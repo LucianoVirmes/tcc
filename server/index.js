@@ -1,8 +1,4 @@
-    const express = require("express");
-    const bodyParser = require("body-parser");
-
-    const app = express();
-    app.use(bodyParser.urlencoded({extended: true}));
+    const app = require('./src/config/express');
 
     const rotas = require('./src/app/rotas/rota1');
     //define rotas

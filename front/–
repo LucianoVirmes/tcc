@@ -1,0 +1,14 @@
+# Nmap 7.70 scan initiated Fri Jul  5 23:37:04 2019 as: nmap -sT -p 80 -oG – 10.0.5.*
+Host: 10.0.5.5 (_gateway)	Status: Up
+Host: 10.0.5.5 (_gateway)	Ports: 80/open/tcp//http///
+Host: 10.0.5.100 ()	Status: Up
+Host: 10.0.5.100 ()	Ports: 80/closed/tcp//http///
+Host: 10.0.5.101 ()	Status: Up
+Host: 10.0.5.101 ()	Ports: 80/closed/tcp//http///
+Host: 10.0.5.102 (virmes)	Status: Up
+Host: 10.0.5.102 (virmes)	Ports: 80/closed/tcp//http///
+Host: 10.0.5.105 ()	Status: Up
+Host: 10.0.5.105 ()	Ports: 80/closed/tcp//http///
+Host: 10.0.5.115 ()	Status: Up
+Host: 10.0.5.115 ()	Ports: 80/closed/tcp//http///
+# Nmap done at Fri Jul  5 23:37:07 2019 -- 256 IP addresses (6 hosts up) scanned in 2.95 seconds
