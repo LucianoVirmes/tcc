@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     permissoes: DataTypes.STRING,
   }, {});
   Usuario.associate = function(models) {
-    
+   
   };
   return Usuario;
 };
