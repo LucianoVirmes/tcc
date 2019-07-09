@@ -1,6 +1,6 @@
-    const app = require('./src/config/express');
-    const db =  require('./src/config/dataBase');
-    const rotas = require('./src/app/rotas/rota1');
+    const app = require('./config/express');
+    const db =  require('./config/dataBase');
+    const rotas = require('./src/app/rotas/rotas');
     //define rotas
     rotas(app);
     db
@@ -13,4 +13,3 @@
         });
        
     app.listen(process.env.PORT || 3000);
-    
