@@ -1,6 +1,10 @@
     const app = require('./config/express');
-    const db =  require('./config/dataBase');
+    const Sequelize =  require('sequelize');
     const rotas = require('./src/app/rotas/rotas');
+    const { configure } = require('sequelize-pg-utilities');
+    const config = require('./config/dataBase.json')
+    const { name, user, password, options } = configure(config)
+    const db = new Sequelize(name, user, password, options);
     //define rotas
     rotas(app);
     db

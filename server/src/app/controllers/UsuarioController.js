@@ -16,6 +16,12 @@ class UsuarioController {
         }
     }
 
+    getPermissoesParaCadastro(){
+        return (req, res) => {
+            let permissoes = require('../models/PermissoesEnum.js')
+            res.send(permissoes);
+        }
+    }
 }
 
 module.exports = UsuarioController;

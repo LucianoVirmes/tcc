@@ -1,6 +1,6 @@
 <template>
     <div class="div container">
-       <menu-padrao :rotas="routes" />
+      <menu-padrao :rotas="routes" />
         <transition name="pagina">
           <router-view></router-view>
         </transition>
