@@ -1,14 +1,19 @@
-const Usuario = require('../models/Usuario.js');
+const db = require('../../../config/configDb');
+const Usuario = db.usuario;
 
 class UsuarioService {
 
     cadastrar(usuario){
-        repository.inserir(usuario);
+        if(!usuario.dataAdmissao){
+            usuario.dataAdmissao = Date.now();
+        }
+        
+        Usuario.create(usuario);
     }
     
     getUsuarios(){
-        Usuario.findAll().then(customers => {
-            return customers;
+        Usuario.findAll().then(usuarios => {
+            return usuarios;
           });
     }
 
