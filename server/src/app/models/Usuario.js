@@ -9,6 +9,13 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
     tableName: 'usuario'
   });
+
+  Usuario.associate = function(models){
+    Usuario.belongsTo(models.pessoa, {
+      foreignKey: 'pessoa_id',
+      onInsert: 'CASCADE'
+    });
+  };
   
   return Usuario;
 };

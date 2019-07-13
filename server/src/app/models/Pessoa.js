@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     telefone: DataTypes.STRING,
     dataNascimento: DataTypes.DATE,
     cpf: DataTypes.INTEGER
-  }, {});
+  }, {
+    paranoid: true,
+    tableName: 'usuario'
+  });
 
   return Pessoa;
 };
