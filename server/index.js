@@ -1,13 +1,10 @@
     const app = require('./config/express');
-    const Sequelize =  require('sequelize');
+    const db = require('./config/configDb');
     const rotas = require('./src/app/rotas/rotas');
-    const { configure } = require('sequelize-pg-utilities');
-    const config = require('./config/dataBase.json')
-    const { name, user, password, options } = configure(config)
-    const db = new Sequelize(name, user, password, options);
+
     //define rotas
     rotas(app);
-    db
+    db.sequelize
     .authenticate()
         .then(() => {
             console.log('Connection has been established successfully.');
@@ -17,3 +14,4 @@
         });
        
     app.listen(process.env.PORT || 3000);
+    module.exports = db;

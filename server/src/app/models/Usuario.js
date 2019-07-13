@@ -6,8 +6,6 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     permissoes: DataTypes.STRING,
   }, {});
-  Usuario.associate = function(models) {
-   
-  };
+  
   return Usuario;
 };

@@ -8,6 +8,7 @@ module.exports = (app) =>{
 
     app.post(rotasUsuario.cadastro, usuarioController.cadastro());
     app.get(rotasUsuario.cadastro, usuarioController.getPermissoesParaCadastro());
+    app.get(rotasUsuario.lista, usuarioController.getUsuarios())
     app.get("/", function(req, res){
          
     })
