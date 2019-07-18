@@ -1,6 +1,12 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
-  const Pessoa = sequelize.define('Pessoa', {
+  const Pessoa = sequelize.define('pessoa', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true, 
+      primaryKey: true
+    },
     nome: DataTypes.STRING,
     sobrenome: DataTypes.STRING,
     email: DataTypes.STRING,
@@ -9,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     cpf: DataTypes.INTEGER
   }, {
     paranoid: true,
-    tableName: 'usuario'
+    tableName: 'pessoa'
   });
 
   return Pessoa;

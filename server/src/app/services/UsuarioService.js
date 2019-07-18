@@ -1,14 +1,22 @@
 const db = require('../../../config/configDb');
 const Usuario = db.usuario;
-
 class UsuarioService {
 
-    cadastrar(usuario){
-        if(!usuario.dataAdmissao){
-            usuario.dataAdmissao = Date.now();
+    cadastrar(req){
+        if(!req.dataAdmissao){
+            req.dataAdmissao = Date.now();
         }
         
-        Usuario.create(usuario);
+        let usuario = {};
+        let pessoa = {};
+        pessoa.nome = req.nome;
+        pessoa.dataNascimento = new Date(req.dataNascimento);
+        usuario.dataAdmissao = req.dataAdmissao;
+        usuario.permissoes = req.permissoes;
+
+        usuario.pessoa = pessoa;
+        Usuario.salvar(usuario);
+    
     }
     
     getUsuarios(){
