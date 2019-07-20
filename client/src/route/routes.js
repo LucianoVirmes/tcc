@@ -1,7 +1,7 @@
-import Lista from './components/usuario/Lista.vue';
-import Cadastro from './components/usuario/Cadastro.vue';
-import Home from './components/home/Home.vue';
-import Pesagem from './components/pesagem/Index.vue';
+import Lista from '../components/usuario/Lista.vue';
+import Cadastro from '../components/usuario/Cadastro.vue';
+import Home from '../components/home/Home.vue';
+import Pesagem from '../components/pesagem/Index.vue';
 
 export const routes = [
     { path: '/usuario/lista', component: Lista, titulo: 'Lista'},

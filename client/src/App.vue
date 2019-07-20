@@ -8,9 +8,9 @@
 </template>
  
 <script>
-    import Router from './router';
+    import Router from './route/router';
     import Menu from './components/shared/menu/Menu.vue';
-    import { routes } from './routes';
+    import { routes } from './route/routes';
     export default {
       components: {
         'menu-padrao': Menu
