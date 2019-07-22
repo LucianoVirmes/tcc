@@ -1,29 +1,17 @@
 <template>
-        <table class="table table-responsive col-sm-12 table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">Opções</th>
-                </tr> 
-            </thead>
-            <tbody>
-                <tr v-for="usuario of usuarios" :key="usuario">
-                    <td>{{usuario.codigo}}</td>
-                    <td>{{usuario.nome}}</td>
-                    <td>{{usuario.email}}</td>
-                    <td>opcao</td>    
-                </tr>
-            </tbody>    
-        </table>
+       <tabela :items=usuarios :headers=headers id="tabela"/>
 </template>
 <script>
+    import Tabela from '../../components/shared/tabela/Tabela.vue';
 export default {
    data (){
        return {
+           headers: ["Codigo", "Nome", "E-mail", "Opções"],
            usuarios: []
         }
+   },
+   components: {
+       'tabela': Tabela
    },
     created () {
       this.$http.get('http://localhost:3000/lista')
@@ -33,5 +21,7 @@ export default {
 }
 </script>
 <style>
-
+    #tabela {
+        margin-top: 8%;
+    }
 </style>

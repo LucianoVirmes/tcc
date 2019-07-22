@@ -1,7 +1,9 @@
 <template>
     <div id="tabela clearfix">
         <b-table striped hover responsive :items="items" :fields="headers"></b-table>
-         <span class="center" v-if="items.length <= 0">Ainda não há nada aqui.</span>
+         <div class="text-center">
+            <span v-if="items.length <= 0" class="text-center">Ainda não há nada aqui.</span>
+         </div>
     </div>    
 </template>
 <script>
@@ -21,5 +23,5 @@
 </script>
 
 <style>
-
+    
 </style>

@@ -1,26 +1,33 @@
 <template>
     <div> 
-        <b-form inline @submit="onSubmit">
-            <label class="sr-only" for="placa">Placa</label>
-            <b-input
-            id="placa"
-            class="mb-2 mr-sm-2 mb-sm-0">
-            </b-input>
-
-            <label class="sr-only" for="motorista">Motorista</label>
-            <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
-            <b-input id="motorista"></b-input>
-            </b-input-group>
-
-            <b-button variant="primary">Salvar</b-button>
+        <b-form @submit="onSubmit">
+            <div class="form-group">
+               <searchbutton placeholder="Placa" />
+            </div>
+            <div class="form-group">
+            <label >Data</label>
+            <input type="date" name="bday" max="3000-12-31" 
+                    min="1000-01-01" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="motorista">Motorista</label>
+                <b-input id="motorista" class="mb-2 mr-sm-2 mb-sm-0 form-control"></b-input>
+                 <b-button variant="primary form-control">Salvar</b-button>
+            </div>
+            
         </b-form>
     </div>
 </template>
 
 <script>
+    import SearchButton from '../../components/shared/inputs/SearchButton.vue';
 export default {
+
         data(){
             return {}
+        },
+        components: {
+            'searchbutton':SearchButton
         }, 
         methods: {
             onSubmit(evt) {
