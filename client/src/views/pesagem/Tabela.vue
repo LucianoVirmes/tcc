@@ -1,16 +1,17 @@
 <template>
-    <div id="tabela clearfix">
-        <b-table striped hover responsive :items="pesagens" :fields="headers"></b-table>
-         <span class="center" v-if="pesagens.length <= 0">Ainda não há pesagens aqui.</span>
-    </div>    
+    <tabela :items=pesagens :headers=headers />
 </template>
 <script>
+    import Tabela from '../../components/shared/tabela/Tabela.vue';
     export default {
         data (){
             return {
                 headers: ['Placa', 'Data de pesagem', 'Tara', 'Peso bruto', 'Peso líquido'],
                 pesagens: []
             }
+        },
+        components: {
+            'tabela': Tabela
         },
         created(){
             this.$http.get('http://localhost:3000/pesagens')
