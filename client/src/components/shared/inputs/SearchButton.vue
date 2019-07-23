@@ -3,7 +3,7 @@
     <input type="text" class="form-control" :placeholder=placeholder>
     <div class="input-group-append">
       <button class="btn btn-secondary" type="button">
-        <font-awesome-icon icon="search"/>
+        <font-awesome-icon icon="search"/> 
       </button>
     </div>
   </div> 
