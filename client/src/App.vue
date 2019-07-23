@@ -1,5 +1,6 @@
 <template>
     <div class="div container">
+      <link rel="stylesheet" href="./assets/fonts/fontawesome.min.css">
       <menu-padrao :rotas="routes" />
         <transition name="pagina">
           <router-view></router-view>
@@ -25,6 +26,6 @@
  
 
  <style>
-  
+    
  </style>
  
