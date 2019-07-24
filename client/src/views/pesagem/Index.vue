@@ -1,6 +1,7 @@
 <template>
     <div>
         <formulario id="formulario"/>
+        <hr>
         <tabela/>
     </div>
 </template>
