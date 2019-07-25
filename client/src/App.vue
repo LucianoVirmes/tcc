@@ -1,5 +1,5 @@
 <template>
-    <div class="div container">
+    <div class="div container-fluid">
       <link rel="stylesheet" href="./assets/fonts/fontawesome.min.css">
       <menu-padrao :rotas="routes" />
         <transition name="pagina">

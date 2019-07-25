@@ -12,7 +12,7 @@
 export default {
     components: {
         'formulario': Formulario,
-        'tabela': Tabela
+        'tabela': Tabela,
     }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
-    <div class="input-group">
-    <input type="text" class="form-control" :placeholder=placeholder>
+    <div class="input-group form-group">
+    <input class="form-control" :placeholder="placeholder" />
     <div class="input-group-append">
-      <button class="btn btn-secondary" type="button">
+      <button class="btn" type="button">
         <font-awesome-icon icon="search"/> 
       </button>
     </div>
@@ -20,6 +20,8 @@
     }
 </script>
 
-<style>
- 
+<style scoped>
+    .btn {
+      background-color: #939996;
+    }
 </style>
