@@ -16,7 +16,7 @@ db.pessoa = require('../src/app/models/Pessoa.js')(sequelize, Sequelize);
 
 //relations
 
-db.usuario.belongsTo(db.pessoa);
+db.usuario.belongsTo(db.pessoa, {foreignKey: 'codpessoa'});
 
  
 module.exports = db;

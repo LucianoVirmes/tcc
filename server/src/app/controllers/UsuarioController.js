@@ -12,15 +12,21 @@ class UsuarioController {
 
     getUsuarios(){
         return (req, res) => {
-            res.send(service.getUsuarios());
+            service.getUsuarios().then(usuarios => {
+                res.send(usuarios);
+            }, error => {
+                console.log(error);
+                res.sendStatus(500);
+            });
         }
     }
     
     cadastro() {
         return (req, res) => {
-            service.cadastrar(req.body).then(status => {
+                service.cadastrar(req.body).then(status => {
                 res.sendStatus(200);
             }, erro => {
+                console.log(erro);
                 res.sendStatus(500);
             });
         }
