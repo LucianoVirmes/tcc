@@ -1,5 +1,5 @@
 <template>
-    <div class="row"> 
+    
         <b-form @submit="onSubmit" class="inline">
             <div class="row">
                 <div class="col">
@@ -7,7 +7,7 @@
                 </div> 
 
                 <div class="col">
-                    <input type="number" class="form-control"/>
+                    <input type="number" step="any" class="form-control"/>
                     <b-button id="btn-pesar" class="form-control btn btn-success text-center">Pesar</b-button>
                 </div>
             </div>
@@ -29,8 +29,6 @@
             </div>
             <botoesform />
         </b-form>
-    
-    </div>
 </template>
 
 <script>

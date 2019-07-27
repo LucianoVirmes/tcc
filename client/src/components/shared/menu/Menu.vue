@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="menu">
   <ul class="nav nav justify-content-end">       
         <li v-for="rota in rotas" class="nav-item">
           <router-link :to="rota.path ? rota.path : '/'" class="nav-link">
@@ -21,6 +21,8 @@ export default {
 }
 </script>
 
-<style>
-    
+<style scoped>
+    .menu {
+      margin-bottom: 3%;
+    }
 </style>

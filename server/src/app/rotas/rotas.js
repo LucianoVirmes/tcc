@@ -1,6 +1,6 @@
 
-    const UsuarioController = require('../controllers/UsuarioController');
-    const usuarioController = new UsuarioController();
+const UsuarioController = require('../controllers/UsuarioController');
+const usuarioController = new UsuarioController();
 
 module.exports = (app) =>{
     

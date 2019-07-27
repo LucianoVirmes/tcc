@@ -1,8 +1,12 @@
 const db = require('../../../config/configDb');
 const Usuario = db.usuario;
+const Pessoa = db.pessoa;
 class UsuarioService {
 
-    cadastrar(req){
+    
+    cadastrar = (req) => {
+       return new Promise((resolve, reject) => {
+
         if(!req.dataAdmissao){
             req.dataAdmissao = Date.now();
         }
@@ -13,11 +17,18 @@ class UsuarioService {
         pessoa.dataNascimento = new Date(req.dataNascimento);
         usuario.dataAdmissao = req.dataAdmissao;
         usuario.permissoes = req.permissoes;
+       
+        Pessoa.create(pessoa).then(pessoa => {
+            usuario.codpessoa = pessoa.id;
+            Usuario.create(usuario);
 
-        usuario.pessoa = pessoa;
-        Usuario.salvar(usuario);
-    
-    }
+            resolve();
+        },  error => {
+            console.log(error);
+            reject();
+        });
+    });
+}
     
     getUsuarios(){
         Usuario.findAll().then(usuarios => {

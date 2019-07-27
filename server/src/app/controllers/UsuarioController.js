@@ -15,9 +15,14 @@ class UsuarioController {
             res.send(service.getUsuarios());
         }
     }
+    
     cadastro() {
         return (req, res) => {
-            service.cadastrar(req.body);
+            service.cadastrar(req.body).then(status => {
+                res.sendStatus(200);
+            }, erro => {
+                res.sendStatus(500);
+            });
         }
     }
 

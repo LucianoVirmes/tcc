@@ -16,7 +16,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
     #formulario {
         margin: 20px;
     }
