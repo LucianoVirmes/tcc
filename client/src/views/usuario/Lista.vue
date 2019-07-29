@@ -16,7 +16,11 @@ export default {
     created () {
       this.$http.get('http://localhost:3000/lista')
       .then(res => res.json())
-      .then(usuarios => this.usuarios = usuarios, err => console.log(err));
+      .then(usuarios => {
+          console.log(usuarios);
+          this.usuarios = usuarios
+          }
+          , err => console.log(err));
     }
 }
 </script>
