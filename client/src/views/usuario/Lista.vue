@@ -6,7 +6,23 @@
 export default {
    data (){
        return {
-           headers: ["Codigo", "Nome", "E-mail", "Opções"],
+           headers: {
+               id:{
+                   label:"Codigo",
+                   sortable:true 
+               },
+               nome: {
+                   key:"pessoa.nome",
+                   label: "Nome",
+                   sortable:true
+               },
+               email: {
+                   label: "E-mail"
+               },
+               opcoes: {
+                   label: "Opções"
+               }
+           },
            usuarios: []
         }
    },
@@ -17,7 +33,6 @@ export default {
       this.$http.get('http://localhost:3000/lista')
       .then(res => res.json())
       .then(usuarios => {
-          console.log(usuarios);
           this.usuarios = usuarios
           }
           , err => console.log(err));

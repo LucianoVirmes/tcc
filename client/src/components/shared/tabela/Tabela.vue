@@ -15,7 +15,6 @@
             }, 
             headers: {
                 required: true,
-                type: Array
             }    
         }
 
