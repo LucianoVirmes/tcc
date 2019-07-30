@@ -1,5 +1,5 @@
 <template>
-    <div class="div container">
+    <div>
       <form class="form">
         <fieldset>
           <div class="form-group">

@@ -11,7 +11,12 @@
       
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown text="Opcoes" right>
+        <b-nav-item-dropdown text="Produtos" right>
+          <b-dropdown-item v-for="(rotaProduto, index) in rotasProduto" :key="index" href="#">
+             <router-link :to="rotaProduto.path">{{rotaProduto.titulo}}</router-link>
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+        <b-nav-item-dropdown text="Balança" right>
           <b-dropdown-item v-for="(rotaPadrao, index) in startFrom(rotasPadrao, 1)" :key="index" href="#">
              <router-link :to="rotaPadrao.path">{{rotaPadrao.titulo}}</router-link>
           </b-dropdown-item>
@@ -31,13 +36,15 @@
 <script>
 
 import {rotasUsuario} from '../../../route/rotasUsuario.js';
-import {rotasPadrao} from '../../../route/rotasPadrao';
+import {rotasPadrao} from '../../../route/rotasPadrao.js';
+import {rotasProduto} from '../../../route/rotasProduto.js';
 
 export default {
     data(){
       return {
         rotasUsuario,
-        rotasPadrao
+        rotasPadrao,
+        rotasProduto
       }
     },
     methods:{
