@@ -25,7 +25,7 @@ export default {
         "tabela":Tabela
     },
     created(){
-         this.$http.get('http://localhost:3000/produtos/lista')
+         this.$http.get('http://localhost:3000/produto/lista')
       .then(res => res.json())
       .then(produtos => {
           this.produtos = produtos
