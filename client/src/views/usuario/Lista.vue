@@ -3,6 +3,7 @@
 </template>
 <script>
     import Tabela from '../../components/shared/tabela/Tabela.vue';
+   
 export default {
    data (){
        return {
@@ -18,9 +19,10 @@ export default {
                },
                email: {
                    label: "E-mail"
-               },
+               }, 
                opcoes: {
-                   label: "Opções"
+                   key: 'actions',
+                   label: "Opções" 
                }
            },
            usuarios: []
