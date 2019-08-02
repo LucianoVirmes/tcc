@@ -1,9 +1,10 @@
 <template>
-       <tabela :items=usuarios :headers=headers id="tabela"/>
+       <tabela :items=usuarios :headers=headers :linkEditar="'/usuario/editar'" :linkExcluir="'/usuario/excluir'"
+       paramRowEditar="codpessoa" paramRowExcluir="item" id="tabela"/>
 </template>
 <script>
     import Tabela from '../../components/shared/tabela/Tabela.vue';
-   
+
 export default {
    data (){
        return {

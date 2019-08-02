@@ -12,19 +12,19 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown text="Produtos" right>
-          <b-dropdown-item v-for="(rotaProduto, index) in rotasProduto" :key="index" href="#">
+          <b-dropdown-item v-for="(rotaProduto, index) in filtraPorMenuAtivo(rotasProduto)" :key="index" href="#">
              <router-link :to="rotaProduto.path">{{rotaProduto.titulo}}</router-link>
           </b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Balança" right>
-          <b-dropdown-item v-for="(rotaPadrao, index) in startFrom(rotasPadrao, 1)" :key="index" href="#">
+          <b-dropdown-item v-for="(rotaPadrao, index) in filtraPorMenuAtivo(rotasPadrao)" :key="index" href="#">
              <router-link :to="rotaPadrao.path">{{rotaPadrao.titulo}}</router-link>
           </b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown right>
           <template slot="button-content"><em>Usuário</em></template>
-          <b-dropdown-item v-for="(rotaUsuario, index) in rotasUsuario" :key="index" href="#">
-             <router-link :to="rotaUsuario.path">{{rotaUsuario.titulo}}</router-link>
+          <b-dropdown-item v-for="(rotaUsuario, index) in filtraPorMenuAtivo(rotasUsuario)" :key="index" href="#">
+              <router-link :to="rotaUsuario.path">{{rotaUsuario.titulo}}</router-link>
           </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -48,8 +48,11 @@ export default {
       }
     },
     methods:{
-      startFrom (array, index) {
-        return array.slice(index)
+      filtraPorMenuAtivo(array){
+       return array.filter(function(value){
+            return value.menu != false;
+        });
+
       }
     }
 }

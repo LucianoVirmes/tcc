@@ -1,6 +1,6 @@
 <template>
-    <tabela :items=produtos :headers=headers />
-</template>
+    <tabela :items=produtos :headers=headers :linkEditar="'linkEditar'" :linkExcluir="'linkExcluir'"/>
+</template> 
 
 <script>
 import Tabela from "../../components/shared/tabela/Tabela.vue";
@@ -16,7 +16,11 @@ export default {
                 },
                 unidade: {
                     label: 'Unidade de medida'
-                }
+                }, 
+                opcoes: {
+                   key: 'actions',
+                   label: "Opções" 
+               }
             },
             produtos: []
         }

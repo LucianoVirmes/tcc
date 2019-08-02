@@ -31,6 +31,10 @@
   export default {
     data() {
       return {
+        nome: "",
+        dataNascimento: "",
+        permissao: { },
+        codpessoa: "",
         permissoes: []
       }
     },
@@ -51,12 +55,28 @@
        }, err => {
          console.log(err);
        })
+      },
+      buscaDados: function (codpessoa){
+          const formData = {
+            codigo: codpessoa
+          };
+          this.$http.get('http://localhost:3000/usuario/visualizar', formData).
+          then(res => {
+            console.log(res);
+            this.nome = res.codigo;
+            this.dataNascimento = res.dataNascimento;
+            this.permissoes = res.permissoes;
+          }, err => console.log(err)) 
       }
     },
     created(){
       this.$http.get('http://localhost:3000/cadastro')
       .then(res => res.json())
       .then(permissoes => this.permissoes = permissoes, err => console.log(err));
+
+      if(this.$route.params){
+        this.buscaDados(this.$route.params);
+      }
     }
   }
 </script> 
