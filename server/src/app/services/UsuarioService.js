@@ -11,15 +11,22 @@ class UsuarioService {
         
         let usuario = {};
         let pessoa = {};
+        
         pessoa.nome = req.nome;
         pessoa.dataNascimento = new Date(req.dataNascimento);
+        
+        usuario.id = parseInt(req.codigo);
         usuario.dataAdmissao = req.dataAdmissao;
         usuario.permissoes = req.permissoes;
         usuario.pessoa = pessoa;
 
-        return repository.save(usuario);
+        if(usuario.id){
+            return repository.update(usuario);
+        } else {
+            return repository.save(usuario);
+        }
 }
-    
+
     getUsuarios(){
         return repository.findAllCompleto();
     }

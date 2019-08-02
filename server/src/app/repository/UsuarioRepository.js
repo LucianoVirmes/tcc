@@ -19,6 +19,29 @@ class UsuarioRepository {
                 Usuario.create(usuario)
             });
     }
+    update(usuario){
+       return this.findById(usuario.id).then(usuarioBanco =>{
+        
+           if(usuarioBanco){
+            usuarioBanco.update({
+                permissoes: usuario.permissoes
+                }
+            ).then(() => {
+                Pessoa.update({
+                    nome: usuario.pessoa.nome,
+                    dataNascimento: usuario.pessoa.dataNascimento,
+                }, {
+                    where: {id: usuarioBanco.codpessoa}
+                })
+            })
+            
+               
+        }
+
+       })
+
+
+    }
 
     findById(codPessoa){
         return Usuario.findByPk(codPessoa, {

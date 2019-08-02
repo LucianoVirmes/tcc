@@ -42,9 +42,10 @@
         event.preventDefault();
 
        const formData = {
+        codigo: this.$route.params.id, 
         nome: this.nome,
         dataNascimento: this.dataNascimento,
-        permissoes: this.permissao.permissao
+        permissoes: this.permissao
         };   
 
        this.$http.post('http://localhost:3000/cadastro', formData).
@@ -55,9 +56,6 @@
        })
       },
       buscaDados: function (pessoa){
-          const formData = {
-            codigo: pessoa.id
-          };
           this.$http.get('http://localhost:3000/usuario/visualizar', {params: {codigo: pessoa.id}}).
           then(res => res.json()).then(usuario => {
             this.nome = usuario.pessoa.nome;
@@ -69,7 +67,7 @@
     created(){
       this.$http.get('http://localhost:3000/cadastro')
       .then(res => res.json())
-      .then(permissoes => this.permissoes = permissoes, err => console.log(err));
+      .then(permissoes => this.permissoes = permissoes);
 
       if(this.$route.params){
         this.buscaDados(this.$route.params);
