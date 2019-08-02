@@ -24,6 +24,9 @@ class UsuarioService {
         return repository.findAllCompleto();
     }
 
+    getUsuarioById(codPessoa){
+        return repository.findById(codPessoa);
+    }
 }
 
 module.exports = UsuarioService;

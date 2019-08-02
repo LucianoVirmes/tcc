@@ -19,6 +19,15 @@ class UsuarioRepository {
                 Usuario.create(usuario)
             });
     }
+
+    findById(codPessoa){
+        return Usuario.findByPk(codPessoa, {
+             include: [{
+                 model: Pessoa,
+                 as: 'pessoa'
+             }]
+         });
+    }
 }
 
 module.exports = UsuarioRepository;

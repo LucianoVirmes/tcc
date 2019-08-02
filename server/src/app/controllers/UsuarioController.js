@@ -6,7 +6,8 @@ class UsuarioController {
     static rotas(){
         return {
             lista: '/lista',
-            cadastro: '/cadastro'
+            cadastro: '/cadastro',
+            visualiza: '/usuario/visualizar'
         }
     }
 
@@ -36,6 +37,14 @@ class UsuarioController {
         return (req, res) => {
             let permissoes = require('../models/PermissoesEnum.js')
             res.send(permissoes);
+        }
+    }
+
+    getUsuarioById(){
+        return (req, res) => {
+            service.getUsuarioById(req.param("codigo")).then(usuario => {
+                res.send(usuario);
+            }, err => res.sendStatus(500));
         }
     }
 }

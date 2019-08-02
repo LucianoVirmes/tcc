@@ -14,6 +14,7 @@ module.exports = (app) =>{
     app.get(rotasUsuario.lista, usuarioController.getUsuarios())
     app.post(rotasProduto.cadastro, produtoController.cadastro());
     app.get(rotasProduto.lista, produtoController.lista());
+    app.get(rotasUsuario.visualiza, usuarioController.getUsuarioById());
     app.get("/", function(req, res){
          
     })

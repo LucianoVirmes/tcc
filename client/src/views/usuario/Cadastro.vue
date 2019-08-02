@@ -12,10 +12,7 @@
           </div>
           <div class="form-group">
             <label>Permissoes</label>
-            <select class="custom-select" v-model="permissao"> 
-              
-              <option v-for="permissao of permissoes" :key="permissao" v-bind:value="{permissao}">{{permissao}}</option>
-            </select>
+            <b-form-select v-model="permissao" :options="permissoes"></b-form-select>
           </div>
           <button class="btn btn-primary" v-on:click="click">Enviar</button>
         </fieldset>
@@ -35,7 +32,8 @@
         dataNascimento: "",
         permissao: { },
         codpessoa: "",
-        permissoes: []
+        permissoes: [],
+        permissaoSelecionada: "Selecione uma permissão"
       }
     },
     methods: {
@@ -56,17 +54,16 @@
          console.log(err);
        })
       },
-      buscaDados: function (codpessoa){
+      buscaDados: function (pessoa){
           const formData = {
-            codigo: codpessoa
+            codigo: pessoa.id
           };
-          this.$http.get('http://localhost:3000/usuario/visualizar', formData).
-          then(res => {
-            console.log(res);
-            this.nome = res.codigo;
-            this.dataNascimento = res.dataNascimento;
-            this.permissoes = res.permissoes;
-          }, err => console.log(err)) 
+          this.$http.get('http://localhost:3000/usuario/visualizar', {params: {codigo: pessoa.id}}).
+          then(res => res.json()).then(usuario => {
+            this.nome = usuario.pessoa.nome;
+            this.dataNascimento = this.$moment(usuario.pessoa.dataNascimento).format("YYYY-MM-DD");
+            this.permissao = usuario.permissoes.toUpperCase();
+          });
       }
     },
     created(){

@@ -10,10 +10,12 @@ import { faUserSecret, faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import router from './route/router.js';
+import VueMoment from 'vue-moment';
 
 library.add(faUserSecret, faSearch, faTrash, faPen)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(BootstrapVue);
+Vue.use(VueMoment);
 Vue.use(VueResource);
 Vue.config.productionTip = false;
 
