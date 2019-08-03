@@ -5,9 +5,10 @@ class UsuarioController {
     
     static rotas(){
         return {
-            lista: '/lista',
-            cadastro: '/cadastro',
-            visualiza: '/usuario/visualizar'
+            lista: '/usuario/lista',
+            cadastro: '/usuario/cadastro',
+            visualiza: '/usuario/visualizar',
+            excluir: '/usuario/inativar'
         }
     }
 
@@ -30,6 +31,17 @@ class UsuarioController {
                 console.log(erro);
                 res.sendStatus(500);
             });
+        }
+    }
+
+    inativar(){
+        return (req, res) => {
+            service.inativar(parseInt(req.body.id)).then(status => {
+                res.sendStatus(200);
+            }, erro => {
+                console.log(erro);
+                res.sendStatus(500);
+            })
         }
     }
 

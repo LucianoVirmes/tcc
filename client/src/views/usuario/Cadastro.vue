@@ -48,7 +48,7 @@
         permissoes: this.permissao
         };   
 
-       this.$http.post('http://localhost:3000/cadastro', formData).
+       this.$http.post('http://localhost:3000//usuario/cadastro', formData).
        then(res => {
          console.log(res);
        }, err => {
@@ -65,7 +65,7 @@
       }
     },
     created(){
-      this.$http.get('http://localhost:3000/cadastro')
+      this.$http.get('http://localhost:3000/usuario/cadastro')
       .then(res => res.json())
       .then(permissoes => this.permissoes = permissoes);
 

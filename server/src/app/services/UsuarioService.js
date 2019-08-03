@@ -3,7 +3,7 @@ const repository = new UsuarioRepository();
 class UsuarioService {
 
     
-    cadastrar = (req) => {
+    cadastrar(req) {
       
         if(!req.dataAdmissao){
             req.dataAdmissao = Date.now();
@@ -25,7 +25,11 @@ class UsuarioService {
         } else {
             return repository.save(usuario);
         }
-}
+    }
+
+    inativar(codUsuario) {
+        return repository.inativar(codUsuario);
+    }
 
     getUsuarios(){
         return repository.findAllCompleto();

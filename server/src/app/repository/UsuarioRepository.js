@@ -37,8 +37,14 @@ class UsuarioRepository {
         }
 
        })
-
-
+    }
+    
+    inativar(codUsuario){
+        return this.findById(codUsuario).then(usuarioBanco => {
+            usuarioBanco.update({
+                dataDemissao: Date.now()
+            });
+        })
     }
 
     findById(codPessoa){

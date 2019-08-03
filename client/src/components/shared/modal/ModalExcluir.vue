@@ -5,10 +5,9 @@
       <b-button size="sm" @click="cancel()">
         {{btnVoltar}}
       </b-button>
-      <b-button size="sm" variant="danger" @click="ok()">
-        {{btnExcluir}}
-      </b-button>
-      
+        <b-button size="sm" variant="danger" @click="excluir(idExcluir)">
+            {{btnExcluir}}
+        </b-button>
     </template>
     </b-modal>    
 </template>
@@ -19,6 +18,9 @@ export default {
         id: {
             required: true,
             type: String
+        },
+        idExcluir: {
+            required: true
         },
         title: {
             default: "Excluir"
@@ -33,6 +35,20 @@ export default {
             default: "Voltar"
         },
         urlExclusao: ""
+    },
+    methods: {
+        excluir: function(){
+        const formData = {
+                id: this.idExcluir
+        }
+
+        this.$http.post(this.urlExclusao, formData).then(sucess => {
+           this.$bvModal.hide(this.id);
+        }, error => {
+            console.log(error);
+        })
+            
+        }
     }
 }
 </script>

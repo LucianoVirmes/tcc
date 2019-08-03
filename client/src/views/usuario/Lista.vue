@@ -1,9 +1,10 @@
 <template>
 <div>
         <tabela :items=usuarios :headers=headers :linkEditar="'/usuario/editar'"
-        :paramRowEditar="'id'" :paramRowExcluir="id" id="tabela" @codExcluir="getCodExcluir"/>
-        <modal :id="modalExcluir.id" :urlExclusao="modalExcluir.url+id"
-         :texto="modalExcluir.texto" :title="modalExcluir.titulo" :btnExcluir="modalExcluir.btnExcluir"/>
+        :paramRowEditar="'id'" :paramRowExcluir="'id'" id="tabela" @codExcluir="getCodExcluir"/>
+        <modal :id="modalExcluir.id" :urlExclusao="modalExcluir.url"
+         :texto="modalExcluir.texto" :title="modalExcluir.titulo" :btnExcluir="modalExcluir.btnExcluir"
+         :idExcluir="id" />
 
 </div>
 </template>
@@ -14,12 +15,12 @@
 export default {
    data (){
        return {
-           id: undefined,
+           id: "",
            modalExcluir: {
                texto: "Deseja mesmo inativar este usuário?",
                titulo: "Inativar",
                id: "modal-excluir",
-               url: "/usuario/excluir",
+               url: "http://localhost:3000/usuario/inativar/",
                btnExcluir: "Inativar"
             }, 
            headers: {
@@ -48,7 +49,7 @@ export default {
        'modal': ModalExcluir
    },
     created () {
-      this.$http.get('http://localhost:3000/lista')
+      this.$http.get('http://localhost:3000/usuario/lista')
       .then(res => res.json())
       .then(usuarios => {
           this.usuarios = usuarios
