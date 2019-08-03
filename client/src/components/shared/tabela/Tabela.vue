@@ -7,11 +7,9 @@
                             <font-awesome-icon icon="pen"/>
                         </b-button>
                     </router-link>
-                    <router-link :to="linkExcluir+row.paramRowExcluir">
-                        <b-button size="sm"  variant="danger">
-                            <font-awesome-icon icon="trash"/>  
-                        </b-button>
-                    </router-link>
+                    <b-button size="sm"  variant="danger" @click="excluir(row.item[paramRowExcluir])">
+                        <font-awesome-icon icon="trash"/>  
+                    </b-button>
                 </template>
         </b-table>
          <div class="text-center">
@@ -36,17 +34,20 @@
                 type: String,
                 required: true
             },
-            linkExcluir: {
-                type: String,
-                required: true
-            },
             mostrarBotoes: {
                 type: Boolean,
                 default: true
             },
             paramRowEditar: "",
 
-            paramRowExcluir: ""
+            paramRowExcluir: "",
+            tituloModalExcluir: "" 
+        },
+        methods: {
+            excluir: function(codExcluir){
+                this.$emit("codExcluir", codExcluir);
+                this.$bvModal.show('modal-excluir');
+            }
         }
         
     }

@@ -1,13 +1,27 @@
 <template>
-       <tabela :items=usuarios :headers=headers :linkEditar="'/usuario/editar'" :linkExcluir="'/usuario/excluir'"
-       paramRowEditar="id" paramRowExcluir="item" id="tabela"/>
+<div>
+        <tabela :items=usuarios :headers=headers :linkEditar="'/usuario/editar'"
+        :paramRowEditar="'id'" :paramRowExcluir="id" id="tabela" @codExcluir="getCodExcluir"/>
+        <modal :id="modalExcluir.id" :urlExclusao="modalExcluir.url+id"
+         :texto="modalExcluir.texto" :title="modalExcluir.titulo" :btnExcluir="modalExcluir.btnExcluir"/>
+
+</div>
 </template>
 <script>
     import Tabela from '../../components/shared/tabela/Tabela.vue';
+    import ModalExcluir from '../../components/shared/modal/ModalExcluir.vue';
 
 export default {
    data (){
        return {
+           id: undefined,
+           modalExcluir: {
+               texto: "Deseja mesmo inativar este usuário?",
+               titulo: "Inativar",
+               id: "modal-excluir",
+               url: "/usuario/excluir",
+               btnExcluir: "Inativar"
+            }, 
            headers: {
                id:{
                    label:"Codigo",
@@ -30,7 +44,8 @@ export default {
         }
    },
    components: {
-       'tabela': Tabela
+       'tabela': Tabela,
+       'modal': ModalExcluir
    },
     created () {
       this.$http.get('http://localhost:3000/lista')
@@ -39,6 +54,11 @@ export default {
           this.usuarios = usuarios
           }
           , err => console.log(err));
+    },
+    methods: {
+        getCodExcluir: function(codigo){
+            this.id = codigo;
+        }
     }
 }
 </script>

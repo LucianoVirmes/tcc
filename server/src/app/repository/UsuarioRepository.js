@@ -34,8 +34,6 @@ class UsuarioRepository {
                     where: {id: usuarioBanco.codpessoa}
                 })
             })
-            
-               
         }
 
        })
