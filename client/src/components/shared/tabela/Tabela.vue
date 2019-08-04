@@ -11,6 +11,10 @@
                         <font-awesome-icon icon="trash"/>  
                     </b-button>
                 </template>
+                <template slot="dataDemissao" slot-scope="data">
+                   <b-badge variant="danger" v-if="data.item.dataDemissao">Inativo</b-badge>
+                   <b-badge variant="success" v-else>Ativo</b-badge>
+                </template>
         </b-table>
          <div class="text-center">
             <span v-if="items.length <= 0" class="text-center">Ainda não há nada aqui.</span>

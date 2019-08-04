@@ -1,5 +1,7 @@
 <template>
     <div>
+      <b-alert variant="success" :show="alertaSucess" dismissible>Usuário salvo com sucesso!</b-alert>
+      <b-alert variant="danger" :show="alertaErro" dismissible>Houve um erro ao tentar submeter o formulário!</b-alert>
       <form class="form">
         <fieldset>
           <div class="form-group">
@@ -33,7 +35,9 @@
         permissao: { },
         codpessoa: "",
         permissoes: [],
-        permissaoSelecionada: "Selecione uma permissão"
+        permissaoSelecionada: "Selecione uma permissão",
+        alertaSucess: false,
+        alertaErro: false
       }
     },
     methods: {
@@ -48,10 +52,11 @@
         permissoes: this.permissao
         };   
 
-       this.$http.post('http://localhost:3000//usuario/cadastro', formData).
+       this.$http.post('http://localhost:3000/usuario/cadastro', formData).
        then(res => {
-         console.log(res);
+         this.showAlert(res);
        }, err => {
+         this.showAlert(err)
          console.log(err);
        })
       },
@@ -62,8 +67,16 @@
             this.dataNascimento = this.$moment(usuario.pessoa.dataNascimento).format("YYYY-MM-DD");
             this.permissao = usuario.permissoes.toUpperCase();
           });
+      },
+      
+      showAlert: function(res){
+       if(res.ok){
+         this.alertaSucess = true;
+      } else {
+        this.alertaErro = true;
       }
     },
+  },
     created(){
       this.$http.get('http://localhost:3000/usuario/cadastro')
       .then(res => res.json())

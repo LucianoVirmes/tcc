@@ -1,10 +1,11 @@
 <template>
-<div>
+<div>   
+        <b-alert variant="success" :show="alertaSucess" dismissible>Usuário inativado com sucesso!</b-alert>
         <tabela :items=usuarios :headers=headers :linkEditar="'/usuario/editar'"
         :paramRowEditar="'id'" :paramRowExcluir="'id'" id="tabela" @codExcluir="getCodExcluir"/>
         <modal :id="modalExcluir.id" :urlExclusao="modalExcluir.url"
          :texto="modalExcluir.texto" :title="modalExcluir.titulo" :btnExcluir="modalExcluir.btnExcluir"
-         :idExcluir="id" />
+         :idExcluir="id" @success="usuarioExcluido"/>
 
 </div>
 </template>
@@ -23,6 +24,7 @@ export default {
                url: "http://localhost:3000/usuario/inativar/",
                btnExcluir: "Inativar"
             }, 
+            alertaSucess: false,
            headers: {
                id:{
                    label:"Codigo",
@@ -35,11 +37,16 @@ export default {
                },
                email: {
                    label: "E-mail"
-               }, 
+               },
+               status: {
+                   label: "Status",
+                   key: "dataDemissao",
+                   sortable: true
+               },
                opcoes: {
                    key: 'actions',
                    label: "Opções" 
-               }
+               },
            },
            usuarios: []
         }
@@ -49,16 +56,23 @@ export default {
        'modal': ModalExcluir
    },
     created () {
-      this.$http.get('http://localhost:3000/usuario/lista')
-      .then(res => res.json())
-      .then(usuarios => {
-          this.usuarios = usuarios
-          }
-          , err => console.log(err));
+      this.buscarUsuarios();
     },
     methods: {
         getCodExcluir: function(codigo){
             this.id = codigo;
+        },
+        buscarUsuarios: function(){
+            this.$http.get('http://localhost:3000/usuario/lista')
+        .then(res => res.json())
+        .then(usuarios => {
+          this.usuarios = usuarios
+          }
+          , err => console.log(err));
+        },
+        usuarioExcluido: function(msg){
+                this.alertaSucess = true;
+                this.buscarUsuarios();
         }
     }
 }

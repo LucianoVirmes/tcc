@@ -42,7 +42,8 @@ export default {
                 id: this.idExcluir
         }
 
-        this.$http.post(this.urlExclusao, formData).then(sucess => {
+        this.$http.post(this.urlExclusao, formData).then(success => {
+           this.$emit("success", success); 
            this.$bvModal.hide(this.id);
         }, error => {
             console.log(error);
