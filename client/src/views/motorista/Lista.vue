@@ -34,7 +34,8 @@ export default {
                     label: "Código"
                 },
                 nome: {
-                    label: "Nome"
+                    label: "Nome",
+                    key: "pessoa.nome"
                 },
                 cnh: {
                     label: "CNH"

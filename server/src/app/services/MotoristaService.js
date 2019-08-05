@@ -12,11 +12,11 @@ class MotoristaService {
     }
 
     getAll(){
-        return repository.findAll();
+        return repository.findAllCompleto();
     }
 
     getById(idMotorista){
-        return repository.findByPk(idMotorista);
+        return repository.findCompletoByPk(idMotorista);
     }
 
     deleteById(idMotorista){

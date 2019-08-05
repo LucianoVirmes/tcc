@@ -34,7 +34,9 @@ export default {
 
             const FormData = {
                     id: this.$route.params.id,
-                    nome: this.nome,
+                    pessoa: {
+                        nome: this.nome
+                    },
                     cnh: this.cnh
                 }
             this.$http.post('http://localhost:3000/motorista/cadastro', FormData).
@@ -49,7 +51,7 @@ export default {
          buscaDados: function (motorista){
             this.$http.get('http://localhost:3000/motorista/visualizar', {params: {id: motorista.id}}).
             then(res => res.json()).then(motorista => {
-                this.nome = motorista.nome,
+                this.nome = motorista.pessoa.nome,
                 this.cnh = motorista.cnh
             });
         }, 
