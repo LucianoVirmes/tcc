@@ -19,6 +19,8 @@ db.empresa = require('../src/app/models/Empresa.js')(sequelize, Sequelize);
 //relations
 
 db.usuario.belongsTo(db.pessoa, {foreignKey: 'codpessoa'});
+db.motorista.belongsTo(db.pessoa, {foreignKey: 'codpessoa'});
+
 db.empresa.belongsToMany(db.motorista, {through: 'empresa-motorista', foreignKey: 'codempresa'});
 db.motorista.belongsToMany(db.empresa, {through: 'empresa-motorista', foreignKey: 'codmotorista'});
  
