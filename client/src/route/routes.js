@@ -1,6 +1,7 @@
 import { rotasUsuario } from './rotasUsuario.js';
 import { rotasPadrao } from './rotasPadrao';
 import { rotasProduto } from './rotasProduto.js';
+import { rotasMotorista } from './rotasMotorista.js';
 
 const routes = [];
 
@@ -13,6 +14,10 @@ rotasPadrao.forEach(rota => {
 });
 
 rotasProduto.forEach(rota => {
+    routes.push(rota);
+})
+
+rotasMotorista.forEach(rota => {
     routes.push(rota);
 })
 

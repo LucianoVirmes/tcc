@@ -8,7 +8,8 @@ class MotoristaController {
             cadastro: "/motorista/cadastro",
             alterar: "/motorista/alterar",
             lista: "/motorista/lista",
-            visualizar: "/motorista/visualizar"
+            visualizar: "/motorista/visualizar",
+            remover: "/motorista/remover"
         }
     }
 
@@ -53,6 +54,17 @@ class MotoristaController {
                 res.sendStatus(500);
                 console.log(err);
             });
+        }
+    }
+
+    removeMotorista(){
+        return (req, res) => {
+            service.deleteById(req.param('id')).then(success => {
+                res.sendStatus(200);
+            }, err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
         }
     }
 

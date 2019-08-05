@@ -4,8 +4,6 @@ module.exports = (sequelize, DataTypes) => {
     nome: DataTypes.STRING,
     cnh: DataTypes.INTEGER
   }, {});
-  Motorista.associate = function(models) {
-    // associations can be defined here
-  };
+ 
   return Motorista;
 };

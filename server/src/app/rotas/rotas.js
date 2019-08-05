@@ -26,6 +26,7 @@ module.exports = (app) =>{
     app.get(rotasMotorista.lista, motoristaController.getMotoristas());
     app.get(rotasMotorista.visualizar, motoristaController.getMotorista());
     app.post(rotasMotorista.alterar, motoristaController.alterar());
+    app.post(rotasMotorista.remover, motoristaController.removeMotorista())
 
     app.get("/", function(req, res){
          

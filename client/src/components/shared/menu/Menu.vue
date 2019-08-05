@@ -27,6 +27,12 @@
               <router-link :to="rotaUsuario.path">{{rotaUsuario.titulo}}</router-link>
           </b-dropdown-item>
         </b-nav-item-dropdown>
+        <b-nav-item-dropdown right>
+          <template slot="button-content"><em>Motorista</em></template>
+          <b-dropdown-item v-for="(rotaMotorista, index) in filtraPorMenuAtivo(rotasMotorista)" :key="index" href="#">
+              <router-link :to="rotaMotorista.path">{{rotaMotorista.titulo}}</router-link>
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -38,13 +44,15 @@
 import {rotasUsuario} from '../../../route/rotasUsuario.js';
 import {rotasPadrao} from '../../../route/rotasPadrao.js';
 import {rotasProduto} from '../../../route/rotasProduto.js';
+import {rotasMotorista} from '../../../route/rotasMotorista.js';
 
 export default {
     data(){
       return {
         rotasUsuario,
         rotasPadrao,
-        rotasProduto
+        rotasProduto,
+        rotasMotorista
       }
     },
     methods:{

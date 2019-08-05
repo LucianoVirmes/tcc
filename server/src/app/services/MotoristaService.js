@@ -18,6 +18,10 @@ class MotoristaService {
     getById(idMotorista){
         return repository.findByPk(idMotorista);
     }
+
+    deleteById(idMotorista){
+        return repository.deleteByPk(idMotorista);
+    }
 }
 
 module.exports = MotoristaService;
