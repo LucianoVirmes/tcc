@@ -19,6 +19,10 @@ class EmpresaService {
         return repository.deleteOne(empresa);
     }
 
+    visualizar(empresaId){
+        return repository.findOneByPk(empresaId);
+    }
+
 }
 
 module.exports = EmpresaService;

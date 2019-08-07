@@ -5,11 +5,11 @@ class EmpresaController {
 
     static rotas(){
         return {
-            lista: "empresa/listar",
-            visualiza: "empresa/visualizar",
-            remove: "empresa/remover",
-            altera: "empresa/alterar",
-            cadastrar: "empresa/cadastrar"
+            listar: "/empresa/listar",
+            visualizar: "/empresa/visualizar",
+            remover: "/empresa/remover",
+            alterar: "/empresa/alterar",
+            cadastrar: "/empresa/cadastrar",
         }
     }
 
@@ -50,6 +50,17 @@ class EmpresaController {
         return (req, res) => {
             service.remover(req.param('id')).then(success =>{
                 res.sendStatus(200);
+            }, error => {
+                res.sendStatus(500);
+                console.log(error);
+            })
+        }
+    }
+
+    visualizar(){
+        return (req, res) => {
+            service.visualizar(req.param('id')).then(empresa => {
+                res.send(empresa);
             }, error => {
                 res.sendStatus(500);
                 console.log(error);

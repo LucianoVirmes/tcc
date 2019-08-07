@@ -27,6 +27,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('empresas');
+    return queryInterface.dropTable('empresa');
   }
 };

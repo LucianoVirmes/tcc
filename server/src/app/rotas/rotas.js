@@ -5,12 +5,15 @@ const ProdutoController = require('../controllers/ProdutoController.js')
 const produtoController = new ProdutoController();
 const MotoristaController = require('../controllers/MotoristaController.js');
 const motoristaController = new MotoristaController();
+const EmpresaController = require('../controllers/EmpresaController.js');
+const empresaController = new EmpresaController();
 
 module.exports = (app) =>{
     
     const rotasUsuario = UsuarioController.rotas(); 
     const rotasProduto = ProdutoController.rotas();
     const rotasMotorista = MotoristaController.rotas();
+    const rotasEmpresa = EmpresaController.rotas();
 
     //usuario
     app.post(rotasUsuario.cadastro, usuarioController.cadastro());
@@ -26,7 +29,13 @@ module.exports = (app) =>{
     app.get(rotasMotorista.lista, motoristaController.getMotoristas());
     app.get(rotasMotorista.visualizar, motoristaController.getMotorista());
     app.post(rotasMotorista.alterar, motoristaController.alterar());
-    app.post(rotasMotorista.remover, motoristaController.removeMotorista())
+    app.post(rotasMotorista.remover, motoristaController.removeMotorista());
+    //empresa
+    app.post(rotasEmpresa.cadastrar, empresaController.cadastrar());
+    app.get(rotasEmpresa.listar, empresaController.listar());
+    app.post(rotasEmpresa.alterar, empresaController.alterar());
+    app.get(rotasEmpresa.visualizar, empresaController.visualizar());
+    app.post(rotasEmpresa.remover, empresaController.remover());
 
     app.get("/", function(req, res){
          
