@@ -1,4 +1,7 @@
 const MorotistaService = require('../services/MotoristaService.js');
+const EmpresaService = require('../services/EmpresaService.js');
+
+const empresaService = new EmpresaService();
 const service = new MorotistaService();
 
 class MotoristaController {
@@ -25,6 +28,17 @@ class MotoristaController {
     }
 
     novo(){
+        return (req, res) => {
+            empresaService.getEmpresas().then(empresas => {
+                res.send(empresas);
+            }, error => {
+                res.sendStatus(500);
+                console.log(error);
+            })
+        }
+    }
+
+    cadastrar(){
         return (req, res) => {
             service.salvaOuAltera(req.body).then( success => {
                 res.sendStatus(200);

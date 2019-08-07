@@ -25,7 +25,8 @@ module.exports = (app) =>{
     app.post(rotasProduto.cadastro, produtoController.cadastro());
     app.get(rotasProduto.lista, produtoController.lista());
     //motorista
-    app.post(rotasMotorista.cadastro, motoristaController.novo());
+    app.post(rotasMotorista.cadastro, motoristaController.cadastrar());
+    app.get(rotasMotorista.cadastro, motoristaController.novo());
     app.get(rotasMotorista.lista, motoristaController.getMotoristas());
     app.get(rotasMotorista.visualizar, motoristaController.getMotorista());
     app.post(rotasMotorista.alterar, motoristaController.alterar());
