@@ -12,7 +12,7 @@
             <label>CNH do motorista</label>
             <input type="number" class="form-control" v-model="cnh" />
           </div>
-            <b-form-select v-model="selected" :options="options" class="mb-3">
+            <b-form-select v-model="empresaSelected" :options="options" class="mb-3">
             <template slot="first">
                 <option :value="null" disabled>Selecione uma empresa</option>
             </template>
@@ -32,7 +32,7 @@ export default {
             alertaSucess: false,
             alertaErro: false,
             options: [],
-            selected: null
+            empresaSelected: null
         }
     }, 
     methods: {
@@ -43,6 +43,9 @@ export default {
                     id: this.$route.params.id,
                     pessoa: {
                         nome: this.nome
+                    },
+                    empresa: {
+                        id: this.empresaSelected
                     },
                     cnh: this.cnh
                 }

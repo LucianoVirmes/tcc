@@ -1,13 +1,16 @@
 const db = require('../../../config/configDb');
 const Motorista = db.motorista;
 const Pessoa = db.pessoa;
+const Empresa = db.empresa;
 
 class MotoristaRepository {
 
     save(motorista){
        return Pessoa.create(motorista.pessoa).then(pessoa =>{
             motorista.codpessoa = pessoa.id;
-            Motorista.create(motorista);
+            Motorista.create(motorista).then(motoristaBanco => {
+                motoristaBanco.setEmpresas([motorista.empresa.id]);
+            });
        })
     }
 
@@ -39,6 +42,9 @@ class MotoristaRepository {
             include: [{
                 model: Pessoa,
                 as: 'pessoa'
+            }, {
+                model: Empresa,
+                as: 'empresas'
             }]
         });
     }
