@@ -1,5 +1,6 @@
 const db = require('../../../config/configDb.js');
 const Empresa = db.empresa;
+const Op = db.Sequelize.Op;
 
 class EmpresaRepository {
 
@@ -27,6 +28,14 @@ class EmpresaRepository {
     deleteOne(codEmpresa){
         return Empresa.destroy({
             where: {id: codEmpresa}
+        })
+    }
+
+    findByNome(nomeEmpresa){
+        return Empresa.findAll({
+            where: {nome: {
+                [Op.like]: '%'+nomeEmpresa+'%'
+            }}
         })
     }
 

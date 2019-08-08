@@ -36,7 +36,7 @@
             },
             linkEditar: {
                 type: String,
-                required: true
+                required: false
             },
             mostrarBotoes: {
                 type: Boolean,

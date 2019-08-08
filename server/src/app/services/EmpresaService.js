@@ -23,6 +23,9 @@ class EmpresaService {
         return repository.findOneByPk(empresaId);
     }
 
+    getEmpresasByNome(nome){
+        return repository.findByNome(nome);
+    }
 }
 
 module.exports = EmpresaService;

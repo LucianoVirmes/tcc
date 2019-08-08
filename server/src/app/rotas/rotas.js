@@ -36,6 +36,7 @@ module.exports = (app) =>{
     app.get(rotasEmpresa.listar, empresaController.listar());
     app.post(rotasEmpresa.alterar, empresaController.alterar());
     app.get(rotasEmpresa.visualizar, empresaController.visualizar());
+    app.get(rotasEmpresa.autocomplete, empresaController.autoComplete());
     app.post(rotasEmpresa.remover, empresaController.remover());
 
     app.get("/", function(req, res){

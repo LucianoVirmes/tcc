@@ -1,5 +1,8 @@
 <template>
     <div>
+    <b-card no-body class="tabs">
+    <b-tabs pills card vertical>
+    <b-tab title="Dados do motorista" active>
       <b-alert variant="success" :show="alertaSucess" dismissible>Motorista salvo com sucesso!</b-alert>
       <b-alert variant="danger" :show="alertaErro" dismissible>Houve um erro ao tentar submeter o formulário!</b-alert>
       <form class="form">
@@ -12,27 +15,32 @@
             <label>CNH do motorista</label>
             <input type="number" class="form-control" v-model="cnh" />
           </div>
-            <b-form-select v-model="empresaSelected" :options="options" class="mb-3">
-            <template slot="first">
-                <option :value="null" disabled>Selecione uma empresa</option>
-            </template>
-            </b-form-select>
-          <button class="btn btn-primary" v-on:click="enviarForm">Enviar</button>
+          
+          <button class="btn btn-primary" v-on:click="enviarForm">Salvar</button>
         </fieldset>
       </form>
+    </b-tab>
+    <b-tab title="Empresas">
+       <motoristaEmpresa />
+    </b-tab>
+    </b-tabs>
+    </b-card>
     </div>
 </template>
 
 <script>
+    
+    import MotoristaEmpresa from './MotoristaEmpresa.vue';
+
 export default {
+
     data(){
         return {
             nome: "",
             cnh: "",
             alertaSucess: false,
             alertaErro: false,
-            options: [],
-            empresaSelected: null
+            
         }
     }, 
     methods: {
@@ -65,14 +73,7 @@ export default {
                 this.cnh = motorista.cnh
             });
         }, 
-        buscaEmpresas: function (){
-            this.$http.get('http://localhost:3000/motorista/cadastro')
-            .then(res => res.json()).then(empresas => {
-                empresas.forEach(empresa => {
-                    this.options.push({value: empresa.id, text:empresa.nome})
-                });
-            })
-        },
+        
         showAlert: function(res){
             if(res.ok){
                 this.alertaSucess = true;
@@ -86,11 +87,16 @@ export default {
         if(this.$route.params){
             this.buscaDados(this.$route.params);
         }
-        this.buscaEmpresas();
+    },
+    components: {
+        'motoristaEmpresa':MotoristaEmpresa
     }
+    
 }
 </script>
 
-<style>
-
+<style scoped>
+    .tabs {
+        min-height: 500px;
+    }
 </style>

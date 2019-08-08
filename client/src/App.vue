@@ -2,7 +2,8 @@
     <div>
       <link rel="stylesheet" href="./assets/fonts/fontawesome.min.css">
       <menu-padrao/>
-       <div class="div container-fluid">
+       <div class="container-fluid">
+         <div class="pb-2 mt-4 mb-2 border-bottom">aaa</div>
          <transition name="pagina">
           <router-view></router-view>
         </transition>
