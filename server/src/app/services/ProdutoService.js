@@ -3,7 +3,7 @@ const repository = new ProdutoRepository();
 
 class ProdutoService {
 
-    listar(){
+    listar() {
         return repository.findAll();
     }
 

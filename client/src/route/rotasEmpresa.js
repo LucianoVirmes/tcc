@@ -1,8 +1,15 @@
 import Cadastro from '../views/empresa/Cadastro.vue';
 import Lista from '../views/empresa/Lista.vue';
+import Empresa from '../views/empresa/Index.vue';
 
-export const rotasEmpresa = [
-    {path: '/empresa/cadastro', titulo:'Cadastro', component: Cadastro },
-    {path: '/empresa/lista', titulo: 'Lista', component: Lista},
-    {path: '/empresa/alterar/:id', titulo:'Alterar', component: Cadastro, menu: false }
-]
+const meta = { desc: 'Empresa' }
+const cadastro = { path: '/empresa/cadastro', titulo: 'Cadastro', component: Cadastro };
+const lista = { path: '/empresa/lista', titulo: 'Lista', component: Lista, meta };
+const alteracao = { path: '/empresa/cadastro/:id', titulo: 'Alterar', component: Cadastro, menu: false, meta }
+
+export const rotasEmpresa = {
+    path: '/empresa/lista', component: Empresa, titulo: 'Empresas', meta,
+    children: [lista, cadastro, alteracao]
+};
+
+export const rotasEmpresaTela = { 'cadastro': cadastro, 'lista': lista, 'alterar': alteracao };

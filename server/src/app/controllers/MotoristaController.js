@@ -6,7 +6,7 @@ const service = new MorotistaService();
 
 class MotoristaController {
 
-    static rotas(){
+    static rotas() {
         return {
             cadastro: "/motorista/cadastro",
             alterar: "/motorista/alterar",
@@ -16,7 +16,7 @@ class MotoristaController {
         }
     }
 
-    getMotorista(){
+    getMotorista() {
         return (req, res) => {
             service.getById(req.param('id')).then(morotista => {
                 res.send(morotista);
@@ -27,7 +27,7 @@ class MotoristaController {
         }
     }
 
-    novo(){
+    novo() {
         return (req, res) => {
             empresaService.getEmpresas().then(empresas => {
                 res.send(empresas);
@@ -38,9 +38,9 @@ class MotoristaController {
         }
     }
 
-    cadastrar(){
+    cadastrar() {
         return (req, res) => {
-            service.salvaOuAltera(req.body).then( success => {
+            service.salvaOuAltera(req.body).then(success => {
                 res.sendStatus(200);
             }, err => {
                 console.log(err);
@@ -49,7 +49,7 @@ class MotoristaController {
         }
     }
 
-    alterar(){
+    alterar() {
         return (req, res) => {
             service.salvaOuAltera(req.body).then(sucess => {
                 res.sendStatus(200);
@@ -60,7 +60,7 @@ class MotoristaController {
         }
     }
 
-    getMotoristas(){
+    getMotoristas() {
         return (req, res) => {
             service.getAll().then(motoristas => {
                 res.send(motoristas);
@@ -71,7 +71,7 @@ class MotoristaController {
         }
     }
 
-    removeMotorista(){
+    removeMotorista() {
         return (req, res) => {
             service.deleteById(req.param('id')).then(success => {
                 res.sendStatus(200);

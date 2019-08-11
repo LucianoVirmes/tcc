@@ -2,25 +2,25 @@ const UsuarioRepository = require('../repository/UsuarioRepository.js');
 const repository = new UsuarioRepository();
 class UsuarioService {
 
-    
+
     cadastrar(req) {
-      
-        if(!req.dataAdmissao){
+
+        if (!req.dataAdmissao) {
             req.dataAdmissao = Date.now();
         }
-        
+
         let usuario = {};
         let pessoa = {};
-        
+
         pessoa.nome = req.nome;
         pessoa.dataNascimento = new Date(req.dataNascimento);
-        
+
         usuario.id = parseInt(req.codigo);
         usuario.dataAdmissao = req.dataAdmissao;
         usuario.permissoes = req.permissoes;
         usuario.pessoa = pessoa;
 
-        if(usuario.id){
+        if (usuario.id) {
             return repository.update(usuario);
         } else {
             return repository.save(usuario);
@@ -31,11 +31,11 @@ class UsuarioService {
         return repository.inativar(codUsuario);
     }
 
-    getUsuarios(){
+    getUsuarios() {
         return repository.findAllCompleto();
     }
 
-    getUsuarioById(codPessoa){
+    getUsuarioById(codPessoa) {
         return repository.findById(codPessoa);
     }
 }

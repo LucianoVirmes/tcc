@@ -3,23 +3,23 @@ const repository = new Repository();
 
 class MotoristaService {
 
-    salvaOuAltera(motorista){
-        if(motorista.id){
+    salvaOuAltera(motorista) {
+        if (motorista.id) {
             return repository.update(motorista);
         } else {
             return repository.save(motorista);
         }
     }
 
-    getAll(){
+    getAll() {
         return repository.findAllCompleto();
     }
 
-    getById(idMotorista){
+    getById(idMotorista) {
         return repository.findCompletoByPk(idMotorista);
     }
 
-    deleteById(idMotorista){
+    deleteById(idMotorista) {
         return repository.deleteByPk(idMotorista);
     }
 }

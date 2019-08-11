@@ -3,7 +3,7 @@ const service = new EmpresaService();
 
 class EmpresaController {
 
-    static rotas(){
+    static rotas() {
         return {
             listar: "/empresa/listar",
             visualizar: "/empresa/visualizar",
@@ -14,7 +14,7 @@ class EmpresaController {
         }
     }
 
-    listar(){
+    listar() {
         return (req, res) => {
             service.getEmpresas().then(empresas => {
                 res.send(empresas);
@@ -25,7 +25,7 @@ class EmpresaController {
         }
     }
 
-    alterar(){
+    alterar() {
         return (req, res) => {
             service.salvaOuAltera(req.body).then(success => {
                 res.sendStatus(200);
@@ -36,7 +36,7 @@ class EmpresaController {
         }
     }
 
-    cadastrar(){
+    cadastrar() {
         return (req, res) => {
             service.salvaOuAltera(req.body).then(sucess => {
                 res.sendStatus(200);
@@ -47,9 +47,9 @@ class EmpresaController {
         }
     }
 
-    remover(){
+    remover() {
         return (req, res) => {
-            service.remover(req.param('id')).then(success =>{
+            service.remover(req.param('id')).then(success => {
                 res.sendStatus(200);
             }, error => {
                 res.sendStatus(500);
@@ -58,7 +58,7 @@ class EmpresaController {
         }
     }
 
-    visualizar(){
+    visualizar() {
         return (req, res) => {
             service.visualizar(req.param('id')).then(empresa => {
                 res.send(empresa);
@@ -69,7 +69,7 @@ class EmpresaController {
         }
     }
 
-    autoComplete(){
+    autoComplete() {
         return (req, res) => {
             service.getEmpresasByNome(req.param('nome')).then(empresas => {
                 res.send(empresas);

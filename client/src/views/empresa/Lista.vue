@@ -1,8 +1,8 @@
 <template>
      <div>
         <b-alert variant="success" :show="alertaSucess" dismissible>Empresa excluida com sucesso!</b-alert>
-        <tabela :items=empresas :headers=headers :linkEditar="'/empresa/alterar'"
-        :paramRowEditar="'id'" :paramRowExcluir="'id'" id="tabela" @codExcluir="getCodExcluir"/>
+        <tabela :items=empresas :headers=headers :linkEditar="'/empresa/cadastro'"
+        :paramRowEditar="'id'" :paramRowExcluir="'id'" :carregando="carregando" id="tabela" @codExcluir="getCodExcluir"/>
          <modal :id="modalExcluir.id" :urlExclusao="modalExcluir.url"
          :texto="modalExcluir.texto" :title="modalExcluir.titulo" :btnExcluir="modalExcluir.btnExcluir"
          :idExcluir="id" @success="motoristaExcluido"/>
@@ -27,6 +27,10 @@ export default {
                id: "modal-excluir",
                url: "http://localhost:3000/empresa/remover/",
                btnExcluir: "Excluir"
+            },
+            carregando: {
+                type: Boolean,
+                default: false
             },
             headers: {
                 id: {
@@ -55,10 +59,12 @@ export default {
             this.id = codExcluir
         },
         buscaEmpresas: function(){
+            this.carregando = true;
             this.$http.get("http://localhost:3000/empresa/listar")
             .then(res => res.json())
             .then(empresas => {
                 this.empresas = empresas
+                this.carregando = false
             })
         },
         motoristaExcluido: function(msg){

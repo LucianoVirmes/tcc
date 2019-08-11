@@ -6,24 +6,15 @@ import { rotasEmpresa } from './rotasEmpresa.js';
 
 const routes = [];
 
-rotasUsuario.forEach(rota => {
-    routes.push(rota);
-});
+routes.push(rotasUsuario);
 
-rotasEmpresa.forEach(rota => {
-    routes.push(rota);
-})
+routes.push(rotasEmpresa);
 
 rotasPadrao.forEach(rota => {
     routes.push(rota);
 });
+routes.push(rotasProduto);
 
-rotasProduto.forEach(rota => {
-    routes.push(rota);
-})
+routes.push(rotasMotorista);
 
-rotasMotorista.forEach(rota => {
-    routes.push(rota);
-})
-
-export {routes};
+export { routes };

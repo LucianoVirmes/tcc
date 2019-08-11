@@ -1,8 +1,8 @@
 <template>
 <div>   
         <b-alert variant="success" :show="alertaSucess" dismissible>Usuário inativado com sucesso!</b-alert>
-        <tabela :items=usuarios :headers=headers :linkEditar="'/usuario/editar'"
-        :paramRowEditar="'id'" :paramRowExcluir="'id'" id="tabela" @codExcluir="getCodExcluir"/>
+        <tabela :items=usuarios :headers=headers :linkEditar="'/usuario/cadastro'"
+        :paramRowEditar="'id'" :paramRowExcluir="'id'" id="tabela" @codExcluir="getCodExcluir" :carregando="carregando" />
         <modal :id="modalExcluir.id" :urlExclusao="modalExcluir.url"
          :texto="modalExcluir.texto" :title="modalExcluir.titulo" :btnExcluir="modalExcluir.btnExcluir"
          :idExcluir="id" @success="usuarioExcluido"/>
@@ -47,6 +47,7 @@ export default {
                    key: 'actions',
                    label: "Opções" 
                },
+               carregando: false,
            },
            usuarios: []
         }
@@ -63,12 +64,17 @@ export default {
             this.id = codigo;
         },
         buscarUsuarios: function(){
-            this.$http.get('http://localhost:3000/usuario/lista')
+          this.carregando = true;
+          this.$http.get('http://localhost:3000/usuario/lista')
         .then(res => res.json())
         .then(usuarios => {
+          this.carregando = false;  
           this.usuarios = usuarios
           }
-          , err => console.log(err));
+          , err =>{ 
+              this.carregando = false;
+              console.log(err);
+          })
         },
         usuarioExcluido: function(msg){
                 this.alertaSucess = true;

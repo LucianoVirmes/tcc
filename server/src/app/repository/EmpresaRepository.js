@@ -4,15 +4,15 @@ const Op = db.Sequelize.Op;
 
 class EmpresaRepository {
 
-    save(empresa){
+    save(empresa) {
         return Empresa.create(empresa);
     }
 
-    findAll(){
+    findAll() {
         return Empresa.findAll();
     }
 
-    update(empresa){
+    update(empresa) {
         return this.findOneByPk(empresa.id).then(empresaBanco => {
             empresaBanco.update({
                 nome: empresa.nome,
@@ -21,21 +21,23 @@ class EmpresaRepository {
         })
     }
 
-    findOneByPk(codEmpresa){
+    findOneByPk(codEmpresa) {
         return Empresa.findByPk(codEmpresa);
     }
 
-    deleteOne(codEmpresa){
+    deleteOne(codEmpresa) {
         return Empresa.destroy({
-            where: {id: codEmpresa}
+            where: { id: codEmpresa }
         })
     }
 
-    findByNome(nomeEmpresa){
+    findByNome(nomeEmpresa) {
         return Empresa.findAll({
-            where: {nome: {
-                [Op.like]: '%'+nomeEmpresa+'%'
-            }}
+            where: {
+                nome: {
+                    [Op.like]: '%' + nomeEmpresa + '%'
+                }
+            }
         })
     }
 

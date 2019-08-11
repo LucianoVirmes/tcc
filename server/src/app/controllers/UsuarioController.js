@@ -2,8 +2,8 @@ const UsuarioService = require('../services/UsuarioService');
 const service = new UsuarioService();
 
 class UsuarioController {
-    
-    static rotas(){
+
+    static rotas() {
         return {
             lista: '/usuario/lista',
             cadastro: '/usuario/cadastro',
@@ -12,7 +12,7 @@ class UsuarioController {
         }
     }
 
-    getUsuarios(){
+    getUsuarios() {
         return (req, res) => {
             service.getUsuarios().then(usuarios => {
                 res.send(usuarios);
@@ -22,10 +22,10 @@ class UsuarioController {
             });
         }
     }
-    
+
     cadastro() {
         return (req, res) => {
-                service.cadastrar(req.body).then(status => {
+            service.cadastrar(req.body).then(status => {
                 res.sendStatus(200);
             }, erro => {
                 console.log(erro);
@@ -34,7 +34,7 @@ class UsuarioController {
         }
     }
 
-    inativar(){
+    inativar() {
         return (req, res) => {
             service.inativar(parseInt(req.body.id)).then(status => {
                 res.sendStatus(200);
@@ -45,14 +45,14 @@ class UsuarioController {
         }
     }
 
-    getPermissoesParaCadastro(){
+    getPermissoesParaCadastro() {
         return (req, res) => {
             let permissoes = require('../models/PermissoesEnum.js')
             res.send(permissoes);
         }
     }
 
-    getUsuarioById(){
+    getUsuarioById() {
         return (req, res) => {
             service.getUsuarioById(req.param("codigo")).then(usuario => {
                 res.send(usuario);

@@ -8,9 +8,9 @@ const motoristaController = new MotoristaController();
 const EmpresaController = require('../controllers/EmpresaController.js');
 const empresaController = new EmpresaController();
 
-module.exports = (app) =>{
-    
-    const rotasUsuario = UsuarioController.rotas(); 
+module.exports = (app) => {
+
+    const rotasUsuario = UsuarioController.rotas();
     const rotasProduto = ProdutoController.rotas();
     const rotasMotorista = MotoristaController.rotas();
     const rotasEmpresa = EmpresaController.rotas();
@@ -39,8 +39,8 @@ module.exports = (app) =>{
     app.get(rotasEmpresa.autocomplete, empresaController.autoComplete());
     app.post(rotasEmpresa.remover, empresaController.remover());
 
-    app.get("/", function(req, res){
-         
+    app.get("/", function (req, res) {
+
     })
-  
+
 }
