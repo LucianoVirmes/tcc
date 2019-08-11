@@ -7,7 +7,6 @@
       :linkEditar="'/motorista/cadastro'"
       :paramRowEditar="'id'"
       :paramRowExcluir="'id'"
-      id="tabela"
       @codExcluir="getCodExcluir"
       :carregando="carregando"
     />

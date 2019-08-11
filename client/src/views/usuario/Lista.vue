@@ -1,90 +1,105 @@
 <template>
-<div>   
-        <b-alert variant="success" :show="alertaSucess" dismissible>Usuário inativado com sucesso!</b-alert>
-        <tabela :items=usuarios :headers=headers :linkEditar="'/usuario/cadastro'"
-        :paramRowEditar="'id'" :paramRowExcluir="'id'" id="tabela" @codExcluir="getCodExcluir" :carregando="carregando" />
-        <modal :id="modalExcluir.id" :urlExclusao="modalExcluir.url"
-         :texto="modalExcluir.texto" :title="modalExcluir.titulo" :btnExcluir="modalExcluir.btnExcluir"
-         :idExcluir="id" @success="usuarioExcluido"/>
-
-</div>
+  <div>
+    <b-alert variant="success" :show="alertaSucess" dismissible>Usuário inativado com sucesso!</b-alert>
+    <tabela
+      :items="usuarios"
+      :headers="headers"
+      :linkEditar="'/usuario/cadastro'"
+      :paramRowEditar="'id'"
+      :paramRowExcluir="'id'"
+      @codExcluir="getCodExcluir"
+      :carregando="carregando"
+    />
+    <modal
+      :id="modalExcluir.id"
+      :urlExclusao="modalExcluir.url"
+      :texto="modalExcluir.texto"
+      :title="modalExcluir.titulo"
+      :btnExcluir="modalExcluir.btnExcluir"
+      :idExcluir="id"
+      @success="usuarioExcluido"
+    />
+  </div>
 </template>
 <script>
-    import Tabela from '../../components/shared/tabela/Tabela.vue';
-    import ModalExcluir from '../../components/shared/modal/ModalExcluir.vue';
+import Tabela from "../../components/shared/tabela/Tabela.vue";
+import ModalExcluir from "../../components/shared/modal/ModalExcluir.vue";
 
 export default {
-   data (){
-       return {
-           id: "",
-           modalExcluir: {
-               texto: "Deseja mesmo inativar este usuário?",
-               titulo: "Inativar",
-               id: "modal-excluir",
-               url: "http://localhost:3000/usuario/inativar/",
-               btnExcluir: "Inativar"
-            }, 
-            alertaSucess: false,
-           headers: {
-               id:{
-                   label:"Codigo",
-                   sortable:true 
-               },
-               nome: {
-                   key:"pessoa.nome",
-                   label: "Nome",
-                   sortable:true
-               },
-               email: {
-                   label: "E-mail"
-               },
-               status: {
-                   label: "Status",
-                   key: "dataDemissao",
-                   sortable: true
-               },
-               opcoes: {
-                   key: 'actions',
-                   label: "Opções" 
-               },
-               carregando: false,
-           },
-           usuarios: []
-        }
-   },
-   components: {
-       'tabela': Tabela,
-       'modal': ModalExcluir
-   },
-    created () {
-      this.buscarUsuarios();
+  data() {
+    return {
+      id: "",
+      modalExcluir: {
+        texto: "Deseja mesmo inativar este usuário?",
+        titulo: "Inativar",
+        id: "modal-excluir",
+        url: "http://localhost:3000/usuario/inativar/",
+        btnExcluir: "Inativar"
+      },
+      alertaSucess: false,
+      headers: {
+        id: {
+          label: "Codigo",
+          sortable: true
+        },
+        nome: {
+          key: "pessoa.nome",
+          label: "Nome",
+          sortable: true
+        },
+        email: {
+          label: "E-mail"
+        },
+        status: {
+          label: "Status",
+          key: "dataDemissao",
+          sortable: true
+        },
+        opcoes: {
+          key: "actions",
+          label: "Opções"
+        },
+        carregando: false
+      },
+      usuarios: []
+    };
+  },
+  components: {
+    tabela: Tabela,
+    modal: ModalExcluir
+  },
+  created() {
+    this.buscarUsuarios();
+  },
+  methods: {
+    getCodExcluir: function(codigo) {
+      this.id = codigo;
     },
-    methods: {
-        getCodExcluir: function(codigo){
-            this.id = codigo;
-        },
-        buscarUsuarios: function(){
-          this.carregando = true;
-          this.$http.get('http://localhost:3000/usuario/lista')
+    buscarUsuarios: function() {
+      this.carregando = true;
+      this.$http
+        .get("http://localhost:3000/usuario/lista")
         .then(res => res.json())
-        .then(usuarios => {
-          this.carregando = false;  
-          this.usuarios = usuarios
+        .then(
+          usuarios => {
+            this.carregando = false;
+            this.usuarios = usuarios;
+          },
+          err => {
+            this.carregando = false;
+            console.log(err);
           }
-          , err =>{ 
-              this.carregando = false;
-              console.log(err);
-          })
-        },
-        usuarioExcluido: function(msg){
-                this.alertaSucess = true;
-                this.buscarUsuarios();
-        }
+        );
+    },
+    usuarioExcluido: function(msg) {
+      this.alertaSucess = true;
+      this.buscarUsuarios();
     }
-}
+  }
+};
 </script>
 <style>
-    #tabela {
-        margin-top: 8%;
-    }
+#tabela {
+  margin-top: 8%;
+}
 </style>
