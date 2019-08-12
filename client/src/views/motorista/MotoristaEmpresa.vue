@@ -1,9 +1,13 @@
 <template>
 <div class="container-fluid">
     <div class="form-group">
+        <label>Motorista</label>
+        <b-form-select v-model="motoristaSelecionado" :options="motoristas" class="form-control" />
+    </div>
+    <div class="form-group">
         <autocomplete :items="options" :placeholderInput="'Digite o nome de uma empresa'"
-         class="col-10 float-left" @input="adicionarEmpresa"/>
-        <b-button class="col-2 form-control" variant="success" @click="adicionarEmpresa()">Adicionar</b-button>
+         class="col-sm-10 float-left" @input="setEmpresa"/>
+        <b-button class="col-sm-2 form-control" variant="success" @click="adicionarEmpresa()">Adicionar</b-button>
     </div>
     <tabela :items="empresas" :headers="headers" class="text-center tabela"/>
 </div>
@@ -29,7 +33,13 @@ export default {
                     label: "Opções",
                     key: "actions"
                 }
-            }
+            },
+            motoristas: [{
+                value: null,
+                text: 'Selecione um motorista'
+            }],
+            motoristaSelecionado: null,
+            empresaSelecionada: null
         }
     },
     methods: {
@@ -42,12 +52,24 @@ export default {
                 });
             })
         },
-        adicionarEmpresa(empresa){
-            console.log(empresa);
+        setEmpresa(empresa){
+            this.empresaSelecionada = empresa;
+        },
+        adicionarEmpresa(){
+            console.log(this.empresaSelecionada);
+        },
+        buscaMotoristas(){
+            this.$http.get('http://localhost:3000/motorista/lista/')
+            .then(res => res.json()).then(motoristas => {
+                motoristas.forEach(element => {
+                    this.motoristas.push({value: element.id, text:element.pessoa.nome});
+                });
+            });
         }
     },
      created(){
         this.autoCompleteEmpresas();
+        this.buscaMotoristas();
     },
     components: {
         'autocomplete': AutoComplete,
