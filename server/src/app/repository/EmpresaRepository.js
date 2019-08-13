@@ -1,5 +1,6 @@
 const db = require('../../../config/configDb.js');
 const Empresa = db.empresa;
+const Motorista = db.motorista;
 const Op = db.Sequelize.Op;
 
 class EmpresaRepository {
@@ -40,6 +41,8 @@ class EmpresaRepository {
             }
         })
     }
+
+   
 
 }
 

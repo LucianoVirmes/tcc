@@ -12,7 +12,9 @@ class MotoristaController {
             alterar: "/motorista/alterar",
             lista: "/motorista/lista",
             visualizar: "/motorista/visualizar",
-            remover: "/motorista/remover"
+            remover: "/motorista/remover",
+            addEmpresa: "/motorista/empresa/nova",
+            listaEmpresas: "/motorista/empresa/lista"
         }
     }
 
@@ -78,6 +80,28 @@ class MotoristaController {
             }, err => {
                 console.log(err);
                 res.sendStatus(500);
+            })
+        }
+    }
+
+    addEmpresa(){
+        return (req, res) => {
+            service.addEmpresa(req.body).then(sucess => {
+                res.sendStatus(200);
+            }, err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+        }
+    }
+
+    getEmpresas(){
+        return (req, res) => {
+            service.getEmpresas(parseInt(req.query.id)).then(empresas=> {
+                res.send(empresas);
+            }, err => {
+                console.log(err);
+                res.sendStatus(404);
             })
         }
     }

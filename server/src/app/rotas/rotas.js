@@ -31,6 +31,9 @@ module.exports = (app) => {
     app.get(rotasMotorista.visualizar, motoristaController.getMotorista());
     app.post(rotasMotorista.alterar, motoristaController.alterar());
     app.post(rotasMotorista.remover, motoristaController.removeMotorista());
+    app.post(rotasMotorista.addEmpresa, motoristaController.addEmpresa());
+    app.get(rotasMotorista.listaEmpresas, motoristaController.getEmpresas());
+
     //empresa
     app.post(rotasEmpresa.cadastrar, empresaController.cadastrar());
     app.get(rotasEmpresa.listar, empresaController.listar());

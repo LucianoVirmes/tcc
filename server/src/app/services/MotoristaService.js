@@ -1,4 +1,6 @@
 const Repository = require('../repository/MotoristaRepository.js');
+const EmpresaRepository = require('../repository/EmpresaRepository.js');
+
 const repository = new Repository();
 
 class MotoristaService {
@@ -21,6 +23,14 @@ class MotoristaService {
 
     deleteById(idMotorista) {
         return repository.deleteByPk(idMotorista);
+    }
+
+    addEmpresa(motorista){
+        return repository.addEmpresa(motorista);
+    }
+
+    getEmpresas(idMotorista){
+        return repository.findEmpresas(idMotorista);
     }
 }
 

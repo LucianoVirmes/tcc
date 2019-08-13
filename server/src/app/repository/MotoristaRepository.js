@@ -8,9 +8,13 @@ class MotoristaRepository {
     save(motorista) {
         return Pessoa.create(motorista.pessoa).then(pessoa => {
             motorista.codpessoa = pessoa.id;
-            Motorista.create(motorista).then(motoristaBanco => {
-                motoristaBanco.setEmpresas([motorista.empresa.id]);
-            });
+            Motorista.create(motorista);
+        })
+    }
+
+    addEmpresa(motorista){
+        return Motorista.findByPk(motorista.id).then(motoristaBanco => {
+            motoristaBanco.setEmpresas([motorista.empresa.id])
         })
     }
 
@@ -52,6 +56,12 @@ class MotoristaRepository {
     deleteByPk(idMotorista) {
         return Motorista.destroy({
             where: { id: idMotorista }
+        })
+    }
+
+    findEmpresas(idMotorista) {
+        return Motorista.findByPk(idMotorista).then(motorista => {
+            return motorista.getEmpresas();
         })
     }
 }

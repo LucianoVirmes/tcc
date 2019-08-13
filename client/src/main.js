@@ -11,9 +11,11 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import router from './route/router.js';
 import VueMoment from 'vue-moment';
-
+import VueSimpleSuggest from 'vue-simple-suggest';
 library.add(faUserSecret, faSearch, faTrash, faPen, faPlus)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('vue-simple-suggest', VueSimpleSuggest)
+
 Vue.use(BootstrapVue);
 Vue.use(VueMoment);
 Vue.use(VueResource);
