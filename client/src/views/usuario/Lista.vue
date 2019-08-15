@@ -17,13 +17,16 @@
       :title="modalExcluir.titulo"
       :btnExcluir="modalExcluir.btnExcluir"
       :idExcluir="id"
+      @clickConfirm="excluir($event)"
       @success="usuarioExcluido"
     />
   </div>
 </template>
 <script>
 import Tabela from "../../components/shared/tabela/Tabela.vue";
+import UsuarioService from "../../domain/usuario/UsuarioService";
 import ModalExcluir from "../../components/shared/modal/ModalExcluir.vue";
+import Usuario from "../../domain/usuario/Usuario";
 
 export default {
   data() {
@@ -33,7 +36,7 @@ export default {
         texto: "Deseja mesmo inativar este usuário?",
         titulo: "Inativar",
         id: "modal-excluir",
-        url: "http://localhost:3000/usuario/inativar/",
+        url: "/usuario",
         btnExcluir: "Inativar"
       },
       alertaSucess: false,
@@ -58,9 +61,9 @@ export default {
         opcoes: {
           key: "actions",
           label: "Opções"
-        },
-        carregando: false
+        }
       },
+      carregando: false,
       usuarios: []
     };
   },
@@ -69,6 +72,8 @@ export default {
     modal: ModalExcluir
   },
   created() {
+    this.service = new UsuarioService(this.$resource);
+
     this.buscarUsuarios();
   },
   methods: {
@@ -76,20 +81,19 @@ export default {
       this.id = codigo;
     },
     buscarUsuarios: function() {
-      this.carregando = true;
-      this.$http
-        .get("http://localhost:3000/usuario/lista")
-        .then(res => res.json())
-        .then(
-          usuarios => {
-            this.carregando = false;
-            this.usuarios = usuarios;
-          },
-          err => {
-            this.carregando = false;
-            console.log(err);
-          }
-        );
+      this.service.listar().then(
+        usuarios => {
+          this.carregando = false;
+          this.usuarios = usuarios;
+        },
+        err => {
+          this.carregando = false;
+          console.log(err);
+        }
+      );
+    },
+    excluir(codUsuario){
+      this.service.inativar(codUsuario).then(()=> console.log('sucesso'));
     },
     usuarioExcluido: function(msg) {
       this.alertaSucess = true;

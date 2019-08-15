@@ -19,6 +19,7 @@ Vue.component('vue-simple-suggest', VueSimpleSuggest)
 Vue.use(BootstrapVue);
 Vue.use(VueMoment);
 Vue.use(VueResource);
+Vue.http.options.root = 'http://localhost:3000';
 Vue.config.productionTip = false;
 
 

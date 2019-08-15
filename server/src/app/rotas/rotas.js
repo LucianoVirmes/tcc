@@ -17,10 +17,10 @@ module.exports = (app) => {
 
     //usuario
     app.post(rotasUsuario.cadastro, usuarioController.cadastro());
-    app.get(rotasUsuario.cadastro, usuarioController.getPermissoesParaCadastro());
+    app.get(rotasUsuario.listaPermissoes, usuarioController.getPermissoesParaCadastro());
     app.get(rotasUsuario.lista, usuarioController.getUsuarios())
     app.get(rotasUsuario.visualiza, usuarioController.getUsuarioById());
-    app.post(rotasUsuario.excluir, usuarioController.inativar());
+    app.delete(rotasUsuario.excluir, usuarioController.inativar());
     //produto
     app.post(rotasProduto.cadastro, produtoController.cadastro());
     app.get(rotasProduto.lista, produtoController.lista());

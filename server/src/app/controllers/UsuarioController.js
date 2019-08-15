@@ -6,9 +6,10 @@ class UsuarioController {
     static rotas() {
         return {
             lista: '/usuario/lista',
-            cadastro: '/usuario/cadastro',
-            visualiza: '/usuario/visualizar',
-            excluir: '/usuario/inativar'
+            listaPermissoes: '/usuario/listaPermissoes',
+            cadastro: '/usuario',
+            visualiza: '/usuario/:id',
+            excluir: '/usuario/:id'
         }
     }
 
@@ -36,7 +37,7 @@ class UsuarioController {
 
     inativar() {
         return (req, res) => {
-            service.inativar(parseInt(req.body.id)).then(status => {
+            service.inativar(parseInt(req.params.id)).then(status => {
                 res.sendStatus(200);
             }, erro => {
                 console.log(erro);
@@ -54,7 +55,7 @@ class UsuarioController {
 
     getUsuarioById() {
         return (req, res) => {
-            service.getUsuarioById(req.param("codigo")).then(usuario => {
+            service.getUsuarioById(req.params.id).then(usuario => {
                 res.send(usuario);
             }, err => res.sendStatus(500));
         }

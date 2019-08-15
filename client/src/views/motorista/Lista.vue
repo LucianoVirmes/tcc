@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-alert variant="success" :show="alertaSucess" dismissible>Motorista inativado com sucesso!</b-alert>
+    <b-alert variant="success" :show="alertaSucess" dismissible>
+      Motorista inativado com sucesso!</b-alert>
     <tabela
       :items="motoristas"
       :headers="headers"
