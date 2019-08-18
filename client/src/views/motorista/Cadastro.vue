@@ -6,18 +6,31 @@
       :show="alertaErro"
       dismissible
     >Houve um erro ao tentar submeter o formulário!</b-alert>
-    <form class="form">
+    <form class="form" @submit.prevent="enviarForm()">
       <fieldset>
         <div class="form-group">
           <label>Nome do motorista</label>
-          <input type="text" class="form-control" v-model="nome" />
+          <input
+            type="text"
+            name="nome"
+            v-validate="{required: true, min: 3, max: 10}"
+            class="form-control"
+            v-model="motorista.pessoa.nome"
+          />
+          <span class="text-danger" v-if="errors.has('nome')">{{errors.first("nome")}}</span>
         </div>
         <div class="form-group">
           <label>CNH do motorista</label>
-          <input type="number" class="form-control" v-model="cnh" />
+          <input
+            class="form-control"
+            name="cnh"
+            v-validate="{required: true, min:11, max: 15 }"
+            v-model="motorista.cnh"
+          />
+          <span class="text-danger" v-if="errors.has('cnh')">{{errors.first("cnh")}}</span>
         </div>
 
-        <button class="btn btn-primary" v-on:click="enviarForm">Salvar</button>
+        <button class="btn btn-primary">Salvar</button>
       </fieldset>
     </form>
   </div>
@@ -25,52 +38,36 @@
 
 <script>
 import MotoristaEmpresa from "./MotoristaEmpresa.vue";
+import Motorista from "../../domain/motorista/Motorista";
+import MotoristaService from "../../domain/motorista/MotoristaService";
 
 export default {
   data() {
     return {
-      nome: "",
-      cnh: "",
+      motorista: new Motorista(),
       alertaSucess: false,
       alertaErro: false
     };
   },
   methods: {
-    enviarForm: function(evt) {
-      evt.preventDefault();
-
-      const FormData = {
-        id: this.$route.params.id,
-        pessoa: {
-          nome: this.nome
-        },
-        empresa: {
-          id: this.empresaSelected
-        },
-        cnh: this.cnh
-      };
-      this.$http
-        .post("http://localhost:3000/motorista/cadastro", FormData)
-        .then(
-          res => {
-            this.showAlert(res);
-          },
-          err => {
-            this.showAlert(err);
-            console.log(err);
-          }
-        );
+    enviarForm: function() {
+      this.$validator.validateAll().then(success => {
+        if (success) {
+          this.service.cadastrar(this.motorista).then(
+            res => {
+              this.motorista = new Motorista();
+              this.showAlert(res);
+            },
+            err => this.showAlert(err)
+          );
+        }
+      });
     },
 
-    buscaDados: function(motorista) {
-      this.$http
-        .get("http://localhost:3000/motorista/visualizar", {
-          params: { id: motorista.id }
-        })
-        .then(res => res.json())
-        .then(motorista => {
-          (this.nome = motorista.pessoa.nome), (this.cnh = motorista.cnh);
-        });
+    buscaDados: function(id) {
+      this.service.visualizar(id).then(motorista => {
+        this.motorista = motorista;
+      });
     },
 
     showAlert: function(res) {
@@ -83,8 +80,9 @@ export default {
   },
 
   created() {
-    if (this.$route.params) {
-      this.buscaDados(this.$route.params);
+    this.service = new MotoristaService(this.$resource);
+    if (this.$route.params.id) {
+      this.buscaDados(this.$route.params.id);
     }
   },
   components: {

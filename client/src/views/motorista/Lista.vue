@@ -1,7 +1,6 @@
 <template>
   <div>
-    <b-alert variant="success" :show="alertaSucess" dismissible>
-      Motorista inativado com sucesso!</b-alert>
+    <b-alert variant="success" :show="alertaSucess" dismissible>Motorista inativado com sucesso!</b-alert>
     <tabela
       :items="motoristas"
       :headers="headers"
@@ -17,8 +16,7 @@
       :texto="modalExcluir.texto"
       :title="modalExcluir.titulo"
       :btnExcluir="modalExcluir.btnExcluir"
-      :idExcluir="id"
-      @success="motoristaExcluido"
+      @clickConfirm="excluir()"
     />
   </div>
 </template>
@@ -26,20 +24,23 @@
 <script>
 import Tabela from "../../components/shared/tabela/Tabela.vue";
 import ModalExcluir from "../../components/shared/modal/ModalExcluir.vue";
+import Empresa from "../../domain/empresa/Empresa";
+import EmpresaService from "../../domain/empresa/EmpresaService";
+import Motorista from '../../domain/motorista/Motorista';
+import MotoristaService from '../../domain/motorista/MotoristaService';
 
 export default {
   data() {
     return {
       motoristas: [],
-      id: "",
+      motorista: new Motorista(),
       alertaSucess: false,
       carregando: false,
       modalExcluir: {
-        texto: "Deseja mesmo inativar este motorista?",
-        titulo: "Inativar",
+        texto: "Deseja mesmo remover este motorista?",
+        titulo: "Remover",
         id: "modal-excluir",
-        url: "http://localhost:3000/motorista/remover/",
-        btnExcluir: "Inativar"
+        btnExcluir: "Remover"
       },
       headers: {
         id: {
@@ -61,26 +62,26 @@ export default {
   },
 
   created() {
+    this.service = new MotoristaService(this.$resource);
     this.buscaMotoristas();
   },
 
   methods: {
     getCodExcluir: function(codExcluir) {
-      this.id = codExcluir;
+      this.motorista.id = codExcluir;
     },
     buscaMotoristas: function() {
       this.carregando = true;
-      this.$http
-        .get("http://localhost:3000/motorista/lista")
-        .then(res => res.json())
-        .then(motoristas => {
-          this.motoristas = motoristas;
-          this.carregando = false;
-        });
+      this.service.listar().then(motoristas => {
+        this.motoristas = motoristas;
+        this.carregando = false;
+      });
     },
-    motoristaExcluido: function(msg) {
-      this.alertaSucess = true;
-      this.buscaMotoristas();
+    excluir() {
+      this.service.remover(this.motorista.id).then(res => {
+        this.alertaSucess = true;
+        this.motoristas.splice(this.motoristas.indexOf(this.motorista));
+      });
     }
   },
   components: {

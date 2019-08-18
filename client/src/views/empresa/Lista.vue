@@ -12,12 +12,10 @@
     />
     <modal
       :id="modalExcluir.id"
-      :urlExclusao="modalExcluir.url"
       :texto="modalExcluir.texto"
       :title="modalExcluir.titulo"
       :btnExcluir="modalExcluir.btnExcluir"
-      :idExcluir="id"
-      @success="motoristaExcluido"
+      @clickConfirm="excluir()"
     />
   </div>
 </template>
@@ -25,18 +23,19 @@
 <script>
 import Tabela from "../../components/shared/tabela/Tabela.vue";
 import ModalExcluir from "../../components/shared/modal/ModalExcluir.vue";
+import EmpresaService from '../../domain/empresa/EmpresaService';
+import Empresa from '../../domain/empresa/Empresa';
 
 export default {
   data() {
     return {
       empresas: [],
-      id: "",
+      empresa: new Empresa(),
       alertaSucess: false,
       modalExcluir: {
         texto: "Deseja mesmo excluir esta empresa?",
         titulo: "Excluir",
         id: "modal-excluir",
-        url: "http://localhost:3000/empresa/remover/",
         btnExcluir: "Excluir"
       },
       carregando: {
@@ -62,18 +61,23 @@ export default {
   },
 
   created() {
+    this.service = new EmpresaService(this.$resource);
     this.buscaEmpresas();
   },
 
   methods: {
     getCodExcluir: function(codExcluir) {
-      this.id = codExcluir;
+      this.empresa.id = codExcluir;
+    },
+    excluir: function(){
+      this.service.deletar(this.empresa.id).then(res => {
+        this.alertaSucess = true;
+        this.empresas.splice(this.empresas.indexOf(this.empresa));
+      })
     },
     buscaEmpresas: function() {
       this.carregando = true;
-      this.$http
-        .get("http://localhost:3000/empresa/listar")
-        .then(res => res.json())
+        this.service.listar()
         .then(empresas => {
           this.empresas = empresas;
           this.carregando = false;

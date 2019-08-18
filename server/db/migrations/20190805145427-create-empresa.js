@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false
       },
       cnpj: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
       },
       createdAt: {

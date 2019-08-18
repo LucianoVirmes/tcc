@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       cnh: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: false
       },
       createdAt: {

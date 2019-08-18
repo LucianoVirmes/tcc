@@ -27,5 +27,9 @@ export default {
  
 
  <style>
+  input:invalid {
+    border-color: red;
+  }
+
 </style>
  

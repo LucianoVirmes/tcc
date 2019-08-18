@@ -10,6 +10,19 @@ class ProdutoService {
     salvar = (produto) => {
         return repository.save(produto);
     }
+
+    visualizar = (id) => {
+        return repository.findOneByPk(id);
+    }
+
+    alterar = (produto) => {
+        return repository.update(produto);
+    }
+
+    remover = (id) => {
+        return repository.delete(id);
+    }
+
 }
 
 module.exports = ProdutoService;

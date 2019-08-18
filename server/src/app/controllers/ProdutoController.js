@@ -3,8 +3,8 @@ const service = new ProdutoService();
 class ProdutoController {
     static rotas() {
         return {
-            lista: "/produto/lista",
-            cadastro: "/produto/cadastro"
+            produto: "/produto",
+            produtoId: "/produto/:id",
         }
     }
 
@@ -25,6 +25,35 @@ class ProdutoController {
                 res.send(produtos);
             }, error => {
                 console.log(error);
+                res.sendStatus(500);
+            })
+        }
+    }
+
+    visualiza() {
+        return (req, res) => {
+            service.visualizar(parseInt(req.params.id)).then(produto => {
+                res.send(produto);
+            }, error => {
+                console.log(error);
+                res.sendStatus(500);
+            })
+        }
+    }
+
+    alterar() {
+        return (req, res) => {
+            service.alterar(req.body).then(() => res.sendStatus(200), err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+        }
+    }
+
+    deleta() {
+        return (req, res) => {
+            service.remover(req.params.id).then(() => res.sendStatus(200), err => {
+                console.log(err);
                 res.sendStatus(500);
             })
         }

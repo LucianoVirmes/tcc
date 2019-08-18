@@ -5,10 +5,12 @@ import Produto from '../views/produto/Index.vue';
 const meta = { desc: "Produtos" }
 const lista = { path: '/produto/lista', titulo: 'Lista', component: Lista, meta };
 const cadastro = { path: '/produto/cadastro', titulo: 'Cadastro', component: Cadastro, meta }
+const edita = { path: '/produto/cadastro/:id', titulo: 'Editar', component: Cadastro, meta }
+
 
 export const rotasProduto =
 {
-    path: '/produto/lista', component: Produto, titulo: 'Produtos', meta, children: [lista, cadastro]
+    path: '/produto/lista', component: Produto, titulo: 'Produtos', meta, children: [lista, cadastro, edita]
 }
 
 export const rotasTela = { 'lista': lista, 'cadastro': cadastro };

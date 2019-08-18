@@ -38,6 +38,9 @@
 
 <script>
 import Tabela from "../../components/shared/tabela/Tabela.vue";
+import EmpresaService from "../../domain/empresa/EmpresaService";
+import Empresa from "../../domain/empresa/Empresa";
+import MotoristaService from "../../domain/motorista/MotoristaService";
 
 export default {
   data() {
@@ -75,14 +78,11 @@ export default {
   },
   methods: {
     autoCompleteEmpresas() {
-      this.$http
-        .get("http://localhost:3000/empresa/listar/")
-        .then(res => res.json())
-        .then(empresas => {
-          empresas.forEach(empresa => {
-            this.options.push(empresa);
-          });
+      this.empresaService.listar().then(empresas => {
+        empresas.forEach(empresa => {
+          this.options.push(empresa);
         });
+      });
     },
     setEmpresa(empresa) {
       this.empresaSelecionada = empresa;
@@ -92,39 +92,36 @@ export default {
         id: this.motoristaSelecionado,
         empresa: this.empresaSelecionada
       };
-      this.$http.post("http://localhost:3000/motorista/empresa/nova", formdata);
+      this.motoristaService
+        .addEmpresa(formdata)
+        .then(success => {
+          this.empresas.push(this.empresaSelecionada);
+        });
     },
     buscaEmpresasMotorista() {
-      this.empresas = [];  
+      this.empresas = [];
       if (this.motoristaSelecionado != null) {
-        this.$http
-          .get("http://localhost:3000/motorista/empresa/lista", {
-            params: {
-              id: this.motoristaSelecionado
-            }
-          })
-          .then(res => res.json())
+        this.motoristaService
+          .getEmpresas(this.motoristaSelecionado)
           .then(empresas => {
-              console.log(empresas);
-              this.empresas =empresas;
+            this.empresas = empresas;
           });
       }
     },
     buscaMotoristas() {
-      this.$http
-        .get("http://localhost:3000/motorista/lista/")
-        .then(res => res.json())
-        .then(motoristas => {
-          motoristas.forEach(element => {
-            this.motoristas.push({
-              value: element.id,
-              text: element.pessoa.nome
-            });
+      this.motoristaService.listar().then(motoristas => {
+        motoristas.forEach(element => {
+          this.motoristas.push({
+            value: element.id,
+            text: element.pessoa.nome
           });
         });
+      });
     }
   },
   created() {
+    this.empresaService = new EmpresaService(this.$resource);
+    this.motoristaService = new MotoristaService(this.$resource);
     this.autoCompleteEmpresas();
     this.buscaMotoristas();
   },

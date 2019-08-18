@@ -1,6 +1,6 @@
 export default class {
-    constructor(nome, cnh){
-        this.nome = nome;
+    constructor(cnh="", pessoa= {}){
         this.cnh = cnh;
+        this.pessoa = pessoa
     }
 }

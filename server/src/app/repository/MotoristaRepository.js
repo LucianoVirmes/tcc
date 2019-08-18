@@ -14,7 +14,7 @@ class MotoristaRepository {
 
     addEmpresa(motorista){
         return Motorista.findByPk(motorista.id).then(motoristaBanco => {
-            motoristaBanco.setEmpresas([motorista.empresa.id])
+            motoristaBanco.addEmpresa([motorista.empresa.id]);
         })
     }
 

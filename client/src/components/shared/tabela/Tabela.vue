@@ -21,7 +21,7 @@
       </template>
     </b-table>
     <div class="text-center">
-      <span v-if="items.length <= 0" class="text-center">Ainda não há nada aqui.</span>
+      <span v-if="items.length <= 0 && !carregando" class="text-center">Ainda não há nada aqui.</span>
     </div>
   </div>
 </template>

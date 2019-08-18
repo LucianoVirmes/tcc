@@ -8,6 +8,7 @@ class EmpresaService {
     }
 
     salvaOuAltera(empresa) {
+
         if (empresa.id) {
             return repository.update(empresa);
         } else {

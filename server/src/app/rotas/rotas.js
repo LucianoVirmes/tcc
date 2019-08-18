@@ -16,31 +16,32 @@ module.exports = (app) => {
     const rotasEmpresa = EmpresaController.rotas();
 
     //usuario
-    app.post(rotasUsuario.cadastro, usuarioController.cadastro());
+    app.post(rotasUsuario.excluir, usuarioController.cadastro());
     app.get(rotasUsuario.listaPermissoes, usuarioController.getPermissoesParaCadastro());
     app.get(rotasUsuario.lista, usuarioController.getUsuarios())
     app.get(rotasUsuario.visualiza, usuarioController.getUsuarioById());
     app.delete(rotasUsuario.excluir, usuarioController.inativar());
     //produto
-    app.post(rotasProduto.cadastro, produtoController.cadastro());
-    app.get(rotasProduto.lista, produtoController.lista());
+    app.post(rotasProduto.produto, produtoController.cadastro());
+    app.get(rotasProduto.produto, produtoController.lista());
+    app.get(rotasProduto.produtoId, produtoController.visualiza());
+    app.put(rotasProduto.produtoId, produtoController.alterar());
+    app.delete(rotasProduto.produtoId, produtoController.deleta());
     //motorista
-    app.post(rotasMotorista.cadastro, motoristaController.cadastrar());
-    app.get(rotasMotorista.cadastro, motoristaController.novo());
-    app.get(rotasMotorista.lista, motoristaController.getMotoristas());
-    app.get(rotasMotorista.visualizar, motoristaController.getMotorista());
-    app.post(rotasMotorista.alterar, motoristaController.alterar());
-    app.post(rotasMotorista.remover, motoristaController.removeMotorista());
-    app.post(rotasMotorista.addEmpresa, motoristaController.addEmpresa());
-    app.get(rotasMotorista.listaEmpresas, motoristaController.getEmpresas());
+    app.post(rotasMotorista.motorista, motoristaController.cadastrar());
+    app.get(rotasMotorista.motorista, motoristaController.getMotoristas());
+    app.get(rotasMotorista.motoristaId, motoristaController.getMotorista());
+    app.put(rotasMotorista.motorista, motoristaController.alterar());
+    app.delete(rotasMotorista.motoristaId, motoristaController.removeMotorista());
+    app.post(rotasMotorista.motoristaEmpresa, motoristaController.addEmpresa());
+    app.get(rotasMotorista.motoristaEmpresaLista, motoristaController.getEmpresas());
 
     //empresa
-    app.post(rotasEmpresa.cadastrar, empresaController.cadastrar());
-    app.get(rotasEmpresa.listar, empresaController.listar());
-    app.post(rotasEmpresa.alterar, empresaController.alterar());
-    app.get(rotasEmpresa.visualizar, empresaController.visualizar());
-    app.get(rotasEmpresa.autocomplete, empresaController.autoComplete());
-    app.post(rotasEmpresa.remover, empresaController.remover());
+    app.post(rotasEmpresa.empresa, empresaController.cadastrar());
+    app.get(rotasEmpresa.empresa, empresaController.listar());
+    app.put(rotasEmpresa.empresaId, empresaController.alterar());
+    app.get(rotasEmpresa.empresaId, empresaController.visualizar());
+    app.delete(rotasEmpresa.empresaId, empresaController.remover());
 
     app.get("/", function (req, res) {
 

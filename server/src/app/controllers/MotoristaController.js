@@ -8,13 +8,10 @@ class MotoristaController {
 
     static rotas() {
         return {
-            cadastro: "/motorista/cadastro",
-            alterar: "/motorista/alterar",
-            lista: "/motorista/lista",
-            visualizar: "/motorista/visualizar",
-            remover: "/motorista/remover",
-            addEmpresa: "/motorista/empresa/nova",
-            listaEmpresas: "/motorista/empresa/lista"
+            motorista: "/motorista",
+            motoristaId: "/motorista/:id",
+            motoristaEmpresaLista: "/motorista/empresa/lista",
+            motoristaEmpresa: "/motorista/empresa"
         }
     }
 
@@ -26,17 +23,6 @@ class MotoristaController {
                 console.log(err);
                 res.sendStatus(500);
             });
-        }
-    }
-
-    novo() {
-        return (req, res) => {
-            empresaService.getEmpresas().then(empresas => {
-                res.send(empresas);
-            }, error => {
-                res.sendStatus(500);
-                console.log(error);
-            })
         }
     }
 

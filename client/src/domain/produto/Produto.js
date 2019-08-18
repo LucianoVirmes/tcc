@@ -1,7 +1,6 @@
 export default class {
-    constructor(codigo,nome, unidadeMedida){
-        this.codigo = codigo;
+    constructor(nome = "", unidademedida = "") {
         this.nome = nome;
-        this.unidadeMedida = unidadeMedida;
+        this.unidademedida = unidademedida;
     }
 }

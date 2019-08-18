@@ -12,16 +12,31 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import router from './route/router.js';
 import VueMoment from 'vue-moment';
 import VueSimpleSuggest from 'vue-simple-suggest';
+import VeeValidate, { Validator } from 'vee-validate';
+import VueTheMask from 'vue-the-mask';
+import msgBR from 'vee-validate/dist/locale/pt_BR';
+
+
 library.add(faUserSecret, faSearch, faTrash, faPen, faPlus)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('vue-simple-suggest', VueSimpleSuggest)
 
+Validator.localize('pt_BR', msgBR);
+Vue.use(VeeValidate, {
+  validity: true,
+  events: 'change|blur',
+  fieldsBagName: 'formFields',
+  locale: 'pt_BR',
+});
+
+
+
+Vue.use(VueTheMask)
 Vue.use(BootstrapVue);
 Vue.use(VueMoment);
 Vue.use(VueResource);
 Vue.http.options.root = 'http://localhost:3000';
 Vue.config.productionTip = false;
-
 
 new Vue({
   router,

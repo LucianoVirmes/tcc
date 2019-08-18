@@ -1,16 +1,20 @@
 export default class {
+
     constructor(resource) {
         this._resource = resource('produto{/id}')
     }
 
     listar() {
-        let resource = this._resource('produto/lista');
-        return resource.query().
+        return this._resource.query().
             then(res => res.json());
     }
 
     cadastrar(produto) {
         return this._resource.save(produto);
+    }
+
+    alterar(produto) {
+        return this._resource.update(produto);
     }
 
     visualizar(id) {

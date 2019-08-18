@@ -5,12 +5,8 @@ class EmpresaController {
 
     static rotas() {
         return {
-            listar: "/empresa/listar",
-            visualizar: "/empresa/visualizar",
-            remover: "/empresa/remover",
-            alterar: "/empresa/alterar",
-            cadastrar: "/empresa/cadastrar",
-            autocomplete: "/empresa/autocomplete"
+            empresa: "/empresa",
+            empresaId: "/empresa/:id",
         }
     }
 
@@ -62,17 +58,6 @@ class EmpresaController {
         return (req, res) => {
             service.visualizar(req.param('id')).then(empresa => {
                 res.send(empresa);
-            }, error => {
-                res.sendStatus(500);
-                console.log(error);
-            })
-        }
-    }
-
-    autoComplete() {
-        return (req, res) => {
-            service.getEmpresasByNome(req.param('nome')).then(empresas => {
-                res.send(empresas);
             }, error => {
                 res.sendStatus(500);
                 console.log(error);
