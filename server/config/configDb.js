@@ -15,6 +15,7 @@ db.pessoa = require('../src/app/models/Pessoa.js')(sequelize, Sequelize);
 db.produto = require('../src/app/models/Produto.js')(sequelize, Sequelize);
 db.motorista = require('../src/app/models/Motorista.js')(sequelize, Sequelize);
 db.empresa = require('../src/app/models/Empresa.js')(sequelize, Sequelize);
+db.veiculo = require('../src/app/models/Veiculo.js')(sequelize, Sequelize);
 
 //relations
 

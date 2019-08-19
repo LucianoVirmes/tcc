@@ -58,7 +58,7 @@ export default {
             this.service.cadastrar(this.veiculo).then(
               res => {
                 this.showAlert(res);
-                this.veiculo = new Produto();
+                this.veiculo = new Veiculo();
               },
               err => this.showAlert(res)
             );

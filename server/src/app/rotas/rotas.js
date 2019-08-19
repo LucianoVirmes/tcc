@@ -7,6 +7,8 @@ const MotoristaController = require('../controllers/MotoristaController.js');
 const motoristaController = new MotoristaController();
 const EmpresaController = require('../controllers/EmpresaController.js');
 const empresaController = new EmpresaController();
+const VeiculoController = require('../controllers/VeiculoController.js');
+const veiculoController = new VeiculoController();
 
 module.exports = (app) => {
 
@@ -14,6 +16,8 @@ module.exports = (app) => {
     const rotasProduto = ProdutoController.rotas();
     const rotasMotorista = MotoristaController.rotas();
     const rotasEmpresa = EmpresaController.rotas();
+    const rotasVeiculo = VeiculoController.rotas();
+
 
     //usuario
     app.post(rotasUsuario.excluir, usuarioController.cadastro());
@@ -42,6 +46,14 @@ module.exports = (app) => {
     app.put(rotasEmpresa.empresaId, empresaController.alterar());
     app.get(rotasEmpresa.empresaId, empresaController.visualizar());
     app.delete(rotasEmpresa.empresaId, empresaController.remover());
+    //veiculo
+    app.post(rotasVeiculo.veiculo, veiculoController.cadastro());
+    app.get(rotasVeiculo.veiculo, veiculoController.listar());
+    app.put(rotasVeiculo.veiculo, veiculoController.alterar());
+    app.delete(rotasVeiculo.veiculoId, veiculoController.deletar());
+    app.get(rotasVeiculo.veiculoId, veiculoController.visualizar());
+
+
 
     app.get("/", function (req, res) {
 

@@ -17,7 +17,7 @@ export default class {
         return this._resource.query({ id }).then(res => res.json());
     }
 
-    inativar(id) {
+    remover(id) {
         return this._resource.delete({ id });
     }
 
