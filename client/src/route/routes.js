@@ -3,6 +3,7 @@ import { rotasPadrao } from './rotasPadrao';
 import { rotasProduto } from './rotasProduto.js';
 import { rotasMotorista } from './rotasMotorista.js';
 import { rotasEmpresa } from './rotasEmpresa.js';
+import {  rotasVeiculo} from './rotasVeiculo.js';
 
 const routes = [];
 

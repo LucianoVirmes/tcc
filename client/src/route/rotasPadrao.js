@@ -4,6 +4,7 @@ import { rotasProduto } from './rotasProduto.js';
 import { rotasUsuario } from './rotasUsuario.js';
 import { rotasMotorista } from './rotasMotorista';
 import { rotasEmpresa } from './rotasEmpresa';
+import { rotasVeiculo } from './rotasVeiculo';
 
 export const rotasPadrao = [
     { path: '/home', component: Home, titulo: 'Home', menu: false },
@@ -15,5 +16,6 @@ export const rotasPadrao = [
     rotasProduto,
     rotasEmpresa,
     rotasMotorista,
-    rotasUsuario
+    rotasUsuario,
+    rotasVeiculo
 ];
