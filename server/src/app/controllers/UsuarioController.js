@@ -5,11 +5,9 @@ class UsuarioController {
 
     static rotas() {
         return {
-            lista: '/usuario/lista',
             listaPermissoes: '/usuario/listaPermissoes',
-            cadastro: '/usuario',
-            visualiza: '/usuario/:id',
-            excluir: '/usuario/:id'
+            usuario: '/usuario',
+            usuarioId: '/usuario/:id',
         }
     }
 

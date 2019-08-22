@@ -53,13 +53,19 @@ export default {
     enviarForm: function() {
       this.$validator.validateAll().then(success => {
         if (success) {
-          this.service.cadastrar(this.motorista).then(
-            res => {
-              this.motorista = new Motorista();
-              this.showAlert(res);
-            },
-            err => this.showAlert(err)
-          );
+          if (this.motorista.id) {
+            this.service
+              .alterar(this.motorista)
+              .then(res => this.showAlert(res), err => this.showAlert(err));
+          } else {
+            this.service.cadastrar(this.motorista).then(
+              res => {
+                this.motorista = new Motorista();
+                this.showAlert(res);
+              },
+              err => this.showAlert(err)
+            );
+          }
         }
       });
     },

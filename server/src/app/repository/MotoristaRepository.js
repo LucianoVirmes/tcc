@@ -22,15 +22,9 @@ class MotoristaRepository {
         return this.findCompletoByPk(motorista.id).then(motoristaBanco => {
             motoristaBanco.update({
                 cnh: motorista.cnh
-            }).then(() => {
-                Pessoa.update({
-                    nome: motorista.nome
-                }, {
-                        where: { id: motoristaBanco.codpessoa }
-                    })
             })
-
-        })
+            
+        });
     }
 
     findCompletoByPk(idMotorista) {

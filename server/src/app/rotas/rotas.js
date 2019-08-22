@@ -9,7 +9,8 @@ const EmpresaController = require('../controllers/EmpresaController.js');
 const empresaController = new EmpresaController();
 const VeiculoController = require('../controllers/VeiculoController.js');
 const veiculoController = new VeiculoController();
-
+const PesagemController = require('../controllers/PesagemController.js');
+const pesagemController = new PesagemController();
 module.exports = (app) => {
 
     const rotasUsuario = UsuarioController.rotas();
@@ -17,14 +18,14 @@ module.exports = (app) => {
     const rotasMotorista = MotoristaController.rotas();
     const rotasEmpresa = EmpresaController.rotas();
     const rotasVeiculo = VeiculoController.rotas();
-
+    const rotasPesagem = PesagemController.rotas();
 
     //usuario
-    app.post(rotasUsuario.excluir, usuarioController.cadastro());
+    app.post(rotasUsuario.usuario, usuarioController.cadastro());
     app.get(rotasUsuario.listaPermissoes, usuarioController.getPermissoesParaCadastro());
-    app.get(rotasUsuario.lista, usuarioController.getUsuarios())
-    app.get(rotasUsuario.visualiza, usuarioController.getUsuarioById());
-    app.delete(rotasUsuario.excluir, usuarioController.inativar());
+    app.get(rotasUsuario.usuario, usuarioController.getUsuarios())
+    app.put(rotasUsuario.usuarioId, usuarioController.getUsuarioById());
+    app.delete(rotasUsuario.usuarioId, usuarioController.inativar());
     //produto
     app.post(rotasProduto.produto, produtoController.cadastro());
     app.get(rotasProduto.produto, produtoController.lista());
@@ -52,7 +53,9 @@ module.exports = (app) => {
     app.put(rotasVeiculo.veiculo, veiculoController.alterar());
     app.delete(rotasVeiculo.veiculoId, veiculoController.deletar());
     app.get(rotasVeiculo.veiculoId, veiculoController.visualizar());
-
+    //pesagem
+    app.get(rotasPesagem.pesagem, pesagemController.listar());
+    app.post(rotasPesagem.pesagem, pesagemController.salvar());
 
 
     app.get("/", function (req, res) {

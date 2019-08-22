@@ -16,13 +16,20 @@ db.produto = require('../src/app/models/Produto.js')(sequelize, Sequelize);
 db.motorista = require('../src/app/models/Motorista.js')(sequelize, Sequelize);
 db.empresa = require('../src/app/models/Empresa.js')(sequelize, Sequelize);
 db.veiculo = require('../src/app/models/Veiculo.js')(sequelize, Sequelize);
-
+db.pesagem = require('../src/app/models/Pesagem.js')(sequelize, Sequelize);
 //relations
 
 db.usuario.belongsTo(db.pessoa, {foreignKey: 'codpessoa'});
 db.motorista.belongsTo(db.pessoa, {foreignKey: 'codpessoa'});
 
+
+
 db.empresa.belongsToMany(db.motorista, {through: 'empresa_motorista', foreignKey: 'codempresa'});
+
 db.motorista.belongsToMany(db.empresa, {through: 'empresa_motorista', foreignKey: 'codmotorista'});
- 
+
+db.motorista.hasMany(db.pesagem, {foreignKey: 'codmotorista'});
+db.empresa.hasMany(db.pesagem, {foreignKey: 'codempresa'});
+db.veiculo.hasMany(db.pesagem, {foreignKey: 'codveiculo'});
+
 module.exports = db;

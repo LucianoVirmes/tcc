@@ -3,7 +3,6 @@ export default class {
     constructor(resource) {
         const acoesPersonalizadas = {
             getPermissoes: { method: 'GET', url: 'usuario/listaPermissoes' },
-            getUsuarios: { method: 'GET', url: 'usuario/lista' }
         }
         this._resource = resource('usuario{/id}', {}, acoesPersonalizadas);
     }
@@ -13,7 +12,7 @@ export default class {
     }
 
     listar() {
-        return this._resource.getUsuarios().
+        return this._resource.query().
             then(res => res.json());
     }
 
