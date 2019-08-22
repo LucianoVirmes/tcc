@@ -22,9 +22,10 @@ module.exports = (app) => {
 
     //usuario
     app.post(rotasUsuario.usuario, usuarioController.cadastro());
+    app.put(rotasUsuario.usuario, usuarioController.cadastro());
     app.get(rotasUsuario.listaPermissoes, usuarioController.getPermissoesParaCadastro());
     app.get(rotasUsuario.usuario, usuarioController.getUsuarios())
-    app.put(rotasUsuario.usuarioId, usuarioController.getUsuarioById());
+    app.get(rotasUsuario.usuarioId, usuarioController.getUsuarioById());
     app.delete(rotasUsuario.usuarioId, usuarioController.inativar());
     //produto
     app.post(rotasProduto.produto, produtoController.cadastro());

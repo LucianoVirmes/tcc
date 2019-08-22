@@ -7,7 +7,7 @@ class UsuarioController {
         return {
             listaPermissoes: '/usuario/listaPermissoes',
             usuario: '/usuario',
-            usuarioId: '/usuario/:id',
+            usuarioId: '/usuario/:id'
         }
     }
 

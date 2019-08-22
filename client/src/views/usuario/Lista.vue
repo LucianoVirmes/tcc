@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-alert variant="success" :show="alertaSucess" dismissible>Usuário inativado com sucesso!</b-alert>
+    <b-alert variant="success" :show="alertaSuccess" dismissible>Usuário inativado com sucesso!</b-alert>
     <tabela
       :items="usuarios"
       :headers="headers"
@@ -9,6 +9,7 @@
       :paramRowExcluir="'id'"
       @codExcluir="getCodExcluir"
       :carregando="carregando"
+      @clickConfirm="excluir()"
     />
     <modal
       :id="modalExcluir.id"
@@ -16,9 +17,7 @@
       :texto="modalExcluir.texto"
       :title="modalExcluir.titulo"
       :btnExcluir="modalExcluir.btnExcluir"
-      :idExcluir="id"
       @clickConfirm="excluir($event)"
-      @success="usuarioExcluido"
     />
   </div>
 </template>
@@ -31,7 +30,6 @@ import Usuario from "../../domain/usuario/Usuario";
 export default {
   data() {
     return {
-      id: "",
       modalExcluir: {
         texto: "Deseja mesmo inativar este usuário?",
         titulo: "Inativar",
@@ -39,7 +37,7 @@ export default {
         url: "/usuario",
         btnExcluir: "Inativar"
       },
-      alertaSucess: false,
+      alertaSuccess: false,
       headers: {
         id: {
           label: "Codigo",
@@ -64,6 +62,7 @@ export default {
         }
       },
       carregando: false,
+      usuario: new Usuario(),
       usuarios: []
     };
   },
@@ -78,7 +77,7 @@ export default {
   },
   methods: {
     getCodExcluir: function(codigo) {
-      this.id = codigo;
+      this.usuario.id = codigo;
     },
     buscarUsuarios: function() {
       this.service.listar().then(
@@ -92,13 +91,12 @@ export default {
         }
       );
     },
-    excluir(codUsuario){
-      this.service.inativar(codUsuario).then(()=> console.log('sucesso'));
+    excluir(){
+      this.service.inativar(this.usuario.id).then(res => {
+        this.alertaSuccess = true;
+        this.buscarUsuarios();
+      }, err => console.log(err));
     },
-    usuarioExcluido: function(msg) {
-      this.alertaSucess = true;
-      this.buscarUsuarios();
-    }
   }
 };
 </script>

@@ -62,7 +62,6 @@ export default {
     },
     buscaDados: function(id) {
       this.service.visualizar(id).then(usuario => {
-        console.log(usuario);
         this.usuario = new Usuario(
           usuario.codigo,
           usuario.pessoa.nome,
@@ -72,7 +71,6 @@ export default {
           usuario.pessoa.email
         );
         this.permissaoSelecionada = usuario.permissoes;
-        console.log(this.usuario);
       });
     },
 
