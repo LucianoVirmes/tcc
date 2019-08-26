@@ -1,11 +1,7 @@
 <template>
   <div>
     <b-alert variant="success" :show="alertaSuccess" dismissible>Empresa salva com sucesso!</b-alert>
-    <b-alert
-      variant="danger"
-      :show="alertaErro"
-      dismissible
-    >Houve um erro ao submeter o formulário!</b-alert>
+    <b-alert variant="danger" :show="alertaErro" dismissible>Houve um erro ao submeter o formulário!</b-alert>
     <form class="form" @submit.prevent="enviarForm()">
       <fieldset>
         <div class="form-group">
@@ -50,9 +46,8 @@
 </template>
 
 <script>
-
-import Empresa from '../../domain/empresa/Empresa';
-import EmpresaService from '../../domain/empresa/EmpresaService';
+import Empresa from "../../domain/empresa/Empresa";
+import EmpresaService from "../../domain/empresa/EmpresaService";
 import ValidationProvider from "vee-validate";
 
 export default {
@@ -65,12 +60,10 @@ export default {
   },
   methods: {
     enviarForm() {
-     
-        this.service.cadastrar(this.empresa)
-        .then(res => {
-          this.empresa = new Empresa();
-          this.showAlert(res);
-        });
+      this.service.cadastrar(this.empresa).then(res => {
+        this.empresa = new Empresa();
+        this.showAlert(res);
+      });
     },
     showAlert: function(res) {
       if (res.ok) {
@@ -80,10 +73,9 @@ export default {
       }
     },
     buscaDados: function(id) {
-        this.service.visualizar(id)
-        .then(empresa => {
-         this.empresa = empresa;
-        });
+      this.service.visualizar(id).then(empresa => {
+        this.empresa = empresa;
+      });
     }
   },
   created() {
@@ -93,8 +85,7 @@ export default {
     if (this.$route.params.id) {
       this.buscaDados(this.$route.params.id);
     }
-  },
-
+  }
 };
 </script>
 
