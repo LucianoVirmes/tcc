@@ -49,10 +49,13 @@ export default {
       veiculosAutocomplete: [],
       headers: {
         nome: {
-          label: "Placa"
+          label: "Placa",
+          key: "placa"
+
         },
         cnpj: {
-          label: "Tara"
+          label: "Tara",
+          key: "tara"
         },
         opcoes: {
           label: "Opções",

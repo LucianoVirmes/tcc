@@ -5,18 +5,6 @@
     <form class="form" @submit.prevent="enviar()">
       <fieldset>
         <div class="form-group">
-          <label>Nome do veículo</label>
-          <input
-            type="text"
-            v-validate
-            data-vv-rules="required|min:3|max:10"
-            name="nome"
-            class="form-control"
-            v-model="veiculo.nome"
-          />
-          <span class="text-danger" v-if="errors.has('nome')">{{ errors.first('nome') }}</span>
-        </div>
-        <div class="form-group">
           <label>Placa</label>
           <input
             type="text"
@@ -27,6 +15,18 @@
             v-model="veiculo.placa"
           />
           <span class="text-danger" v-if="errors.has('placa')">{{ errors.first('placa') }}</span>
+        </div>
+        <div class="form-group">
+          <label>Tara</label>
+          <input
+            type="text"
+            v-validate
+            rules="number"
+            name="tara"
+            class="form-control"
+            v-model="veiculo.tara"
+          />
+           <span class="text-danger" v-if="errors.has('tara')">{{ errors.first('tara') }}</span>
         </div>
         <button class="btn btn-primary">Enviar</button>
       </fieldset>
@@ -69,7 +69,7 @@ export default {
     buscaVeiculo(id) {
       this.service.visualizar(id).then(veiculo => {
         this.veiculo.id = veiculo.id;
-        this.veiculo.nome = veiculo.nome;
+        this.veiculo.tara = veiculo.tara;
         this.veiculo.placa = veiculo.placa;
       });
     },

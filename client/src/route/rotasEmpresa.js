@@ -8,7 +8,7 @@ const cadastro = { path: '/empresa/cadastro', titulo: 'Cadastro', component: Cad
 const lista = { path: '/empresa/lista', titulo: 'Lista', component: Lista, meta };
 const alteracao = { path: '/empresa/cadastro/:id', titulo: 'Alterar', component: Cadastro, menu: false, meta }
 const empresaVeiculos = {
-    path: '/empresa/empresa-veiculo', titulo: 'Veiculos da empresa', component: EmpresaVeiculo, meta
+    path: '/empresa/empresa-veiculo', titulo: 'Veículos da empresa', component: EmpresaVeiculo, meta
 }
 
 export const rotasEmpresa = {

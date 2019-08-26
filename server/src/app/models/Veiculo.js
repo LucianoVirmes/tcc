@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const veiculo = sequelize.define('veiculo', {
-    nome: DataTypes.STRING,
-    placa: DataTypes.STRING
+    placa: DataTypes.STRING,
+    tara: DataTypes.BIGINT
   }, {
     paranoid: true,
     tableName: 'veiculo'

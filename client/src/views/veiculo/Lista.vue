@@ -1,7 +1,6 @@
 <template>
   <div>
-    <b-alert variant="success" :show="alertaSucess" dismissible>
-      Veículo excluido com sucesso!</b-alert>
+    <b-alert variant="success" :show="alertaSucess" dismissible>Veículo excluido com sucesso!</b-alert>
     <tabela
       :items="veiculos"
       :headers="headers"
@@ -24,8 +23,8 @@
 <script>
 import Tabela from "../../components/shared/tabela/Tabela.vue";
 import ModalExcluir from "../../components/shared/modal/ModalExcluir.vue";
-import Veiculo from '../../domain/veiculo/Veiculo';
-import VeiculoService from '../../domain/veiculo/VeiculoService';
+import Veiculo from "../../domain/veiculo/Veiculo";
+import VeiculoService from "../../domain/veiculo/VeiculoService";
 
 export default {
   data() {
@@ -42,11 +41,12 @@ export default {
         id: {
           label: "Codigo"
         },
-        nome: {
-          label: "Nome"
-        },
         placa: {
-          label: "Placa",
+          label: "Placa"
+        },
+        nome: {
+          label: "Tara",
+          key: "tara"
         },
         opcoes: {
           key: "actions",
@@ -81,13 +81,13 @@ export default {
     );
   },
   methods: {
-    excluir(){
+    excluir() {
       this.service.remover(this.veiculo.id).then(res => {
         this.alertaSucess = true;
         this.veiculos.splice(this.veiculos.indexOf(this.veiculo.id));
       });
     },
-    getCodExcluir(id){
+    getCodExcluir(id) {
       this.veiculo.id = id;
     }
   }

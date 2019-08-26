@@ -16,7 +16,7 @@ class VeiculoRepository {
         return this.findOneByPk(veiculo.id).then(veiculoBanco => {
             veiculoBanco.update({
                 placa: veiculo.placa,
-                nome: veiculo.nome
+                tara: veiculo.tara
             })
         })
     }

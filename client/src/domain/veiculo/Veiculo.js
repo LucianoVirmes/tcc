@@ -1,7 +1,7 @@
 export default class {
-    constructor(id = "", placa = "", nome = "") {
+    constructor(id = "", placa = "", tara = "") {
         this.id = id;
         this.placa = placa;
-        this.nome = nome;
+        this.tara = tara;
     }
 }
