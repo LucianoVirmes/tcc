@@ -42,8 +42,18 @@ class EmpresaRepository {
         })
     }
 
-   
+    addVeiculo(idEmpresa, veiculo) {
+        return this.findOneByPk(idEmpresa).then(empresaBanco => {
+            empresaBanco.addVeiculo(veiculo.id);
+        })
+    }
 
+    getVeiculos(idEmpresa) {
+        return this.findOneByPk(idEmpresa)
+            .then(empresaBanco => {
+              return  empresaBanco.getVeiculos();
+            })
+    }
 }
 
 module.exports = EmpresaRepository;

@@ -14,15 +14,14 @@
         <vue-simple-suggest
           class="col-sm-8 float-left no-padding autocomplete"
           v-model="veiculoSelecionado"
-          :list="options"
-          :destyled="true"
+          :list="veiculosAutocomplete"
           :styles="autoCompleteStyle"
           placeholder="Busque um veículo pela placa"
           mode="select"
           :nullable-select="false"
           :prevent-submit="true"
-          :display-attribute="'nome'"
-          :filter-by-query="true"
+          :display-attribute="'placa'"
+          @input="getVeiculosAutocomplete($event)"
         ></vue-simple-suggest>
 
         <b-button
@@ -47,6 +46,7 @@ export default {
     return {
       options: [],
       veiculos: [],
+      veiculosAutocomplete: [],
       headers: {
         nome: {
           label: "Placa"
@@ -77,11 +77,9 @@ export default {
     };
   },
   methods: {
-    autoCompleteVeiculos() {
-      this.veiculoService.listar().then(veiculos => {
-        veiculos.forEach(veiculo => {
-          this.options.push(veiculo);
-        });
+    getVeiculosAutocomplete(evt) {
+      this.veiculoService.getVeiculosByPlaca({ placa: evt }).then(veiculos => {
+        this.veiculosAutocomplete = veiculos;
       });
     },
     setVeiculo(veiculo) {
@@ -90,17 +88,16 @@ export default {
     adicionarVeiculo() {
       const formdata = {
         id: this.empresaSelecionada,
-        empresa: this.veiculoSelecionado
+        veiculo: this.veiculoSelecionado
       };
-      this.empresaService
-        .addVeiculo(formdata)
-        .then(success => {
-          this.veiculos.push(this.veiculoSelecionado);
-        });
+      this.empresaService.addVeiculo(formdata).then(success => {
+        this.veiculos.push(this.veiculoSelecionado);
+      });
     },
     buscaEmpresaVeiculo() {
       this.veiculos = [];
       if (this.empresaSelecionada != null) {
+        console.log(this.empresaSelecionada)
         this.empresaService
           .getVeiculos(this.empresaSelecionada)
           .then(veiculos => {

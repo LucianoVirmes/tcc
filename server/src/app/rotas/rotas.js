@@ -48,6 +48,8 @@ module.exports = (app) => {
     app.put(rotasEmpresa.empresaId, empresaController.alterar());
     app.get(rotasEmpresa.empresaId, empresaController.visualizar());
     app.delete(rotasEmpresa.empresaId, empresaController.remover());
+    app.get(rotasEmpresa.empresaVeiculo, empresaController.getVeiculos());
+    app.post(rotasEmpresa.empresaVeiculo, empresaController.addVeiculo());
     //veiculo
     app.post(rotasVeiculo.veiculo, veiculoController.cadastro());
     app.get(rotasVeiculo.veiculo, veiculoController.listar());

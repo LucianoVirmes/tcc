@@ -27,6 +27,14 @@ class EmpresaService {
     getEmpresasByNome(nome) {
         return repository.findByNome(nome);
     }
+
+    getVeiculos(idEmpresa){
+        return repository.getVeiculos(idEmpresa);
+    }
+
+    addVeiculo(request){
+        return repository.addVeiculo(request.id, request.veiculo);
+    }
 }
 
 module.exports = EmpresaService;

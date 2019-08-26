@@ -7,6 +7,7 @@ class EmpresaController {
         return {
             empresa: "/empresa",
             empresaId: "/empresa/:id",
+            empresaVeiculo: "/empresa-veiculo"
         }
     }
 
@@ -64,6 +65,26 @@ class EmpresaController {
             })
         }
     }
+
+    getVeiculos() {
+        return (req, res) => {
+            service.getVeiculos(req.query.id).then(veiculos => res.send(veiculos), err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+        }
+    }
+
+    addVeiculo() {
+        return (req, res) => {
+            service.addVeiculo(req.body).then(success => res.sendStatus(200), err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+        }
+    }
+
+
 }
 
 module.exports = EmpresaController;

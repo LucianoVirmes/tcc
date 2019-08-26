@@ -2,8 +2,8 @@ export default class {
     
     constructor(resource) {
         const acoesPersonalizadas = {
-            getEmpresaVeiculo: { method: "GET", url: "empresa/veiculo/lista" },
-            addEmpresaVeiculo: { method: "POST", url: "empresa/veiculo/novo"}
+            getEmpresaVeiculo: { method: "GET", url: "empresa-veiculo/" },
+            addEmpresaVeiculo: { method: "POST", url: "empresa-veiculo/"}
         }
         this._resource = resource('empresa{/id}', {}, acoesPersonalizadas);
     }
