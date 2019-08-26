@@ -1,7 +1,8 @@
 export default class {
 
     constructor(resource) {
-        this._resource = resource('veiculo{/id}');
+        const acoesPersonalizadas= { getVeiculosByPlaca: {method: 'GET', url: 'placa'}}
+        this._resource = resource('veiculo{/id}', {}, acoesPersonalizadas);
     }
 
     cadastrar(veiculo) {
@@ -25,5 +26,7 @@ export default class {
         return this._resource.delete({ id });
     }
 
-
+    getVeiculosByPlaca(placa){
+        return this._resource.getVeiculosByPlaca(placa).then( res => res.json());
+    }
 }

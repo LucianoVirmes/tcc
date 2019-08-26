@@ -5,7 +5,8 @@ class PesagemController {
 
     static rotas() {
         return {
-            pesagem: '/pesagem'
+            pesagem: '/pesagem',
+            pesar: '/pesar'
         }
     }
 
@@ -18,12 +19,18 @@ class PesagemController {
         }
     }
 
-    listar(){
+    listar() {
         return (req, res) => {
             service.listar().then(pesagens =>  res.send(pesagens), err => {
                 res.sendStatus(500);
                 console.log(err);
             })
+        }
+    }
+
+    pesar() {
+        return (req, res) => {
+            service.pesar().then(data => res.send(data));
         }
     }
 

@@ -4,22 +4,20 @@
       <div class="col">
         <vue-simple-suggest
           class="col-sm-8 float-left no-padding autocomplete"
-          v-model="empresaSelecionada"
+          v-model="veiculoSelecionado"
           :list="veiculos"
-          :destyled="true"
           :styles="autoCompleteStyle"
-          placeholder="Placa"
+          placeholder="Busque um veículo pela placa"
           mode="select"
           :nullable-select="false"
           :prevent-submit="true"
-          :display-attribute="'nome'"
-          :filter-by-query="true"
+          :display-attribute="'placa'"
+          @input="getVeiculosAutocomplete($event)"
         ></vue-simple-suggest>
       </div>
-
       <div class="col">
-        <input type="number" step="any" class="form-control" />
-        <b-button id="btn-pesar" class="form-control btn btn-success text-center">Pesar</b-button>
+        <input type="number" step="any" class="form-control" v-model="peso"/>
+        <b-button id="btn-pesar" class="form-control btn btn-success text-center" @click="pesar()">Pesar</b-button>
       </div>
     </div>
     <div class="row">
@@ -44,20 +42,22 @@
 <script>
 import InputSearch from "../../components/shared/inputs/InputSearch.vue";
 import BotoesFormulario from "../../components/shared/buttons/BotoesFormulario.vue";
-import PesagemService from "../../domain/usuario/UsuarioService.js";
+import PesagemService from "../../domain/pesagem/PesagemService";
 import VeiculoService from "../../domain/veiculo/VeiculoService.js";
 
 export default {
   data() {
     return {
         veiculos: [],
+        peso: '',
         autoCompleteStyle: {
-        vueSimpleSuggest: "position-relative",
-        inputWrapper: "",
-        defaultInput: "form-control",
-        suggestions: "position-absolute list-group z-1000",
-        suggestItem: "list-group-item"
-      }
+            vueSimpleSuggest: "position-relative",
+            inputWrapper: "",
+            defaultInput: "form-control",
+            suggestions: "position-absolute list-group z-1000",
+            suggestItem: "list-group-item",
+        },
+      veiculoSelecionado: ''
     };
   },
   components: {
@@ -67,14 +67,20 @@ export default {
   methods: {
     onSubmit() {
     },
-    buscaVeiculos(){
-        this.veiculoService.listar().then( veiculos => this.veiculos = veiculos);
-    }
+     getVeiculosAutocomplete(evt){
+       this.veiculoService.getVeiculosByPlaca({placa: evt}).then( veiculos => {
+         this.veiculos = veiculos;
+       })
+     }, 
+     pesar() {
+       this.service.pesar().then(peso => {
+         this.peso = peso;
+       })
+     }
   },
   created(){
       this.service = new PesagemService(this.$resource);
       this.veiculoService = new VeiculoService(this.$resource);
-      this.buscaVeiculos();
   }
 };
 </script>

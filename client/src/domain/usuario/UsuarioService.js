@@ -28,6 +28,4 @@ export default class {
     inativar(id) {
         return this._resource.delete({ id });
     }
-
-
 }

@@ -54,10 +54,11 @@ module.exports = (app) => {
     app.put(rotasVeiculo.veiculo, veiculoController.alterar());
     app.delete(rotasVeiculo.veiculoId, veiculoController.deletar());
     app.get(rotasVeiculo.veiculoId, veiculoController.visualizar());
+    app.get(rotasVeiculo.veiculoPlaca, veiculoController.autocompletePlaca());
     //pesagem
     app.get(rotasPesagem.pesagem, pesagemController.listar());
     app.post(rotasPesagem.pesagem, pesagemController.salvar());
-
+    app.get(rotasPesagem.pesar, pesagemController.pesar());
 
     app.get("/", function (req, res) {
 

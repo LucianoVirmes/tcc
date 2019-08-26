@@ -1,4 +1,5 @@
 const db = require('../../../config/configDb');
+const Op = db.Sequelize.Op;
 const Veiculo = db.veiculo;
 
 class VeiculoRepository {
@@ -24,6 +25,12 @@ class VeiculoRepository {
         return Veiculo.destroy({ where: { id } });
     }
 
+
+    findByPlaca(placa){
+        return Veiculo.findAll({
+            where: {placa : {[Op.like]: '%'+placa+'%'}}
+        })
+    }
 
     findAll() {
         return Veiculo.findAll();

@@ -3,6 +3,8 @@
 </template>
 <script>
     import Tabela from '../../components/shared/tabela/Tabela.vue';
+    import PesagemService from '../../domain/pesagem/PesagemService.js';
+
     export default {
         data (){
             return {
@@ -14,8 +16,8 @@
             'tabela': Tabela
         },
         created(){
-            this.$http.get('http://localhost:3000/pesagens')
-            .then(res => res.json())
+            this.service = new PesagemService(this.$resource);
+            this.service.listar()
             .then(pesagens => this.pesagens = pesagens, err => console.log(err));
         }
 

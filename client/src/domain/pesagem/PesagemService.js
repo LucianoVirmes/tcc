@@ -1,7 +1,8 @@
 export default class {
 
     constructor(resource) {
-        this._resource = resource('/pesagem');
+        const acoesPersonalizadas = { pesar: { method: 'GET', url: 'pesar' }, }
+        this._resource = resource('/pesagem', {}, acoesPersonalizadas);
     }
 
 
@@ -11,6 +12,10 @@ export default class {
 
     listar() {
         return this._resource.query().then(res => res.json());
+    }
+
+    pesar() {
+        return this._resource.pesar().then(res => res.json());
     }
 
 }

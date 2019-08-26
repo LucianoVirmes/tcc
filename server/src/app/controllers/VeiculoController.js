@@ -5,7 +5,8 @@ class VeiculoController {
     static rotas() {
         return {
             veiculo: "/veiculo",
-            veiculoId: "/veiculo/:id"
+            veiculoId: "/veiculo/:id",
+            veiculoPlaca: "/placa"
         }
     }
 
@@ -45,9 +46,18 @@ class VeiculoController {
         }
     }
 
-    visualizar(id){
+    visualizar(){
         return (req, res) => {
             service.getVeiculo(req.params.id).then( veiculo => res.send(veiculo), err =>{
+                res.sendStatus(500);
+                console.log(err);
+            })
+        }
+    }
+
+    autocompletePlaca(){
+        return (req, res) => {
+            service.getVeiculosByPlaca(req.query.placa).then( veiculos => res.send(veiculos), err =>{
                 res.sendStatus(500);
                 console.log(err);
             })

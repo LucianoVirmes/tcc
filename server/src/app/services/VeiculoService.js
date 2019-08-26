@@ -22,6 +22,11 @@ class VeiculoService {
     getVeiculo(id){
         return repository.findOneByPk(id);
     }
+
+    getVeiculosByPlaca(placa){
+        return repository.findByPlaca(placa);
+    }
+
 }
 
 module.exports = VeiculoService;
