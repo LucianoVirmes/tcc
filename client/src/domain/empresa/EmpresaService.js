@@ -1,7 +1,11 @@
 export default class {
     
     constructor(resource) {
-        this._resource = resource('empresa{/id}')
+        const acoesPersonalizadas = {
+            getEmpresaVeiculo: { method: "GET", url: "empresa/veiculo/lista" },
+            addEmpresaVeiculo: { method: "POST", url: "empresa/veiculo/novo"}
+        }
+        this._resource = resource('empresa{/id}', {}, acoesPersonalizadas);
     }
 
     cadastrar(empresa) {
@@ -22,5 +26,13 @@ export default class {
 
     deletar(id) {
         return this._resource.delete({ id });
+    }
+
+    getVeiculos(idEmpresa) {
+        return this._resource.getEmpresaVeiculo({ id: idEmpresa }).then(res => res.json());
+    }
+
+    addVeiculo(addEmpresaVeiculo) {
+        return this._resource.addEmpresaVeiculo(addEmpresaVeiculo)
     }
 }

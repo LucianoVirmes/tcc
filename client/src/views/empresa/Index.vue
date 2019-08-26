@@ -8,7 +8,7 @@ import {rotasEmpresaTela} from '../../route/rotasEmpresa';
 export default {
     data(){
         return {
-            rotas: [rotasEmpresaTela.lista, rotasEmpresaTela.cadastro]
+            rotas: [rotasEmpresaTela.lista, rotasEmpresaTela.cadastro, rotasEmpresaTela.empresaVeiculos]
         }
     },
     components: {
