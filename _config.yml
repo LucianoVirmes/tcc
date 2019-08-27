@@ -1,3 +1,5 @@
 theme: jekyll-theme-hacker
-# Google Analytics
-google_analytics: UA—146433211-1
+analytics:
+provider: "google-universal"
+google:
+tracking_id: UA—146433211-1
