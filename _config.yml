@@ -1,5 +1,3 @@
 theme: jekyll-theme-time-machine
-analytics:
-provider: "google-universal"
-google:
-tracking_id: UA—146433211-1
+title: [CONSTRUINDO SISTEMAS MULTIPLATAFORMA UTILIZANDO NODE.JS E VUE.JS]
+google_analytics: [UA—146433211-1]
