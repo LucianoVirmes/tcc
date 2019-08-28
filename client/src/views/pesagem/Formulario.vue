@@ -1,23 +1,26 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="inline">
     <div class="row">
-      <div class="col">
-        <vue-simple-suggest
-          class="col-sm-8 float-left no-padding autocomplete"
-          v-model="veiculoSelecionado"
-          :list="veiculos"
-          :styles="autoCompleteStyle"
-          placeholder="Busque um veículo pela placa"
-          mode="select"
-          :nullable-select="false"
-          :prevent-submit="true"
-          :display-attribute="'placa'"
+      <div class="col-sm-10">
+        <label>Placa</label>
+        <inputsearch
+          displayAttribute="placa"
+          placeholder="ABC-1234"
+          :lista="veiculos"
           @input="getVeiculosAutocomplete($event)"
-        ></vue-simple-suggest>
+        />
       </div>
-      <div class="col">
-        <input type="number" step="any" class="form-control" v-model="peso"/>
-        <b-button id="btn-pesar" class="form-control btn btn-success text-center" @click="pesar()">Pesar</b-button>
+      <div class="col-sm-3">
+        <label>Empresa</label>
+        <input type="text" class="form-control" />
+      </div>
+      <div class="col-4">
+        <input type="number" step="any" class="form-control" v-model="peso" />
+        <b-button
+          id="btn-pesar"
+          class="form-control btn btn-success text-center"
+          @click="pesar()"
+        >Pesar</b-button>
       </div>
     </div>
     <div class="row">
@@ -48,16 +51,16 @@ import VeiculoService from "../../domain/veiculo/VeiculoService.js";
 export default {
   data() {
     return {
-        veiculos: [],
-        peso: '',
-        autoCompleteStyle: {
-            vueSimpleSuggest: "position-relative",
-            inputWrapper: "",
-            defaultInput: "form-control",
-            suggestions: "position-absolute list-group z-1000",
-            suggestItem: "list-group-item",
-        },
-      veiculoSelecionado: ''
+      veiculos: [],
+      peso: "",
+      autoCompleteStyle: {
+        vueSimpleSuggest: "position-relative",
+        inputWrapper: "",
+        defaultInput: "form-control",
+        suggestions: "position-absolute list-group z-1000",
+        suggestItem: "list-group-item"
+      },
+      veiculoSelecionado: ""
     };
   },
   components: {
@@ -65,27 +68,30 @@ export default {
     botoesform: BotoesFormulario
   },
   methods: {
-    onSubmit() {
+    onSubmit() {},
+    getVeiculosAutocomplete(evt) {
+      console.log(evt);
+      this.veiculoService.getVeiculosByPlaca({ placa: evt }).then(veiculos => {
+        this.veiculos = veiculos;
+      });
     },
-     getVeiculosAutocomplete(evt){
-       this.veiculoService.getVeiculosByPlaca({placa: evt}).then( veiculos => {
-         this.veiculos = veiculos;
-       })
-     }, 
-     pesar() {
-       this.service.pesar().then(peso => {
-         this.peso = peso;
-       })
-     }
+    pesar() {
+      this.service.pesar().then(peso => {
+        this.peso = peso;
+      });
+    }
   },
-  created(){
-      this.service = new PesagemService(this.$resource);
-      this.veiculoService = new VeiculoService(this.$resource);
+  created() {
+    this.service = new PesagemService(this.$resource);
+    this.veiculoService = new VeiculoService(this.$resource);
   }
 };
 </script>
 
 <style scoped>
+.no-padding {
+  padding: 0 !important;
+}
 #btn-pesar {
   margin: 3% 0;
 }
