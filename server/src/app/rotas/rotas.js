@@ -41,7 +41,8 @@ module.exports = (app) => {
     app.delete(rotasMotorista.motoristaId, motoristaController.removeMotorista());
     app.post(rotasMotorista.motoristaEmpresa, motoristaController.addEmpresa());
     app.get(rotasMotorista.motoristaEmpresaLista, motoristaController.getEmpresas());
-
+    app.get(rotasMotorista.motoristaAutocomplete, motoristaController.getAutocomplete());
+    app.get(rotasMotorista.motoristaAutocompleteByEmpresa, motoristaController.getAutocompleteByEmpresa());
     //empresa
     app.post(rotasEmpresa.empresa, empresaController.cadastrar());
     app.get(rotasEmpresa.empresa, empresaController.listar());
@@ -50,6 +51,8 @@ module.exports = (app) => {
     app.delete(rotasEmpresa.empresaId, empresaController.remover());
     app.get(rotasEmpresa.empresaVeiculo, empresaController.getVeiculos());
     app.post(rotasEmpresa.empresaVeiculo, empresaController.addVeiculo());
+    app.get(rotasEmpresa.empresaAutocomplete, empresaController.autocomplete());
+    app.get(rotasEmpresa.empresaAutocompleteByVeiculo, empresaController.autocompleteByVeiculo());
     //veiculo
     app.post(rotasVeiculo.veiculo, veiculoController.cadastro());
     app.get(rotasVeiculo.veiculo, veiculoController.listar());

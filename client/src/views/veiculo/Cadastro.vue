@@ -1,36 +1,42 @@
 <template>
   <div>
-    <b-alert variant="success" :show="alertaSucess" dismissible>Veículo salvo com sucesso!</b-alert>
-    <b-alert variant="danger" :show="alertaErro" dismissible>Houve um erro ao submeter o formulário!</b-alert>
-    <form class="form" @submit.prevent="enviar()">
-      <fieldset>
-        <div class="form-group">
-          <label>Placa</label>
-          <input
-            type="text"
-            v-validate
-            data-vv-rules="required|min:7|max:8"
-            name="placa"
-            class="form-control"
-            v-model="veiculo.placa"
-          />
-          <span class="text-danger" v-if="errors.has('placa')">{{ errors.first('placa') }}</span>
-        </div>
-        <div class="form-group">
-          <label>Tara</label>
-          <input
-            type="text"
-            v-validate
-            rules="number"
-            name="tara"
-            class="form-control"
-            v-model="veiculo.tara"
-          />
-           <span class="text-danger" v-if="errors.has('tara')">{{ errors.first('tara') }}</span>
-        </div>
-        <button class="btn btn-primary">Enviar</button>
-      </fieldset>
-    </form>
+    <b-card bg-variant="light">
+      <b-alert variant="success" :show="alertaSucess" dismissible>Veículo salvo com sucesso!</b-alert>
+      <b-alert
+        variant="danger"
+        :show="alertaErro"
+        dismissible
+      >Houve um erro ao submeter o formulário!</b-alert>
+      <form class="form" @submit.prevent="enviar()">
+        <fieldset>
+          <div class="form-group">
+            <label>Placa</label>
+            <input
+              type="text"
+              v-validate
+              data-vv-rules="required|min:7|max:8"
+              name="placa"
+              class="form-control"
+              v-model="veiculo.placa"
+            />
+            <span class="text-danger" v-if="errors.has('placa')">{{ errors.first('placa') }}</span>
+          </div>
+          <div class="form-group">
+            <label>Tara</label>
+            <input
+              type="text"
+              v-validate
+              rules="number"
+              name="tara"
+              class="form-control"
+              v-model="veiculo.tara"
+            />
+            <span class="text-danger" v-if="errors.has('tara')">{{ errors.first('tara') }}</span>
+          </div>
+          <button class="btn btn-primary">Enviar</button>
+        </fieldset>
+      </form>
+    </b-card>
   </div>
 </template>
 

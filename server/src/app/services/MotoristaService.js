@@ -32,6 +32,14 @@ class MotoristaService {
     getEmpresas(idMotorista){
         return repository.findEmpresas(idMotorista);
     }
+
+    getAutocomplete(nomeMotorista) {
+        return repository.findByNome(nomeMotorista);
+    }
+
+    getAutocompleteByEmpresa(nomeMotorista, idEmpresa){
+        return repository.findByNomeAndEmpresa(nomeMotorista, idEmpresa);
+    }
 }
 
 module.exports = MotoristaService;

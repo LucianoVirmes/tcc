@@ -1,6 +1,6 @@
 const db = require('../../../config/configDb.js');
 const Empresa = db.empresa;
-const Motorista = db.motorista;
+const Veiculo = db.veiculo;
 const Op = db.Sequelize.Op;
 
 class EmpresaRepository {
@@ -51,9 +51,27 @@ class EmpresaRepository {
     getVeiculos(idEmpresa) {
         return this.findOneByPk(idEmpresa)
             .then(empresaBanco => {
-              return  empresaBanco.getVeiculos();
+                return empresaBanco.getVeiculos();
             })
     }
+
+    findByNomeAndVeiculo(nomeEmpresa, veiculoId) {
+        return Empresa.findAll({
+            where: {
+                nome: {
+                    [Op.like]: '%' + nomeEmpresa + '%'
+                },
+                '$veiculos.id$': veiculoId
+            }, include: [
+                {
+                    model: Veiculo,
+                    required: false,
+                }
+            ]
+        })
+    }
+
+
 }
 
 module.exports = EmpresaRepository;

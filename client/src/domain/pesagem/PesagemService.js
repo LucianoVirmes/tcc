@@ -2,7 +2,7 @@ export default class {
 
     constructor(resource) {
         const acoesPersonalizadas = { pesar: { method: 'GET', url: 'pesar' }, }
-        this._resource = resource('/pesagem', {}, acoesPersonalizadas);
+        this._resource = resource('pesagem{/id}', {}, acoesPersonalizadas);
     }
 
 

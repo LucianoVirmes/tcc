@@ -17,6 +17,8 @@ db.motorista = require('../src/app/models/Motorista.js')(sequelize, Sequelize);
 db.empresa = require('../src/app/models/Empresa.js')(sequelize, Sequelize);
 db.veiculo = require('../src/app/models/Veiculo.js')(sequelize, Sequelize);
 db.pesagem = require('../src/app/models/Pesagem.js')(sequelize, Sequelize);
+db.empresaVeiculo = require('../src/app/models/EmpresaVeiculo.js')(sequelize, Sequelize);
+db.empresaMotorista = require('../src/app/models/EmpresaMotorista.js')(sequelize, Sequelize);
 //relations
 
 db.usuario.belongsTo(db.pessoa, {foreignKey: 'codpessoa'});
@@ -31,5 +33,8 @@ db.veiculo.belongsToMany(db.empresa, {through: 'empresa_veiculo', foreignKey: 'c
 db.motorista.hasMany(db.pesagem, {foreignKey: 'codmotorista'});
 db.empresa.hasMany(db.pesagem, {foreignKey: 'codempresa'});
 db.veiculo.hasMany(db.pesagem, {foreignKey: 'codveiculo'});
+db.pesagem.belongsTo(db.empresa, {foreignKey: 'codempresa', as: 'empresa'});
+db.pesagem.belongsTo(db.veiculo, {foreignKey: 'codveiculo', as: 'veiculo'});
+db.pesagem.belongsTo(db.motorista, {foreignKey: 'codmotorista', as: 'motorista'});
 
 module.exports = db;

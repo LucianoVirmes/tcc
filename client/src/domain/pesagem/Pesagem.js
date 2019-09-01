@@ -1,10 +1,10 @@
 export default class {
-    constructor(id="", veiculo = {}, empresa = {}, motorista = {}, veiculo = {}, data = ''){
+    constructor(id="", veiculo = {}, empresa = {}, motorista = {}, data = '', peso = ''){
         this.id = id;
         this.veiculo = veiculo;
         this.empresa = empresa;
         this.motorista = motorista;
-        this.veiculo = veiculo;
         this.data = data;
+        this.peso = peso;
     }
 }

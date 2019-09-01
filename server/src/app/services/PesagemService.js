@@ -5,16 +5,27 @@ const repository = new PesagemRepository();
 const integracaoBalancaController = new IntegracaoBalancaController();
 
 class PesagemService {
-    
-    salvar(pesagem){
-        return repository.save(pesagem);
+
+    salvar(pesagem) {
+
+        let novaPesagem = {
+            codempresa: pesagem.empresa.id,
+            datahora: pesagem.data,
+            codmotorista: pesagem.motorista.id,
+            codveiculo: pesagem.veiculo.id,
+            pesobruto: pesagem.peso,
+            pesotara: pesagem.veiculo.tara,
+            pesoliquido: pesagem.peso - pesagem.veiculo.tara
+        }
+
+        return repository.save(novaPesagem);
     }
 
-    listar(){
+    listar() {
         return repository.findAll();
     }
 
-    pesar(){
+    pesar() {
         return integracaoBalancaController.conectar();
     }
 }

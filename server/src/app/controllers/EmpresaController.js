@@ -7,7 +7,9 @@ class EmpresaController {
         return {
             empresa: "/empresa",
             empresaId: "/empresa/:id",
-            empresaVeiculo: "/empresa-veiculo"
+            empresaVeiculo: "/empresa-veiculo",
+            empresaAutocomplete: "/empresa-autocomplete/empresa",
+            empresaAutocompleteByVeiculo: "/empresa-autocomplete/veiculo"
         }
     }
 
@@ -84,7 +86,25 @@ class EmpresaController {
         }
     }
 
+    autocomplete() {
+        return (req, res) => {
+            service.getEmpresasByNome(req.query.nome).then(empresas => res.send(empresas), err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+        }
+    }
 
+    autocompleteByVeiculo() {
+        return (req, res) => {
+            service.getEmpresasByNomeAndVeiculos(req.query.nome, req.query.idVeiculo)
+            .then(empresas => res.send(empresas), err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+        }
+
+    }
 }
 
 module.exports = EmpresaController;

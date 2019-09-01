@@ -11,6 +11,7 @@
       :nullable-select="nullableSelect"
       :prevent-submit="preventSubmit"
       :display-attribute="displayAttribute"
+      @select="emitSelected($event)"
       @input="emitValue($event)"
     ></vue-simple-suggest>
     <div class="input-group-append">
@@ -57,6 +58,9 @@ export default {
   methods: {
     emitValue(val) {
       this.$emit("input", val);
+    },
+    emitSelected(val) {
+      this.$emit("select", val);
     }
   }
 };

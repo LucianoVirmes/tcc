@@ -12,7 +12,7 @@ class PesagemRepository {
     }
 
     findAll() {
-        return Pesagem.findAll()({
+        return Pesagem.findAll({
             include:
                 [
                     { model: Motorista, as: 'motorista' },

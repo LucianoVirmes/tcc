@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     codempresa: DataTypes.INTEGER,
     codveiculo: DataTypes.INTEGER,
     ativoEmpresa: DataTypes.BOOLEAN
+  }, {
+    tableName: 'empresa_veiculo'
   });
  
   return empresa_veiculo;

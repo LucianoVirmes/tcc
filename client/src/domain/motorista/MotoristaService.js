@@ -2,7 +2,9 @@ export default class {
     constructor(resource) {
         const acoesPersonalizadas = {
             getEmpresaMotorista: { method: "GET", url: "motorista/empresa/lista" },
-            addEmpresaMotorista: { method: "POST", url: "motorista/empresa"}
+            addEmpresaMotorista: { method: "POST", url: "motorista/empresa" },
+            getAutocomplete: { method: "GET", url: "motorista-autocomplete/motorista" },
+            getAutocompleteByEmpresa: { method: "GET", url: "motorista-autocomplete/empresa" }
         }
         this._resource = resource("motorista{/id}", {}, acoesPersonalizadas);
     }
@@ -34,5 +36,13 @@ export default class {
 
     addEmpresa(motoristaEmpresa) {
         return this._resource.addEmpresaMotorista(motoristaEmpresa)
+    }
+
+    getAutocomplete(nomeMotorista) {
+        return this._resource.getAutocomplete(nomeMotorista).then(res => res.json());
+    }
+
+    getAutocompleteByEmpresa(nomeMotorista, idEmpresa) {
+        return this._resource.getAutocompleteByEmpresa(nomeMotorista, idEmpresa);
     }
 }

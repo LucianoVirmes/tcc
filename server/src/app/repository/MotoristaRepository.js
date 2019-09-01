@@ -2,6 +2,7 @@ const db = require('../../../config/configDb');
 const Motorista = db.motorista;
 const Pessoa = db.pessoa;
 const Empresa = db.empresa;
+const Op = db.Sequelize.Op;
 
 class MotoristaRepository {
 
@@ -12,7 +13,7 @@ class MotoristaRepository {
         })
     }
 
-    addEmpresa(motorista){
+    addEmpresa(motorista) {
         return Motorista.findByPk(motorista.id).then(motoristaBanco => {
             motoristaBanco.addEmpresa([motorista.empresa.id]);
         })
@@ -23,9 +24,9 @@ class MotoristaRepository {
             motoristaBanco.update({
                 cnh: motorista.cnh
             }).then(
-                Pessoa.update ({
+                Pessoa.update({
                     nome: motorista.pessoa.nome,
-                }, {where: {id : motoristaBanco.codpessoa}})
+                }, { where: { id: motoristaBanco.codpessoa } })
             )
         })
     }
@@ -59,6 +60,34 @@ class MotoristaRepository {
     findEmpresas(idMotorista) {
         return Motorista.findByPk(idMotorista).then(motorista => {
             return motorista.getEmpresas();
+        })
+    }
+
+    findByNome(nome) {
+        return Motorista.findAll({
+            where: {
+                '$pessoa.nome$': {
+                    [Op.like]: `%${nome}%`
+                },
+            }, include: {
+                model: Pessoa
+            }
+        })
+    }
+
+    findByNomeAndEmpresa(nome, idEmpresa) {
+        return Motorista.findAll({
+            where: {
+                '$pessoa.nome$': {
+                    [Op.like]: `%${nome}%`
+                },
+                '$empresas.id$': idEmpresa
+            },
+            include: [{
+                model: Empresa
+            }, {
+                model:Pessoa
+            }]
         })
     }
 }

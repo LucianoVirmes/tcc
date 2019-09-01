@@ -11,7 +11,9 @@ class MotoristaController {
             motorista: "/motorista",
             motoristaId: "/motorista/:id",
             motoristaEmpresaLista: "/motorista/empresa/lista",
-            motoristaEmpresa: "/motorista/empresa"
+            motoristaEmpresa: "/motorista/empresa",
+            motoristaAutocomplete: "/motorista-autocomplete/motorista",
+            motoristaAutocompleteByEmpresa: "/motorista-autocomplete/empresa",
         }
     }
 
@@ -70,7 +72,7 @@ class MotoristaController {
         }
     }
 
-    addEmpresa(){
+    addEmpresa() {
         return (req, res) => {
             service.addEmpresa(req.body).then(sucess => {
                 res.sendStatus(200);
@@ -81,13 +83,31 @@ class MotoristaController {
         }
     }
 
-    getEmpresas(){
+    getEmpresas() {
         return (req, res) => {
-            service.getEmpresas(parseInt(req.query.id)).then(empresas=> {
+            service.getEmpresas(parseInt(req.query.id)).then(empresas => {
                 res.send(empresas);
             }, err => {
                 console.log(err);
                 res.sendStatus(404);
+            })
+        }
+    }
+
+    getAutocomplete() {
+        return (req, res) => {
+            service.getAutocomplete(req.query.nome).then(motoristas => res.send(motoristas), err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+        }
+    }
+
+    getAutocompleteByEmpresa() {
+        return (req, res) => {
+            service.getAutocompleteByEmpresa(req.query.nome, req.query.idEmpresa).then(motoristas => res.send(motoristas), err => {
+                console.log(err);
+                res.sendStatus(500);
             })
         }
     }

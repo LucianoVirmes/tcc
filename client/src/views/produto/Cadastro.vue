@@ -1,36 +1,42 @@
 <template>
   <div>
-    <b-alert variant="success" :show="alertaSucess" dismissible>Produto salvo com sucesso!</b-alert>
-    <b-alert variant="danger" :show="alertaErro" dismissible>Houve um erro ao submeter o formulário!</b-alert>
-    <form class="form" @submit.prevent="enviar()">
-      <fieldset>
-        <div class="form-group">
-          <label>Nome do produto</label>
-          <input
-            type="text"
-            v-validate
-            data-vv-rules="required|min:3|max:10"
-            name="nome"
-            class="form-control"
-            v-model="produto.nome"
-          />
-          <span class="text-danger" v-if="errors.has('nome')">{{ errors.first('nome') }}</span>
-        </div>
-        <div class="form-group">
-          <label>Unidade de medida</label>
-          <input
-            type="text"
-            v-validate
-            data-vv-rules="required|min:1|max:10"
-            name="unidade"
-            class="form-control"
-            v-model="produto.unidademedida"
-          />
-          <span class="text-danger" v-if="errors.has('unidade')">{{ errors.first('unidade') }}</span>
-        </div>
-        <button class="btn btn-primary">Enviar</button>
-      </fieldset>
-    </form>
+    <b-card bg-variant="light">
+      <b-alert variant="success" :show="alertaSucess" dismissible>Produto salvo com sucesso!</b-alert>
+      <b-alert
+        variant="danger"
+        :show="alertaErro"
+        dismissible
+      >Houve um erro ao submeter o formulário!</b-alert>
+      <form class="form" @submit.prevent="enviar()">
+        <fieldset>
+          <div class="form-group">
+            <label>Nome do produto</label>
+            <input
+              type="text"
+              v-validate
+              data-vv-rules="required|min:3|max:10"
+              name="nome"
+              class="form-control"
+              v-model="produto.nome"
+            />
+            <span class="text-danger" v-if="errors.has('nome')">{{ errors.first('nome') }}</span>
+          </div>
+          <div class="form-group">
+            <label>Unidade de medida</label>
+            <input
+              type="text"
+              v-validate
+              data-vv-rules="required|min:1|max:10"
+              name="unidade"
+              class="form-control"
+              v-model="produto.unidademedida"
+            />
+            <span class="text-danger" v-if="errors.has('unidade')">{{ errors.first('unidade') }}</span>
+          </div>
+          <button class="btn btn-primary">Enviar</button>
+        </fieldset>
+      </form>
+    </b-card>
   </div>
 </template>
 

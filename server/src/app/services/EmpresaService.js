@@ -28,12 +28,16 @@ class EmpresaService {
         return repository.findByNome(nome);
     }
 
-    getVeiculos(idEmpresa){
+    getVeiculos(idEmpresa) {
         return repository.getVeiculos(idEmpresa);
     }
 
-    addVeiculo(request){
+    addVeiculo(request) {
         return repository.addVeiculo(request.id, request.veiculo);
+    }
+
+    getEmpresasByNomeAndVeiculos(nomeEmpresa, idVeiculo) {
+        return repository.findByNomeAndVeiculo(nomeEmpresa, idVeiculo);
     }
 }
 

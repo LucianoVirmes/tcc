@@ -1,26 +1,32 @@
 <template>
   <div>
-    <b-alert variant="success" :show="alertaSucess" dismissible>Usuário salvo com sucesso!</b-alert>
-    <b-alert variant="danger" :show="alertaErro" dismissible>Houve um erro ao submeter o formulário!</b-alert>
-    <form class="form">
-      <fieldset>
-        <div class="form-group">
-          <label>Nome de usuário</label>
-          <input type="text" class="form-control" v-model="usuario.nome" />
-        </div>
-        <div class="form-group">
-          <label>Nome data de nascimento</label>
-          <input type="date" class="form-control" v-model="usuario.dataNascimento" />
-        </div>
-        <div class="form-group">
-          <label>Permissoes</label>
-          <b-form-select v-model="permissaoSelecionada" :options="permissoes">
-            <option :value="null" disabled>Selecione uma permissão</option>
-          </b-form-select>
-        </div>
-        <button class="btn btn-primary" v-on:click="click">Enviar</button>
-      </fieldset>
-    </form>
+    <b-card bg-variant="light">
+      <b-alert variant="success" :show="alertaSucess" dismissible>Usuário salvo com sucesso!</b-alert>
+      <b-alert
+        variant="danger"
+        :show="alertaErro"
+        dismissible
+      >Houve um erro ao submeter o formulário!</b-alert>
+      <form class="form">
+        <fieldset>
+          <div class="form-group">
+            <label>Nome de usuário</label>
+            <input type="text" class="form-control" v-model="usuario.nome" />
+          </div>
+          <div class="form-group">
+            <label>Nome data de nascimento</label>
+            <input type="date" class="form-control" v-model="usuario.dataNascimento" />
+          </div>
+          <div class="form-group">
+            <label>Permissoes</label>
+            <b-form-select v-model="permissaoSelecionada" :options="permissoes">
+              <option :value="null" disabled>Selecione uma permissão</option>
+            </b-form-select>
+          </div>
+          <button class="btn btn-primary" v-on:click="click">Enviar</button>
+        </fieldset>
+      </form>
+    </b-card>
   </div>
 </template>
 

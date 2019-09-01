@@ -30,6 +30,6 @@ export default {
   input:invalid {
     border-color: red;
   }
-
+ 
 </style>
  
