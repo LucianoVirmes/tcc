@@ -6,7 +6,8 @@ class PesagemController {
     static rotas() {
         return {
             pesagem: '/pesagem',
-            pesar: '/pesar'
+            pesar: '/pesar',
+            conexao: '/conexao'
         }
     }
 
@@ -21,7 +22,7 @@ class PesagemController {
 
     listar() {
         return (req, res) => {
-            service.listar().then(pesagens =>  res.send(pesagens), err => {
+            service.listar().then(pesagens => res.send(pesagens), err => {
                 res.sendStatus(500);
                 console.log(err);
             })
@@ -31,6 +32,12 @@ class PesagemController {
     pesar() {
         return (req, res) => {
             service.pesar().then(data => res.send(data));
+        }
+    }
+
+    verificaConexao() {
+        return (req, res) => {
+            service.verificarConexao('/dev/ttyUSB0').then( connected => res.send(connected));
         }
     }
 

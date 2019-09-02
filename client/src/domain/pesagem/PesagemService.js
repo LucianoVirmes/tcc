@@ -1,7 +1,10 @@
 export default class {
 
     constructor(resource) {
-        const acoesPersonalizadas = { pesar: { method: 'GET', url: 'pesar' }, }
+        const acoesPersonalizadas = {
+            pesar: { method: 'GET', url: 'pesar' },
+            verificarConexao: { method: 'GET', url: 'conexao' },
+        }
         this._resource = resource('pesagem{/id}', {}, acoesPersonalizadas);
     }
 
@@ -18,4 +21,7 @@ export default class {
         return this._resource.pesar().then(res => res.json());
     }
 
+    verificarConexao() {
+        return this._resource.verificarConexao().then(res => res.json());
+    }
 }

@@ -14,11 +14,32 @@
         </div>
         <div class="col-sm-8 col-md-6">
           <label>Peso</label>
-          <b-input-group>
+          <b-input-group v-if="balancaConectada">
             <b-form-input class="col-sm-8 col-md-6" type="number" v-model="peso"></b-form-input>
             <b-input-group-append>
               <b-button variant="info" @click="pesar()">Pesar</b-button>
             </b-input-group-append>
+          </b-input-group>
+          <b-input-group v-else>
+            <b-form-input
+              class="col-sm-8 col-md-6"
+              disabled
+              v-b-popover.hover="'O Arduino está desconectado!'"
+              title="Falha na conexão"
+              type="number"
+              v-model="peso"
+            ></b-form-input>
+            <b-input-group-append>
+              <b-button
+                variant="info"
+                disabled
+               id="popover-button-open"
+              >Pesar</b-button>
+            </b-input-group-append>
+            <b-popover show target="popover-button-open" title="Falha na conexão">
+              O Arduino está
+              <strong>desconectado!</strong>
+            </b-popover>
           </b-input-group>
         </div>
       </div>
@@ -47,7 +68,14 @@
       <div class="row form-group">
         <div class="col-sm-8 col-md-3">
           <label>Data</label>
-          <input type="date" name="data" max="3000-12-31" min="1000-01-01" class="form-control" v-model="data"/>
+          <input
+            type="date"
+            name="data"
+            max="3000-12-31"
+            min="1000-01-01"
+            class="form-control"
+            v-model="data"
+          />
         </div>
         <div class="col-sm-8 col-md-4 offset-md-3">
           <label for="produto">Produto</label>
@@ -92,7 +120,8 @@ export default {
       veiculoSelecionado: null,
       empresaSelecionada: null,
       motoristaSelecionado: null,
-      produtoSelecionado: null
+      produtoSelecionado: null,
+      balancaConectada: false
     };
   },
   components: {
@@ -150,7 +179,8 @@ export default {
       });
     },
     salvar() {
-      const pesagem = new Pesagem(null, 
+      const pesagem = new Pesagem(
+        null,
         this.veiculoSelecionado,
         this.empresaSelecionada,
         this.motoristaSelecionado,
@@ -166,6 +196,9 @@ export default {
     this.empresaService = new EmpresaService(this.$resource);
     this.motoristaService = new MotoristaService(this.$resource);
     this.produtoService = new ProdutoService(this.$resource);
+    this.service
+      .verificarConexao()
+      .then(conectada => (this.balancaConectada = conectada));
     this.buscarProdutos();
   }
 };

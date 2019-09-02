@@ -27,6 +27,18 @@ class IntegracaoBalancaController {
       });
     });
   }
+
+ async verificarConexao(portName) {
+    const conectado = await new Promise(function(resolve, reject) {
+        SerialPort.list((err, ports) => {
+          resolve(ports.some(port => port.comName === portName));
+        });
+      });
+      return conectado;
+    }
+   
+  
+
 }
 
 module.exports = IntegracaoBalancaController;

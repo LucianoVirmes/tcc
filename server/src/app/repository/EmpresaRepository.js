@@ -59,7 +59,7 @@ class EmpresaRepository {
         return Empresa.findAll({
             where: {
                 nome: {
-                    [Op.like]: '%' + nomeEmpresa + '%'
+                    [Op.like]: `%${nomeEmpresa}`
                 },
                 '$veiculos.id$': veiculoId
             }, include: [

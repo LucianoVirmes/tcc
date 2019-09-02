@@ -28,6 +28,10 @@ class PesagemService {
     pesar() {
         return integracaoBalancaController.conectar();
     }
+
+    verificarConexao(porta) {
+        return integracaoBalancaController.verificarConexao(porta);
+    }
 }
 
 module.exports = PesagemService;

@@ -12,7 +12,7 @@
       :prevent-submit="preventSubmit"
       :display-attribute="displayAttribute"
       @select="emitSelected($event)"
-      @input="emitValue($event)"
+      @input="emitValue"
     ></vue-simple-suggest>
     <div class="input-group-append">
       <button class="btn" type="button">
@@ -26,6 +26,7 @@
 export default {
   data() {
     return {
+      teclas: 0,
       itemSelecionado: "",
       autoCompleteStyle: {
         vueSimpleSuggest: "position-relative",
@@ -57,7 +58,11 @@ export default {
   },
   methods: {
     emitValue(val) {
-      this.$emit("input", val);
+      this.teclas++;
+      if(this.teclas > 2){
+        this.$emit("input", val);
+        this.teclas = 0;
+      }
     },
     emitSelected(val) {
       this.$emit("select", val);

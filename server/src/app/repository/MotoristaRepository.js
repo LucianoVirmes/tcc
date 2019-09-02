@@ -67,7 +67,7 @@ class MotoristaRepository {
         return Motorista.findAll({
             where: {
                 '$pessoa.nome$': {
-                    [Op.like]: `%${nome}%`
+                    [Op.like]: `%${nome}`
                 },
             }, include: {
                 model: Pessoa
