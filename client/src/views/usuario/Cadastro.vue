@@ -10,12 +10,45 @@
       <form class="form">
         <fieldset>
           <div class="form-group">
+            <label>Login</label>
+            <input
+              type="email"
+              name="login"
+              v-validate
+              rules="email"
+              class="form-control"
+              v-model="usuario.login"
+            />
+            <span class="text-danger" v-if="errors.has('login')">{{errors.first('login')}}</span>
+          </div>
+          <div class="form-group">
+            <label>Senha</label>
+            <input
+              name="senha"
+              v-validate="{required: true, min: 8}"
+              class="form-control"
+              v-model="usuario.senha"
+            />
+            <span class="text-danger" v-if="errors.has('senha')">{{errors.first('senha')}}</span>
+          </div>
+          <div class="form-group">
             <label>Nome de usuário</label>
-            <input type="text" class="form-control" v-model="usuario.nome" />
+            <input
+              type="text"
+              name="nome"
+              v-validate="{required: true, min: 3, max: 10}"
+              class="form-control"
+              v-model="usuario.nome"
+            />
+            <span class="text-danger" v-if="errors.has('nome')">{{errors.first('nome')}}</span>
           </div>
           <div class="form-group">
             <label>Nome data de nascimento</label>
-            <input type="date" class="form-control" v-model="usuario.dataNascimento" />
+            <input 
+              type="date" name="data"
+              v-validate
+              rules="date" class="form-control" v-model="usuario.dataNascimento" />
+              <span class="text-danger" v-if="errors.has('data')">{{errors.first('data')}}</span>
           </div>
           <div class="form-group">
             <label>Permissoes</label>

@@ -1,6 +1,7 @@
 
 export default class {
-    constructor(codigo, nome, dataNascimento, cpf, telefone, email, permissao) {
+    constructor(codigo = null, nome = '', dataNascimento = '', cpf = '',
+        telefone = '', email = '', permissao = '', login = '', senha = '') {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
@@ -8,6 +9,8 @@ export default class {
         this.email = email;
         this.permissao = permissao;
         this.codigo = codigo;
+        this.login = login;
+        this.senha = senha;
     }
 
 }

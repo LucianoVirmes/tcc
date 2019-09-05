@@ -55,6 +55,14 @@ class UsuarioRepository {
             }]
         });
     }
+
+    findByLogin(login) {
+        return Usuario.find({
+            where: { login },
+            include:
+                { model: Pessoa, as: 'pessoa' }
+        });
+    }
 }
 
 module.exports = UsuarioRepository;

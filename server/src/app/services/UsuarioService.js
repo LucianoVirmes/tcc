@@ -1,5 +1,7 @@
 const UsuarioRepository = require('../repository/UsuarioRepository.js');
 const repository = new UsuarioRepository();
+const bcript = require('bcrypt');
+const salt = 10;
 class UsuarioService {
 
 
@@ -19,6 +21,8 @@ class UsuarioService {
         usuario.dataAdmissao = req.dataAdmissao;
         usuario.permissoes = req.permissoes;
         usuario.pessoa = pessoa;
+        usuario.login = req.login;
+        usuario.senha = bcript.hashSync(req.senha, salt);
 
         if (usuario.id) {
             return repository.update(usuario);
@@ -37,6 +41,16 @@ class UsuarioService {
 
     getUsuarioById(codPessoa) {
         return repository.findById(codPessoa);
+    }
+
+    getAuthenticacao(login, senha) {
+        repository.findById(login).then(usuarioBanco => {
+            if (bcript.compareSync(senha, usuarioBanco.senha)) {
+                return usuarioBanco;
+            } else {
+                return null;
+            }
+        })
     }
 }
 
