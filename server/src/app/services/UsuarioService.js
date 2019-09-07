@@ -43,14 +43,8 @@ class UsuarioService {
         return repository.findById(codPessoa);
     }
 
-    getAuthenticacao(login, senha) {
-        repository.findById(login).then(usuarioBanco => {
-            if (bcript.compareSync(senha, usuarioBanco.senha)) {
-                return usuarioBanco;
-            } else {
-                return null;
-            }
-        })
+    validaSenha(usuarioCompleto, senha) {
+        return bcript.compareSync(senha, usuarioCompleto.senha);
     }
 }
 

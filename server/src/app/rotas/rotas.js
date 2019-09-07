@@ -11,6 +11,11 @@ const VeiculoController = require('../controllers/VeiculoController.js');
 const veiculoController = new VeiculoController();
 const PesagemController = require('../controllers/PesagemController.js');
 const pesagemController = new PesagemController();
+const LoginController = require('../controllers/LoginController.js');
+const loginController = new LoginController();
+
+const auth = require('./auth.js');
+
 module.exports = (app) => {
 
     const rotasUsuario = UsuarioController.rotas();
@@ -19,9 +24,11 @@ module.exports = (app) => {
     const rotasEmpresa = EmpresaController.rotas();
     const rotasVeiculo = VeiculoController.rotas();
     const rotasPesagem = PesagemController.rotas();
+    const rotasLogin = LoginController.rotas();
 
+    app.post(rotasLogin.login, auth.optional, loginController.login());
     //usuario
-    app.post(rotasUsuario.usuario, usuarioController.cadastro());
+    app.post(rotasUsuario.usuario, auth.required, usuarioController.cadastro());
     app.put(rotasUsuario.usuario, usuarioController.cadastro());
     app.get(rotasUsuario.listaPermissoes, usuarioController.getPermissoesParaCadastro());
     app.get(rotasUsuario.usuario, usuarioController.getUsuarios())
