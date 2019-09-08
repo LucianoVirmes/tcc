@@ -7,7 +7,8 @@ class PesagemController {
         return {
             pesagem: '/pesagem',
             pesar: '/pesar',
-            conexao: '/conexao'
+            conexao: '/conexao',
+            relatorio: '/relatorio'
         }
     }
 
@@ -41,6 +42,11 @@ class PesagemController {
         }
     }
 
+    relatorio() {
+       return (req, res) => {
+        service.geraRelatorio();
+       }
+    }
 }
 
 module.exports = PesagemController;

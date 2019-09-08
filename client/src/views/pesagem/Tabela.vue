@@ -1,5 +1,8 @@
 <template>
+<div>
+      <b-button @click="imprimir()" class="mb-3">Imprimir</b-button>
   <tabela :items="pesagens" :headers="headers" />
+</div>
 </template>
 <script>
 import Tabela from "../../components/shared/tabela/Tabela.vue";
@@ -20,6 +23,11 @@ export default {
   },
   components: {
     tabela: Tabela
+  },
+  methods: {
+    imprimir() {
+      this.service.imprimir();
+    }
   },
   created() {
     this.service = new PesagemService(this.$resource);

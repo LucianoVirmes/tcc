@@ -4,6 +4,7 @@ export default class {
         const acoesPersonalizadas = {
             pesar: { method: 'GET', url: 'pesar' },
             verificarConexao: { method: 'GET', url: 'conexao' },
+            imprimir: { method: 'GET', url: 'relatorio'}
         }
         this._resource = resource('pesagem{/id}', {}, acoesPersonalizadas);
     }
@@ -23,5 +24,9 @@ export default class {
 
     verificarConexao() {
         return this._resource.verificarConexao().then(res => res.json());
+    }
+
+    imprimir(){
+        return this._resource.imprimir();
     }
 }

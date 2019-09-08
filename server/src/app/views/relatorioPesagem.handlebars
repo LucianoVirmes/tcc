@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <table>
+      <tr>
+        <th>Placa</th>
+        <th>data</th>
+        <th>peso tara</th>
+        <th>peso bruto</th>
+        <th>peso liquido</th>
+      </tr>
+      {{#each options.pesagem}}
+      <tr>
+         <th>{{this.placa}}</th>
+        <th>{{this.datahora}}</th>
+        <th>{{this.pesotara}}</th>
+        <th>{{this.pesobruto}}</th>
+        <th>{{this.pesoliquido}}</th>
+      </tr>
+      {{/each}}
+    </table>
+</body>
+</html>
