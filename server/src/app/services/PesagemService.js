@@ -36,9 +36,10 @@ class PesagemService {
     }
 
     geraRelatorio() {
-        repository.findAll().then(pesagens => {
-            relatorioService.geraRelatorio('relatorioPesagem.handlebars', pesagens);
+        return repository.findAll().then(pesagens => {
+            return relatorioService.getRelatorio('relatorioPesagem.handlebars', pesagens);
         })
+
     }
 }
 

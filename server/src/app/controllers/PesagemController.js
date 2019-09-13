@@ -1,5 +1,8 @@
 const PesagemService = require('../services/PesagemService.js');
 const service = new PesagemService();
+var path = require('path');
+var mime = require('mime');
+var fs = require('fs');
 
 class PesagemController {
 
@@ -44,8 +47,10 @@ class PesagemController {
 
     relatorio() {
        return (req, res) => {
-        service.geraRelatorio();
-       }
+        service.geraRelatorio().then(redable => {
+            redable.pipe(res);
+        });
+    }
     }
 }
 
