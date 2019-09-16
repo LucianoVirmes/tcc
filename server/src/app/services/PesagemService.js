@@ -41,6 +41,17 @@ class PesagemService {
         })
 
     }
+    geraRelatorioComFiltros(pesquisa) {
+
+        if(pesquisa.motorista){
+            pesquisa.idMotorista = pesquisa.motorista.id;
+        }
+        
+        return repository.findAllRelatorioFiltros(pesquisa).then(pesagens => {
+            return relatorioService.getRelatorio('relatorioPesagem.handlebars', pesagens);
+        })
+
+    }
 }
 
 module.exports = PesagemService;

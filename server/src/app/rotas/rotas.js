@@ -66,6 +66,7 @@ module.exports = (app) => {
     app.get(rotasPesagem.pesar, pesagemController.pesar());
     app.get(rotasPesagem.conexao, pesagemController.verificaConexao());
     app.get(rotasPesagem.relatorio, pesagemController.relatorio());
+    app.get(rotasPesagem.relatorioFiltros, pesagemController.relatorioFiltros())
     app.get("/", function (req, res) {
 
     })

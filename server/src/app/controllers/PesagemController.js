@@ -11,7 +11,8 @@ class PesagemController {
             pesagem: '/pesagem',
             pesar: '/pesar',
             conexao: '/conexao',
-            relatorio: '/relatorio'
+            relatorio: '/relatorio',
+            relatorioFiltros: '/relatorioFiltros'
         }
     }
 
@@ -41,17 +42,26 @@ class PesagemController {
 
     verificaConexao() {
         return (req, res) => {
-            service.verificarConexao('/dev/ttyUSB0').then( connected => res.send(connected));
+            service.verificarConexao('/dev/ttyUSB0').then(connected => res.send(connected));
         }
     }
 
     relatorio() {
-       return (req, res) => {
-        service.geraRelatorio().then(redable => {
-            redable.pipe(res);
-        });
+        return (req, res) => {
+            service.geraRelatorio().then(redable => {
+                redable.pipe(res);
+            });
+        }
     }
+
+    relatorioFiltros() {
+        return (req, res) => {
+            service.geraRelatorioComFiltros(req.query).then(redable => {
+                redable.pipe(res);
+            });
+        }
     }
+
 }
 
 module.exports = PesagemController;
