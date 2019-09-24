@@ -9,7 +9,7 @@ import { rotasVeiculo } from './rotasVeiculo';
 export const rotasPadrao = [
     { path: '/home', component: Home, titulo: 'Home', menu: false },
     {
-        path: '/pesagem/index', component: Pesagem, titulo: 'Pesagem', meta: {
+        path: '/pesagem/index', component: Pesagem, parent: '/pesagem', titulo: 'Pesagem', icon: 'balance-scale', meta: {
             desc: "Pesagem"
         }
     },

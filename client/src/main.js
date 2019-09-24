@@ -6,7 +6,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import VueResource from 'vue-resource';
 import './registerServiceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret, faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faTrash, faPen, faPlus, faUser, faWeight, faBalanceScale, faBoxOpen, faBusinessTime, faBriefcase, faAddressCard, faTruck } from '@fortawesome/free-solid-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import router from './route/router.js';
@@ -17,7 +17,7 @@ import VueTheMask from 'vue-the-mask';
 import msgBR from 'vee-validate/dist/locale/pt_BR';
 
 
-library.add(faUserSecret, faSearch, faTrash, faPen, faPlus)
+library.add(faUserSecret, faSearch, faTrash, faPen, faPlus, faBalanceScale, faBoxOpen, faBriefcase, faAddressCard, faUser, faTruck)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('vue-simple-suggest', VueSimpleSuggest)
 

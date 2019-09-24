@@ -8,6 +8,6 @@ const lista = { path: '/usuario/lista', component: Lista, titulo: 'Lista', menu:
 const editar = { path: '/usuario/cadastro/:id', component: Cadastro, titulo: 'Editar', meta}
 
 export const rotasUsuario = {
-    path: '/usuario/lista', component: Usuario, titulo: 'Usuários', meta, children: [lista, cadastro, editar]
+    path: '/usuario/lista', component: Usuario, icon:'user', titulo: 'Usuários', parent:'/usuario', meta, children: [lista, cadastro, editar]
 };
 export const rotasUsuarioTela = { 'cadastro': cadastro, 'editar': editar, 'lista': lista };

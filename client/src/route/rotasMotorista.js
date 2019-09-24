@@ -19,7 +19,7 @@ const motoristaEmpresa = {
 }
 
 export const rotasMotorista = {
-    path: '/motorista/lista', component: Motorista, titulo: 'Motoristas', meta, children: [lista, cadastro, alterar, motoristaEmpresa]
+    path: '/motorista/lista', component: Motorista, parent: '/motorista', icon: 'address-card', titulo: 'Motoristas', meta, children: [lista, cadastro, alterar, motoristaEmpresa]
 };
 
 export const rotasMotoristaTela = { 'cadastro': cadastro, 'alterar': alterar, 'lista': lista, 'motoristaEmpresa': motoristaEmpresa }

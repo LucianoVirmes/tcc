@@ -10,7 +10,7 @@ const edita = { path: '/produto/cadastro/:id', titulo: 'Editar', component: Cada
 
 export const rotasProduto =
 {
-    path: '/produto/lista', component: Produto, titulo: 'Produtos', meta, children: [lista, cadastro, edita]
+    path: '/produto/lista', component: Produto, titulo: 'Produtos', parent:'/produto', icon:'box-open',meta, children: [lista, cadastro, edita]
 }
 
 export const rotasTela = { 'lista': lista, 'cadastro': cadastro };

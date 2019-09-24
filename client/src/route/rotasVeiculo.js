@@ -10,7 +10,7 @@ const edita = { path: '/veiculo/cadastro/:id', titulo: 'Editar', component: Cada
 
 export const rotasVeiculo =
 {
-    path: '/veiculo/lista', component: Veiculo, titulo: 'Veículos', meta, children: [lista, cadastro, edita]
+    path: '/veiculo/lista', component: Veiculo, icon: 'truck', parent: '/veiculo', titulo: 'Veículos', meta, children: [lista, cadastro, edita]
 }
 
 export const rotasTela = { 'lista': lista, 'cadastro': cadastro };
