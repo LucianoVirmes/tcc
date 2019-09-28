@@ -51,7 +51,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .menu {
   margin-bottom: 0.3%;
 }
