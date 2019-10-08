@@ -6,22 +6,55 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+<script>
+  const moment = require('moment');
+</script>
+<style>
+		body {
+			font-size: 12pt;
+			font-family: arial;
+			background-color: #ffffff
+		}
+		
+		table {
+			border-left: #000000 1px solid;
+			border-bottom: #000000 1px solid
+		}
+		
+		td {
+			border-right: #000000 1px solid;
+			border-top: #000000 1px solid;
+			font-family: arial;
+			padding: 1px 1px 1px 2px;
+		}
+		
+		.noborder {
+			border-right: 0px;
+			border-top: 0px;
+			border-left: 0px;
+			border-bottom: 0px;
+		}
+    .titulo {
+      text-align: center;
+    }
+	</style>
 <body>
-    <table>
+    <h2 class="titulo">Relatório de pesagens</h2>
+    <table align="center">
       <tr>
         <th>Placa</th>
-        <th>data</th>
-        <th>peso tara</th>
-        <th>peso bruto</th>
-        <th>peso liquido</th>
+        <th>Data de pesagem</th>
+        <th>Peso tara</th>
+        <th>Peso bruto</th>
+        <th>Peso líquido</th>
       </tr>
       {{#each options}}
       <tr>
-        <th>{{this.placa}}</th>
-        <th>{{this.datahora}}</th>
-        <th>{{this.pesotara}}</th>
-        <th>{{this.pesobruto}}</th>
-        <th>{{this.pesoliquido}}</th>
+        <td align="center" width="100">{{this.veiculo.placa}}</td>
+        <td align="center">{{formatDate this.datahora 'DD/MM/YYYY'}}</td>
+        <td align="right" width="100">{{this.pesotara}}</td>
+        <td align="right" width="100">{{this.pesobruto}}</td>
+        <td align="right" width="100">{{this.pesoliquido}}</td>
       </tr>
       {{/each}}
     </table>

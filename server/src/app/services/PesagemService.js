@@ -5,6 +5,7 @@ const repository = new PesagemRepository();
 const integracaoBalancaController = new IntegracaoBalancaController();
 const RelatorioService = require('../services/RelatorioService.js');
 const relatorioService = new RelatorioService();
+const moment = require('moment');
 
 class PesagemService {
 
@@ -43,10 +44,10 @@ class PesagemService {
     }
     geraRelatorioComFiltros(pesquisa) {
 
-        if(pesquisa.motorista){
+        if (pesquisa.motorista) {
             pesquisa.idMotorista = pesquisa.motorista.id;
         }
-        
+
         return repository.findAllRelatorioFiltros(pesquisa).then(pesagens => {
             return relatorioService.getRelatorio('relatorioPesagem.handlebars', pesagens);
         })

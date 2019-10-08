@@ -17,7 +17,8 @@
       </template>
     </b-modal>
     <modalDownload @download="downloadPesquisa" />
-    <tabela :items="pesagens" :headers="headers" />
+    <tabela :items="pesagens" :headers="headers">
+    </tabela>
   </div>
 </template>
 <script>
@@ -30,7 +31,7 @@ export default {
     return {
       headers: [
         { label: "Placa", key: "veiculo.placa" },
-        { label: "Data de pesagem", key: "datahora" },
+        'datahora',
         { label: "Tara", key: "pesotara" },
         { label: "Peso bruto", key: "pesobruto" },
         { label: "Peso líquido", key: "pesoliquido" }
@@ -64,7 +65,7 @@ export default {
     this.service = new PesagemService(this.$resource);
     this.service
       .listar()
-      .then(pesagens => (this.pesagens = pesagens), err => console.log(err));
+      .then(pesagens => {console.log(pesagens);this.pesagens = pesagens}, err => console.log(err));
   }
 };
 </script>

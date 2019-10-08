@@ -27,10 +27,12 @@ class PesagemController {
 
     listar() {
         return (req, res) => {
-            service.listar().then(pesagens => res.send(pesagens), err => {
-                res.sendStatus(500);
-                console.log(err);
-            })
+            service.listar()
+                .then(pesagens =>
+                    res.send(pesagens), err => {
+                        res.sendStatus(500);
+                        console.log(err);
+                    })
         }
     }
 

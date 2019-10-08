@@ -28,7 +28,7 @@ class VeiculoRepository {
 
     findByPlaca(placa){
         return Veiculo.findAll({
-            where: {placa : {[Op.like]: `%${placa}`}}
+            where: {placa : {[Op.like]: `%${placa}%`}}
         })
     }
 

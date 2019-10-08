@@ -15,7 +15,7 @@
       @input="emitValue"
     ></vue-simple-suggest>
     <div class="input-group-append">
-      <button class="btn" type="button">
+      <button class="btn" type="button" @click="emitValue('')">
         <font-awesome-icon icon="search" />
       </button>
     </div>
@@ -26,7 +26,6 @@
 export default {
   data() {
     return {
-      teclas: 0,
       itemSelecionado: "",
       autoCompleteStyle: {
         vueSimpleSuggest: "position-relative",
@@ -58,11 +57,7 @@ export default {
   },
   methods: {
     emitValue(val) {
-      this.teclas++;
-      if(this.teclas > 2){
-        this.$emit("input", val);
-        this.teclas = 0;
-      }
+      this.$emit("input", val);
     },
     emitSelected(val) {
       this.$emit("select", val);

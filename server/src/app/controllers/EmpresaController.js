@@ -88,7 +88,8 @@ class EmpresaController {
 
     autocomplete() {
         return (req, res) => {
-            service.getEmpresasByNome(req.query.nome).then(empresas => res.send(empresas), err => {
+            service.getEmpresasByNome(req.query.nome).then(empresas => 
+                res.send(empresas), err => {
                 console.log(err);
                 res.sendStatus(500);
             })
@@ -98,10 +99,10 @@ class EmpresaController {
     autocompleteByVeiculo() {
         return (req, res) => {
             service.getEmpresasByNomeAndVeiculos(req.query.nome, req.query.idVeiculo)
-            .then(empresas => res.send(empresas), err => {
-                console.log(err);
-                res.sendStatus(500);
-            })
+                .then(empresas => res.send(empresas), err => {
+                    console.log(err);
+                    res.sendStatus(500);
+                })
         }
 
     }

@@ -24,19 +24,14 @@
             <b-form-input
               class="col-sm-8 col-md-6"
               disabled
-              v-b-popover.hover="'O Arduino está desconectado!'"
               title="Falha na conexão"
               type="number"
               v-model="peso"
             ></b-form-input>
             <b-input-group-append>
-              <b-button
-                variant="info"
-                disabled
-               id="popover-button-open"
-              >Pesar</b-button>
+              <b-button variant="info" id="popover-button-open">Pesar</b-button>
             </b-input-group-append>
-            <b-popover show target="popover-button-open" title="Falha na conexão">
+            <b-popover target="popover-button-open" triggers="hover focus" title="Falha na conexão">
               O Arduino está
               <strong>desconectado!</strong>
             </b-popover>
@@ -46,23 +41,11 @@
       <div class="row form-group">
         <div class="col-sm-8 col-md-6">
           <label>Motorista</label>
-          <inputsearch
-            displayAttribute="pessoa.nome"
-            placeholder="Nome do motorista"
-            :lista="motoristas"
-            @input="getMotoristaAutoComplete($event)"
-            @select="motoristaSelecionado = $event"
-          />
+          <autocompleteMotorista @select="selecionaMotorista"/>
         </div>
         <div class="col-sm-8 col-md-6">
           <label>Empresa</label>
-          <inputsearch
-            displayAttribute="nome"
-            placeholder="Nome da empresa"
-            :lista="empresas"
-            @input="getEmpresaAutocomplete($event)"
-            @select="empresaSelecionada = $event"
-          />
+          <autocompleteEmpresa @select="selecionaEmpresa" />
         </div>
       </div>
       <div class="row form-group">
@@ -93,6 +76,8 @@
 
 <script>
 import InputSearch from "../../components/shared/inputs/InputSearch.vue";
+import AutoCompleteEmpresa from "../../components/shared/inputs/AutoCompleteEmpresa.vue";
+import AutoCompleteMotorista from "../../components/shared/inputs/AutoCompleteMotorista.vue";
 import BotoesFormulario from "../../components/shared/buttons/BotoesFormulario.vue";
 import PesagemService from "../../domain/pesagem/PesagemService";
 import EmpresaService from "../../domain/empresa/EmpresaService.js";
@@ -110,13 +95,6 @@ export default {
       produtos: [],
       peso: "",
       data: "",
-      autoCompleteStyle: {
-        vueSimpleSuggest: "position-relative",
-        inputWrapper: "",
-        defaultInput: "form-control",
-        suggestions: "position-absolute list-group z-1000",
-        suggestItem: "list-group-item"
-      },
       veiculoSelecionado: null,
       empresaSelecionada: null,
       motoristaSelecionado: null,
@@ -126,7 +104,9 @@ export default {
   },
   components: {
     inputsearch: InputSearch,
-    botoesform: BotoesFormulario
+    botoesform: BotoesFormulario,
+    autocompleteEmpresa: AutoCompleteEmpresa,
+    autocompleteMotorista: AutoCompleteMotorista
   },
   methods: {
     onSubmit() {},
@@ -151,21 +131,6 @@ export default {
           .then(empresas => (this.empresas = empresas));
       }
     },
-
-    getMotoristaAutoComplete(nomeMotorista) {
-      if (this.empresaSelecionada == null) {
-        this.motoristaService
-          .getAutocomplete({ nome: nomeMotorista })
-          .then(motoristas => (this.motoristas = motoristas));
-      } else {
-        this.motoristaService
-          .getAutocompleteByEmpresa({
-            nome: nomeMotorista,
-            idEmpresa: this.empresaSelecionada.id
-          })
-          .then(empresas => (this.empresas = empresas));
-      }
-    },
     buscarProdutos() {
       this.produtoService.listar().then(produtos => {
         produtos.forEach(element => {
@@ -177,6 +142,12 @@ export default {
       this.service.pesar().then(peso => {
         this.peso = peso;
       });
+    },
+    selecionaMotorista(motorista) {
+      this.motoristaSelecionado = motorista;
+    },
+    selecionaEmpresa(empresa) {
+      this.empresaSelecionada = empresa;
     },
     salvar() {
       const pesagem = new Pesagem(

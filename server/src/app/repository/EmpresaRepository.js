@@ -33,12 +33,13 @@ class EmpresaRepository {
     }
 
     findByNome(nomeEmpresa) {
+        let where = {};
+
+        if (nomeEmpresa) {
+            where['nome'] = {[Op.like]: `%${nomeEmpresa}%`};
+        }
         return Empresa.findAll({
-            where: {
-                nome: {
-                    [Op.like]: '%' + nomeEmpresa + '%'
-                }
-            }
+            where
         })
     }
 
@@ -59,7 +60,7 @@ class EmpresaRepository {
         return Empresa.findAll({
             where: {
                 nome: {
-                    [Op.like]: `%${nomeEmpresa}`
+                    [Op.like]: `%${nomeEmpresa}%`
                 },
                 '$veiculos.id$': veiculoId
             }, include: [
