@@ -3,8 +3,7 @@ import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
-const isDevelopment = process.env.NODE_ENV !== 'production'
-
+const isDevelopment = process.env.NODE_ENV !== 'production';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -27,7 +26,7 @@ function createWindow () {
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
   }
-
+  
   win.on('closed', () => {
     win = null
   })

@@ -9,6 +9,7 @@
  
 <script>
 import Menu from "./components/shared/menu/Menu.vue";
+
 export default {
   components: {
     "menu-padrao": Menu

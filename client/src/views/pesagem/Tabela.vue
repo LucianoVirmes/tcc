@@ -65,7 +65,7 @@ export default {
     this.service = new PesagemService(this.$resource);
     this.service
       .listar()
-      .then(pesagens => {console.log(pesagens);this.pesagens = pesagens}, err => console.log(err));
+      .then(pesagens => this.pesagens = pesagens, err => console.log(err));
   }
 };
 </script>

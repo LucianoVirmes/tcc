@@ -10,12 +10,14 @@
       </b-tab>
     </b-tabs>
   </b-card>
+  
 </div>
 </template>
 
 <script>
     import Tabela from './Tabela.vue';
     import Formulario from './Formulario.vue';
+    
 export default {
     components: {
         'formulario': Formulario,

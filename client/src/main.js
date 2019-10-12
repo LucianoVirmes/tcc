@@ -38,6 +38,7 @@ Vue.use(VueResource);
 Vue.http.options.root = 'http://localhost:3000';
 Vue.config.productionTip = false;
 
+  
 new Vue({
   router,
   render: h => h(App)

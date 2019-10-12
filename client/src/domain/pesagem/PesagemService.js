@@ -1,9 +1,9 @@
+import IntegracaoBalancaController from "./IntegracaoBalancaController.js";
+const balancaController = new IntegracaoBalancaController();
 export default class {
 
     constructor(resource) {
         const acoesPersonalizadas = {
-            pesar: { method: 'GET', url: 'pesar' },
-            verificarConexao: { method: 'GET', url: 'conexao' },
             imprimir: { method: 'GET', url: 'relatorio', responseType: 'arraybuffer' },
             imprimirComFiltros: { method: 'GET', url: 'relatorioFiltros', responseType: 'arraybuffer' },
         }
@@ -20,11 +20,11 @@ export default class {
     }
 
     pesar() {
-        return this._resource.pesar().then(res => res.json());
+       return balancaController.conectar();
     }
 
     verificarConexao() {
-        return this._resource.verificarConexao().then(res => res.json());
+        return balancaController.verificarConexao('/dev/ttyUSB0');
     }
 
     imprimir() {
@@ -35,7 +35,7 @@ export default class {
             link.download = 'relatorio.pdf'
             link.click()
         })
-               
+
     }
 
     imprimirComFiltros(pesquisa) {

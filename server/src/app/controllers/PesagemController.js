@@ -1,16 +1,11 @@
 const PesagemService = require('../services/PesagemService.js');
 const service = new PesagemService();
-var path = require('path');
-var mime = require('mime');
-var fs = require('fs');
 
 class PesagemController {
 
     static rotas() {
         return {
             pesagem: '/pesagem',
-            pesar: '/pesar',
-            conexao: '/conexao',
             relatorio: '/relatorio',
             relatorioFiltros: '/relatorioFiltros'
         }
@@ -33,18 +28,6 @@ class PesagemController {
                         res.sendStatus(500);
                         console.log(err);
                     })
-        }
-    }
-
-    pesar() {
-        return (req, res) => {
-            service.pesar().then(data => res.send(data));
-        }
-    }
-
-    verificaConexao() {
-        return (req, res) => {
-            service.verificarConexao('/dev/ttyUSB0').then(connected => res.send(connected));
         }
     }
 

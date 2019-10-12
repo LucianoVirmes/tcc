@@ -85,7 +85,8 @@ import VeiculoService from "../../domain/veiculo/VeiculoService.js";
 import MotoristaService from "../../domain/motorista/MotoristaService.js";
 import ProdutoService from "../../domain/produto/ProdutoService.js";
 import Pesagem from "../../domain/pesagem/Pesagem.js";
-
+import IntegracaoBalancaController from "../../domain/pesagem/IntegracaoBalancaController.js"
+   
 export default {
   data() {
     return {
@@ -99,7 +100,7 @@ export default {
       empresaSelecionada: null,
       motoristaSelecionado: null,
       produtoSelecionado: null,
-      balancaConectada: false
+      balancaConectada: false,
     };
   },
   components: {
@@ -140,7 +141,7 @@ export default {
     },
     pesar() {
       this.service.pesar().then(peso => {
-        this.peso = peso;
+        this.peso = parseFloat(peso);
       });
     },
     selecionaMotorista(motorista) {
@@ -167,9 +168,11 @@ export default {
     this.empresaService = new EmpresaService(this.$resource);
     this.motoristaService = new MotoristaService(this.$resource);
     this.produtoService = new ProdutoService(this.$resource);
+
     this.service
       .verificarConexao()
       .then(conectada => (this.balancaConectada = conectada));
+     
     this.buscarProdutos();
   }
 };
