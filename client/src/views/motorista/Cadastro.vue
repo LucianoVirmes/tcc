@@ -31,7 +31,7 @@
             <span class="text-danger" v-if="errors.has('cnh')">{{errors.first("cnh")}}</span>
           </div>
 
-          <button class="btn btn-primary">Salvar</button>
+          <botoes-form />
         </fieldset>
       </form>
     </b-card>
@@ -42,6 +42,7 @@
 import MotoristaEmpresa from "./MotoristaEmpresa.vue";
 import Motorista from "../../domain/motorista/Motorista";
 import MotoristaService from "../../domain/motorista/MotoristaService";
+import BotoesFormulario from "../../components/shared/buttons/BotoesFormulario.vue";
 
 export default {
   data() {
@@ -94,7 +95,8 @@ export default {
     }
   },
   components: {
-    motoristaEmpresa: MotoristaEmpresa
+    motoristaEmpresa: MotoristaEmpresa,
+    botoesForm: BotoesFormulario
   }
 };
 </script>

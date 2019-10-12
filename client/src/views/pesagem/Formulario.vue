@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import InputSearch from "../../components/shared/inputs/InputSearch.vue";
 import AutoCompleteEmpresa from "../../components/shared/inputs/AutoCompleteEmpresa.vue";
 import AutoCompleteMotorista from "../../components/shared/inputs/AutoCompleteMotorista.vue";
 import BotoesFormulario from "../../components/shared/buttons/BotoesFormulario.vue";
@@ -86,6 +85,7 @@ import MotoristaService from "../../domain/motorista/MotoristaService.js";
 import ProdutoService from "../../domain/produto/ProdutoService.js";
 import Pesagem from "../../domain/pesagem/Pesagem.js";
 import IntegracaoBalancaController from "../../domain/pesagem/IntegracaoBalancaController.js"
+import InputSearch from '../../components/shared/inputs/InputSearch.vue';
    
 export default {
   data() {
@@ -104,10 +104,10 @@ export default {
     };
   },
   components: {
-    inputsearch: InputSearch,
     botoesform: BotoesFormulario,
     autocompleteEmpresa: AutoCompleteEmpresa,
-    autocompleteMotorista: AutoCompleteMotorista
+    autocompleteMotorista: AutoCompleteMotorista,
+    inputsearch: InputSearch
   },
   methods: {
     onSubmit() {},
@@ -116,21 +116,6 @@ export default {
       this.veiculoService.getVeiculosByPlaca({ placa: evt }).then(veiculos => {
         this.veiculos = veiculos;
       });
-    },
-
-    getEmpresaAutocomplete(nomeEmpresa) {
-      if (this.veiculoSelecionado == null) {
-        this.empresaService
-          .getEmpresaAutocomplete({ nome: nomeEmpresa })
-          .then(empresas => (this.empresas = empresas));
-      } else {
-        this.empresaService
-          .getEmpresaAutocompleteByVeiculo({
-            nome: nomeEmpresa,
-            idVeiculo: this.veiculoSelecionado.id
-          })
-          .then(empresas => (this.empresas = empresas));
-      }
     },
     buscarProdutos() {
       this.produtoService.listar().then(produtos => {
@@ -159,7 +144,14 @@ export default {
         this.data,
         this.peso
       );
-      this.service.salvar(pesagem);
+      this.service.salvar(pesagem).then(res =>  this.showAlert(res));
+    },
+     showAlert: function(res) {
+      if (res.ok) {
+        this.alertaSucess = true;
+      } else {
+        this.alertaErro = true;
+      }
     }
   },
   created() {

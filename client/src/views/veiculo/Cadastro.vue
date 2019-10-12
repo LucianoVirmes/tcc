@@ -33,7 +33,7 @@
             />
             <span class="text-danger" v-if="errors.has('tara')">{{ errors.first('tara') }}</span>
           </div>
-          <button class="btn btn-primary">Enviar</button>
+          <botoes-form @cancelar="resetForm()" />
         </fieldset>
       </form>
     </b-card>
@@ -43,6 +43,7 @@
 <script>
 import VeiculoService from "../../domain/veiculo/VeiculoService";
 import Veiculo from "../../domain/veiculo/Veiculo";
+import BotoesFormulario from '../../components/shared/buttons/BotoesFormulario.vue';
 
 export default {
   data() {
@@ -85,6 +86,9 @@ export default {
       } else {
         this.alertaErro = true;
       }
+    },
+    resetForm() {
+      this.veiculo = new Veiculo();
     }
   },
   created() {
@@ -93,6 +97,10 @@ export default {
     if (this.$route.params) {
       this.buscaVeiculo(this.$route.params.id);
     }
+  },
+  components: {
+  botoesForm: BotoesFormulario
+
   }
 };
 </script>

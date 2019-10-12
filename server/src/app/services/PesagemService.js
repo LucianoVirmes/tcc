@@ -1,11 +1,8 @@
 
 const PesagemRepository = require('../repository/PesagemRepository.js');
-const IntegracaoBalancaController = require('../controllers/IntegracaoBalancaController.js');
 const repository = new PesagemRepository();
-const integracaoBalancaController = new IntegracaoBalancaController();
 const RelatorioService = require('../services/RelatorioService.js');
 const relatorioService = new RelatorioService();
-const moment = require('moment');
 
 class PesagemService {
 
@@ -26,14 +23,6 @@ class PesagemService {
 
     listar() {
         return repository.findAll();
-    }
-
-    pesar() {
-        return integracaoBalancaController.conectar();
-    }
-
-    verificarConexao(porta) {
-        return integracaoBalancaController.verificarConexao(porta);
     }
 
     geraRelatorio() {

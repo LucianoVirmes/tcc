@@ -1,24 +1,24 @@
 <template>
   <div class="input-group form-group">
-    <vue-simple-suggest
-      :type="type"
-      :class="classInput"
-      v-model="itemSelecionado"
-      :list="lista"
-      :styles="autoCompleteStyle"
-      :placeholder="placeholder"
-      :mode="mode"
-      :nullable-select="nullableSelect"
-      :prevent-submit="preventSubmit"
-      :display-attribute="displayAttribute"
-      @select="emitSelected($event)"
-      @input="emitValue"
-    ></vue-simple-suggest>
-    <div class="input-group-append">
-      <button class="btn" type="button" @click="emitValue('')">
-        <font-awesome-icon icon="search" />
-      </button>
-    </div>
+    <b-input-group>
+      <template v-slot:append>
+        <b-input-group-text ><font-awesome-icon icon="search" /></b-input-group-text>
+      </template>
+      <vue-simple-suggest
+        :type="type"
+        :class="classInput"
+        v-model="itemSelecionado"
+        :list="lista"
+        :styles="autoCompleteStyle"
+        :placeholder="placeholder"
+        :mode="mode"
+        :nullable-select="nullableSelect"
+        :prevent-submit="preventSubmit"
+        :display-attribute="displayAttribute"
+        @select="emitSelected($event)"
+        @input="emitValue"
+      ></vue-simple-suggest>
+    </b-input-group>
   </div>
 </template>
 

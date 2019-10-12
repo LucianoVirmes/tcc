@@ -58,14 +58,17 @@ export default {
     },
     downloadPesquisa(pesquisa) {
       this.service.imprimirComFiltros(pesquisa);
+    },
+    carregarPesagens() {
+       this.service
+      .listar()
+      .then(pesagens => this.pesagens = pesagens, err => console.log(err));
     }
   },
 
   created() {
     this.service = new PesagemService(this.$resource);
-    this.service
-      .listar()
-      .then(pesagens => this.pesagens = pesagens, err => console.log(err));
+   this.carregarPesagens();
   }
 };
 </script>

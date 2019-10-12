@@ -44,7 +44,7 @@
             />
             <span class="text-danger" v-if="errors.has('email')">{{errors.first('email')}}</span>
           </div>
-          <button class="btn btn-primary">Enviar</button>
+          <botoesForm @cancelar="resetForm()" />
         </fieldset>
       </form>
     </b-card>
@@ -55,6 +55,7 @@
 import Empresa from "../../domain/empresa/Empresa";
 import EmpresaService from "../../domain/empresa/EmpresaService";
 import ValidationProvider from "vee-validate";
+import BotoesFormulario from "../../components/shared/buttons/BotoesFormulario.vue";
 
 export default {
   data() {
@@ -66,9 +67,13 @@ export default {
   },
   methods: {
     enviarForm() {
-      this.service.cadastrar(this.empresa).then(res => {
-        this.empresa = new Empresa();
-        this.showAlert(res);
+      this.$validator.validateAll().then(success => {
+        if (success) {
+          this.service.cadastrar(this.empresa).then(res => {
+            this.empresa = new Empresa();
+            this.showAlert(res);
+          });
+        }
       });
     },
     showAlert: function(res) {
@@ -82,8 +87,12 @@ export default {
       this.service.visualizar(id).then(empresa => {
         this.empresa = empresa;
       });
+    },
+    resetForm() {
+      this.empresa = new Empresa();
     }
   },
+
   created() {
     this.service = new EmpresaService(this.$resource);
 
@@ -91,9 +100,10 @@ export default {
     if (this.$route.params.id) {
       this.buscaDados(this.$route.params.id);
     }
+  },
+  components: {
+    botoesForm: BotoesFormulario
   }
 };
 </script>
 
-<style>
-</style>

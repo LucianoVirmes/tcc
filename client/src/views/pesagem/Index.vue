@@ -5,8 +5,8 @@
       <b-tab title="Formulário" active>
          <formulario id="formulario"/>
       </b-tab>
-      <b-tab title="Tabela">
-         <tabela/>
+      <b-tab title="Tabela" @click="carregarTabela()">
+         <tabela ref="tabela"/>
       </b-tab>
     </b-tabs>
   </b-card>
@@ -22,6 +22,11 @@ export default {
     components: {
         'formulario': Formulario,
         'tabela': Tabela,
+    },
+    methods: {
+      carregarTabela() {
+        this.$refs.tabela.carregarPesagens();
+      }
     }
 }
 </script>

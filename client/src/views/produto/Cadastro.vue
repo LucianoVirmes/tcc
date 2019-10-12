@@ -33,7 +33,7 @@
             />
             <span class="text-danger" v-if="errors.has('unidade')">{{ errors.first('unidade') }}</span>
           </div>
-          <button class="btn btn-primary">Enviar</button>
+          <botoes-form @cancelar="resetForm()" />
         </fieldset>
       </form>
     </b-card>
@@ -43,7 +43,7 @@
 <script>
 import ProdutoService from "../../domain/produto/ProdutoService";
 import Produto from "../../domain/produto/Produto";
-
+import BotoesFormulario from '../../components/shared/buttons/BotoesFormulario.vue';
 export default {
   data() {
     return {
@@ -85,6 +85,9 @@ export default {
       } else {
         this.alertaErro = true;
       }
+    }, 
+    resetForm: function() {
+      this.produto = new Produto();
     }
   },
   created() {
@@ -93,6 +96,9 @@ export default {
     if (this.$route.params) {
       this.buscaProduto(this.$route.params.id);
     }
+  },
+  components: {
+    botoesForm: BotoesFormulario
   }
 };
 </script>
