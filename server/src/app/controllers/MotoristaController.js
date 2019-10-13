@@ -1,7 +1,5 @@
 const MorotistaService = require('../services/MotoristaService.js');
-const EmpresaService = require('../services/EmpresaService.js');
 
-const empresaService = new EmpresaService();
 const service = new MorotistaService();
 
 class MotoristaController {
@@ -14,17 +12,6 @@ class MotoristaController {
             motoristaEmpresa: "/motorista/empresa",
             motoristaAutocomplete: "/motorista-autocomplete/motorista",
             motoristaAutocompleteByEmpresa: "/motorista-autocomplete/empresa",
-        }
-    }
-
-    getMotorista() {
-        return (req, res) => {
-            service.getById(req.param('id')).then(morotista => {
-                res.send(morotista);
-            }, err => {
-                console.log(err);
-                res.sendStatus(500);
-            });
         }
     }
 
@@ -43,6 +30,17 @@ class MotoristaController {
         return (req, res) => {
             service.salvaOuAltera(req.body).then(sucess => {
                 res.sendStatus(200);
+            }, err => {
+                console.log(err);
+                res.sendStatus(500);
+            });
+        }
+    }
+    
+    getMotorista() {
+        return (req, res) => {
+            service.getById(req.param('id')).then(morotista => {
+                res.send(morotista);
             }, err => {
                 console.log(err);
                 res.sendStatus(500);

@@ -18,6 +18,7 @@
     </b-modal>
     <modalDownload @download="downloadPesquisa" />
     <tabela :items="pesagens" :headers="headers">
+      <template>aqui deveria ir a datahora de cada item da lista pesagem</template>
     </tabela>
   </div>
 </template>
@@ -25,13 +26,20 @@
 import Tabela from "../../components/shared/tabela/Tabela.vue";
 import PesagemService from "../../domain/pesagem/PesagemService.js";
 import ModalDownload from "./ModalDownload.vue";
+import * as moment from "moment";
 
 export default {
   data() {
     return {
       headers: [
         { label: "Placa", key: "veiculo.placa" },
-        'datahora',
+        {
+          label: "Data",
+          key: "datahora",
+          formatter: value => {
+            return moment(value).format("DD/MM/YYYY hh:mm");
+          }
+        },
         { label: "Tara", key: "pesotara" },
         { label: "Peso bruto", key: "pesobruto" },
         { label: "Peso líquido", key: "pesoliquido" }
@@ -60,15 +68,15 @@ export default {
       this.service.imprimirComFiltros(pesquisa);
     },
     carregarPesagens() {
-       this.service
-      .listar()
-      .then(pesagens => this.pesagens = pesagens, err => console.log(err));
+      this.service
+        .listar()
+        .then(pesagens => (this.pesagens = pesagens), err => console.log(err));
     }
   },
 
   created() {
     this.service = new PesagemService(this.$resource);
-   this.carregarPesagens();
+    this.carregarPesagens();
   }
 };
 </script>

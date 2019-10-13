@@ -7,11 +7,11 @@
     db.sequelize
     .authenticate()
         .then(() => {
-            console.log('Connection has been established successfully.');
+            console.log('Conexão estabelecida com sucesso');
         })
         .catch(err => {
-            console.error('Unable to connect to the database:', err);
+            console.error('Não foi possível se conectar ao servidor do banco, erro:', err);
         });
        
     app.listen(process.env.PORT || 3000);
-    module.exports = db;
+    

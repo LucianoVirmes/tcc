@@ -1,6 +1,4 @@
 const Repository = require('../repository/MotoristaRepository.js');
-const EmpresaRepository = require('../repository/EmpresaRepository.js');
-
 const repository = new Repository();
 
 class MotoristaService {

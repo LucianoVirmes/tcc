@@ -5,9 +5,6 @@
         <b-spinner class="align-middle"></b-spinner>
         <strong>Carregando...</strong>
       </div>
-      <template slot="datahora" slot-scope="data">
-      {{data.item.datahora | moment('DD/MM/YYYY')}}
-      </template>
       <template slot="actions" slot-scope="row" v-if="mostrarBotoes">
         <router-link :to="linkEditar+'/'+row.item[paramRowEditar]">
           <b-button size="sm" class="mr-1" variant="info">
