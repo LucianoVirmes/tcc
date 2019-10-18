@@ -1,5 +1,11 @@
 <template>
   <b-card bg-variant="light">
+    <b-alert variant="success" :show="alertaSucess" dismissible>Pesagem salva com sucesso!</b-alert>
+    <b-alert
+      variant="danger"
+      :show="alertaErro"
+      dismissible
+    >Houve um erro ao tentar submeter o formulário!</b-alert>
     <b-form @submit.prevent="onSubmit" class="inline">
       <div class="row form-group">
         <div class="col-sm-8 col-md-6">
@@ -41,7 +47,7 @@
       <div class="row form-group">
         <div class="col-sm-8 col-md-6">
           <label>Motorista</label>
-          <autocompleteMotorista @select="selecionaMotorista"/>
+          <autocompleteMotorista @select="selecionaMotorista" />
         </div>
         <div class="col-sm-8 col-md-6">
           <label>Empresa</label>
@@ -84,9 +90,9 @@ import VeiculoService from "../../domain/veiculo/VeiculoService.js";
 import MotoristaService from "../../domain/motorista/MotoristaService.js";
 import ProdutoService from "../../domain/produto/ProdutoService.js";
 import Pesagem from "../../domain/pesagem/Pesagem.js";
-import IntegracaoBalancaController from "../../domain/pesagem/IntegracaoBalancaController.js"
-import InputSearch from '../../components/shared/inputs/InputSearch.vue';
-   
+import IntegracaoBalancaController from "../../domain/pesagem/IntegracaoBalancaController.js";
+import InputSearch from "../../components/shared/inputs/InputSearch.vue";
+
 export default {
   data() {
     return {
@@ -101,6 +107,8 @@ export default {
       motoristaSelecionado: null,
       produtoSelecionado: null,
       balancaConectada: false,
+      alertaErro: false,
+      alertaSucess: false
     };
   },
   components: {
@@ -144,9 +152,9 @@ export default {
         this.data,
         this.peso
       );
-      this.service.salvar(pesagem).then(res =>  this.showAlert(res));
+      this.service.salvar(pesagem).then(res => this.showAlert(res));
     },
-     showAlert: function(res) {
+    showAlert: function(res) {
       if (res.ok) {
         this.alertaSucess = true;
       } else {
@@ -164,7 +172,7 @@ export default {
     this.service
       .verificarConexao()
       .then(conectada => (this.balancaConectada = conectada));
-     
+
     this.buscarProdutos();
   }
 };

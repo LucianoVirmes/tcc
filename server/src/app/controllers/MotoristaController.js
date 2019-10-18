@@ -10,6 +10,7 @@ class MotoristaController {
             motoristaId: "/motorista/:id",
             motoristaEmpresaLista: "/motorista/empresa/lista",
             motoristaEmpresa: "/motorista/empresa",
+            removeEmpresa: "/motorista/remover-empresa",
             motoristaAutocomplete: "/motorista-autocomplete/motorista",
             motoristaAutocompleteByEmpresa: "/motorista-autocomplete/empresa",
         }
@@ -62,6 +63,17 @@ class MotoristaController {
     removeMotorista() {
         return (req, res) => {
             service.deleteById(req.param('id')).then(success => {
+                res.sendStatus(200);
+            }, err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+        }
+    }
+
+    removeEmpresa() {
+        return (req, res ) => {
+            service.removeEmpresa(req.body.idEmpresa, req.body.idMotorista).then(sucess => {
                 res.sendStatus(200);
             }, err => {
                 console.log(err);

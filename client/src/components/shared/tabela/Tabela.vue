@@ -6,7 +6,7 @@
         <strong>Carregando...</strong>
       </div>
       <template slot="actions" slot-scope="row" v-if="mostrarBotoes">
-        <router-link :to="linkEditar+'/'+row.item[paramRowEditar]">
+        <router-link v-if="mostrarBtnEditar" :to="linkEditar+'/'+row.item[paramRowEditar]">
           <b-button size="sm" class="mr-1" variant="info">
             <font-awesome-icon icon="pen" />
           </b-button>
@@ -44,11 +44,14 @@ export default {
       default: true
     },
     carregando: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false
     },
     paramRowEditar: "",
-
+    mostrarBtnEditar: {
+      type: Boolean,
+      default: true
+    },
     paramRowExcluir: "",
     tituloModalExcluir: ""
   },

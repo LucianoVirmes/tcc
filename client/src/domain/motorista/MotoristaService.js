@@ -3,6 +3,7 @@ export default class {
         const acoesPersonalizadas = {
             getEmpresaMotorista: { method: "GET", url: "motorista/empresa/lista" },
             addEmpresaMotorista: { method: "POST", url: "motorista/empresa" },
+            removeEmpresa: { method: "POST", url: "motorista/remover-empresa" },
             getAutocomplete: { method: "GET", url: "motorista-autocomplete/motorista" },
             getAutocompleteByEmpresa: { method: "GET", url: "motorista-autocomplete/empresa" }
         }
@@ -32,6 +33,10 @@ export default class {
 
     getEmpresas(idMotorista) {
         return this._resource.getEmpresaMotorista({ id: idMotorista }).then(res => res.json());
+    }
+
+    removeEmpresa(codEmpresa, idMotorista) {
+        return this._resource.removeEmpresa({ idEmpresa: codEmpresa, idMotorista: idMotorista });
     }
 
     addEmpresa(motoristaEmpresa) {

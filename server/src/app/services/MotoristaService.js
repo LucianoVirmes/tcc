@@ -27,8 +27,12 @@ class MotoristaService {
         return repository.addEmpresa(motorista);
     }
 
-    getEmpresas(idMotorista){
-        return repository.findEmpresas(idMotorista);
+    removeEmpresa(codEmpresa, codMotorista){
+        return repository.removeEmpresa(codEmpresa, codMotorista);
+    }
+
+    getEmpresas(idEmpresa){
+        return repository.findEmpresas(idEmpresa);
     }
 
     getAutocomplete(nomeMotorista) {

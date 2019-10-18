@@ -24,7 +24,7 @@ export default {
     },
     criaNotificacaoDesktop(msg) {
       new Notification("Internet", {
-        body: "Conexão estabelecida!",
+        body: "Conexão estabelecida!"
       });
     }
   },
@@ -50,8 +50,8 @@ export default {
  
 
  <style>
-input:invalid {
-  border-color: red;
-}
+  input:invalid {
+    border-color: red;
+  }
 </style>
  

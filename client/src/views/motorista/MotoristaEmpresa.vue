@@ -1,5 +1,7 @@
 <template>
   <div class="container-fluid">
+    <b-alert variant="success" :show="alertaSucess" dismissible>Empresa removida com sucesso!</b-alert>
+    <b-alert variant="danger" :show="alertaErro" dismissible>Não foi possível remover a empresa!</b-alert>
     <div class="form-group">
       <label>Motorista</label>
       <b-form-select
@@ -31,7 +33,21 @@
           @click="adicionarEmpresa()"
         >Adicionar</b-button>
       </div>
-      <tabela :items="empresas" :headers="headers" class="text-center tabela" />
+      <tabela
+        :items="empresas"
+        :mostrarBtnEditar="false"
+        @codExcluir="setCodEmpresa"
+        :headers="headers"
+        :paramRowExcluir="'id'"
+        class="text-center tabela"
+      />
+      <modal
+        :id="modalExcluir.id"
+        :texto="modalExcluir.texto"
+        :title="modalExcluir.titulo"
+        :btnExcluir="modalExcluir.btnExcluir"
+        @clickConfirm="excluir()"
+      />
     </div>
   </div>
 </template>
@@ -41,6 +57,7 @@ import Tabela from "../../components/shared/tabela/Tabela.vue";
 import EmpresaService from "../../domain/empresa/EmpresaService";
 import Empresa from "../../domain/empresa/Empresa";
 import MotoristaService from "../../domain/motorista/MotoristaService";
+import ModalExcluir from "../../components/shared/modal/ModalExcluir.vue";
 
 export default {
   data() {
@@ -65,11 +82,19 @@ export default {
           text: "Selecione um motorista"
         }
       ],
+      idEmpresa: null,
+      modalExcluir: {
+        texto: "Deseja mesmo desassociar este motorista?",
+        titulo: "Desassociar",
+        id: "modal-excluir",
+        btnExcluir: "Desassociar"
+      },
+      alertaSucess: false,
+      alertaErro: false,
       motoristaSelecionado: null,
       empresaSelecionada: null,
       autoCompleteStyle: {
         vueSimpleSuggest: "position-relative",
-        inputWrapper: "",
         defaultInput: "form-control",
         suggestions: "position-absolute list-group z-1000",
         suggestItem: "list-group-item"
@@ -88,12 +113,11 @@ export default {
       this.empresaSelecionada = empresa;
     },
     adicionarEmpresa() {
-      const formdata = {
-        id: this.motoristaSelecionado,
-        empresa: this.empresaSelecionada
-      };
       this.motoristaService
-        .addEmpresa(formdata)
+        .addEmpresa({
+          id: this.motoristaSelecionado,
+          empresa: this.empresaSelecionada
+        })
         .then(success => {
           this.empresas.push(this.empresaSelecionada);
         });
@@ -108,6 +132,16 @@ export default {
           });
       }
     },
+    showAlert: function(res) {
+      if (res.ok) {
+        this.alertaSucess = true;
+      } else {
+        this.alertaErro = true;
+      }
+    },
+    setCodEmpresa(idEmpresa) {
+      this.idEmpresa = idEmpresa;
+    },
     buscaMotoristas() {
       this.motoristaService.listar().then(motoristas => {
         motoristas.forEach(element => {
@@ -116,6 +150,12 @@ export default {
             text: element.pessoa.nome
           });
         });
+      });
+    },
+    excluir() {
+      this.motoristaService.removeEmpresa(this.idEmpresa, this.motoristaSelecionado).then(res => {
+        this.showAlert(res);
+        this.empresas.splice(this.empresas.indexOf(this.idEmpresa));
       });
     }
   },
@@ -126,7 +166,8 @@ export default {
     this.buscaMotoristas();
   },
   components: {
-    tabela: Tabela
+    tabela: Tabela,
+    modal: ModalExcluir
   }
 };
 </script>

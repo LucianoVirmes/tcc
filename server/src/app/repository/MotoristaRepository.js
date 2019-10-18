@@ -19,6 +19,12 @@ class MotoristaRepository {
         })
     }
 
+    removeEmpresa(idEmpresa, idMotorista) {
+        return Motorista.findByPk(idMotorista).then(motoristaBanco => {
+            motoristaBanco.removeEmpresa(idEmpresa);
+        })
+    }
+
     update(motorista) {
         return this.findCompletoByPk(motorista.id).then(motoristaBanco => {
             motoristaBanco.update({

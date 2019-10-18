@@ -40,6 +40,7 @@ module.exports = (app) => {
     app.put(rotasMotorista.motorista, motoristaController.alterar());
     app.delete(rotasMotorista.motoristaId, motoristaController.removeMotorista());
     app.post(rotasMotorista.motoristaEmpresa, motoristaController.addEmpresa());
+    app.post(rotasMotorista.removeEmpresa, motoristaController.removeEmpresa());
     app.get(rotasMotorista.motoristaEmpresaLista, motoristaController.getEmpresas());
     app.get(rotasMotorista.motoristaAutocomplete, motoristaController.getAutocomplete());
     app.get(rotasMotorista.motoristaAutocompleteByEmpresa, motoristaController.getAutocompleteByEmpresa());

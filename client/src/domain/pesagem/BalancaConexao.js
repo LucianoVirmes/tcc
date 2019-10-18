@@ -31,11 +31,9 @@ export default class {
     async verificarConexao(portName) {
         const conectado = await new Promise(function (resolve, reject) {
             SerialPort.list((err, ports) => {
-                console.log(portName)
                 resolve(ports.some(port => port.comName === portName));
             });
         });
-        console.log(conectado)
         return conectado;
     }
 

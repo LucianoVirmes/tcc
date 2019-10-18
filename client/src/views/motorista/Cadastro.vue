@@ -14,7 +14,7 @@
             <input
               type="text"
               name="nome"
-              v-validate="{required: true, min: 3, max: 10}"
+              v-validate="{required: true, min: 3, max: 30}"
               class="form-control"
               v-model="motorista.pessoa.nome"
             />
@@ -25,7 +25,7 @@
             <input
               class="form-control"
               name="cnh"
-              v-validate="{required: true, min:11, max: 15 }"
+              v-validate="{required: true, max: 15 }"
               v-model="motorista.cnh"
             />
             <span class="text-danger" v-if="errors.has('cnh')">{{errors.first("cnh")}}</span>
