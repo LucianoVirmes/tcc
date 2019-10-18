@@ -51,6 +51,7 @@ module.exports = (app) => {
     app.get(rotasEmpresa.empresaId, empresaController.visualizar());
     app.delete(rotasEmpresa.empresaId, empresaController.remover());
     app.get(rotasEmpresa.empresaVeiculo, empresaController.getVeiculos());
+    app.post(rotasEmpresa.removerVeiculo, empresaController.removerVeiculo());
     app.post(rotasEmpresa.empresaVeiculo, empresaController.addVeiculo());
     app.get(rotasEmpresa.empresaAutocomplete, empresaController.autocomplete());
     app.get(rotasEmpresa.empresaAutocompleteByVeiculo, empresaController.autocompleteByVeiculo());

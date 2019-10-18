@@ -8,6 +8,7 @@ class EmpresaController {
             empresa: "/empresa",
             empresaId: "/empresa/:id",
             empresaVeiculo: "/empresa-veiculo",
+            removerVeiculo: "/empresa/remover/veiculo",
             empresaAutocomplete: "/empresa-autocomplete/empresa",
             empresaAutocompleteByVeiculo: "/empresa-autocomplete/veiculo"
         }
@@ -80,6 +81,15 @@ class EmpresaController {
     addVeiculo() {
         return (req, res) => {
             service.addVeiculo(req.body).then(success => res.sendStatus(200), err => {
+                console.log(err);
+                res.sendStatus(500);
+            })
+        }
+    }
+
+    removerVeiculo() {
+        return (req, res) => {
+            service.removeVeiculo(req.body).then(success => res.sendStatus(200), err => {
                 console.log(err);
                 res.sendStatus(500);
             })

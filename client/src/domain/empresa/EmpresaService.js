@@ -1,11 +1,12 @@
 export default class {
-    
+
     constructor(resource) {
         const acoesPersonalizadas = {
             getEmpresaVeiculo: { method: "GET", url: "empresa-veiculo/" },
-            addEmpresaVeiculo: { method: "POST", url: "empresa-veiculo/"},
-            getEmpresaAutocomplete: { method: "GET", url: "empresa-autocomplete/empresa"},
-            getEmpresaAutocompleteByVeiculo: { method: "GET", url: "empresa-autocomplete/veiculo"}
+            addEmpresaVeiculo: { method: "POST", url: "empresa-veiculo/" },
+            removeEmpresaVeiculo: { method: "POST", url: "empresa/remover/veiculo" },
+            getEmpresaAutocomplete: { method: "GET", url: "empresa-autocomplete/empresa" },
+            getEmpresaAutocompleteByVeiculo: { method: "GET", url: "empresa-autocomplete/veiculo" }
         }
         this._resource = resource('empresa{/id}', {}, acoesPersonalizadas);
     }
@@ -38,11 +39,15 @@ export default class {
         return this._resource.addEmpresaVeiculo(addEmpresaVeiculo);
     }
 
+    removerVeiculo(veiculoId, empresaId) {
+        return this._resource.removeEmpresaVeiculo({ idVeiculo: veiculoId, idEmpresa: empresaId }).then(res => res.json());
+    }
+
     getEmpresaAutocomplete(nomeEmpresa) {
         return this._resource.getEmpresaAutocomplete(nomeEmpresa).then(res => res.json());
     }
 
     getEmpresaAutocompleteByVeiculo(nomeEmpresa, idVeiculo) {
         return this._resource.getEmpresaAutocompleteByVeiculo(nomeEmpresa, idVeiculo).then(res => res.json());
-    } 
+    }
 }

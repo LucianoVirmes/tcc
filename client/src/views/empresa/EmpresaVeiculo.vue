@@ -30,7 +30,21 @@
           @click="adicionarVeiculo()"
         >Adicionar</b-button>
       </div>
-      <tabela :items="veiculos" :headers="headers" class="text-center tabela" />
+      <tabela
+        :items="veiculos"
+        :mostrarBtnEditar="false"
+        @codExcluir="setCodVeiculo"
+        :headers="headers"
+        :paramRowExcluir="'id'"
+        class="text-center tabela"
+      />
+      <modal
+        :id="modalExcluir.id"
+        :texto="modalExcluir.texto"
+        :title="modalExcluir.titulo"
+        :btnExcluir="modalExcluir.btnExcluir"
+        @clickConfirm="excluir()"
+      />
     </div>
   </div>
 </template>
@@ -40,6 +54,7 @@ import Tabela from "../../components/shared/tabela/Tabela.vue";
 import EmpresaService from "../../domain/empresa/EmpresaService";
 import Veiculo from "../../domain/veiculo/Veiculo";
 import VeiculoService from "../../domain/veiculo/VeiculoService";
+import ModalExcluir from "../../components/shared/modal/ModalExcluir.vue";
 
 export default {
   data() {
@@ -51,7 +66,6 @@ export default {
         nome: {
           label: "Placa",
           key: "placa"
-
         },
         cnpj: {
           label: "Tara",
@@ -76,7 +90,16 @@ export default {
         defaultInput: "form-control",
         suggestions: "position-absolute list-group z-1000",
         suggestItem: "list-group-item"
-      }
+      },
+      idVeiculo: null,
+      modalExcluir: {
+        texto: "Deseja mesmo desassociar este veículo?",
+        titulo: "Desassociar",
+        id: "modal-excluir",
+        btnExcluir: "Desassociar"
+      },
+      alertaSucess: false,
+      alertaErro: false
     };
   },
   methods: {
@@ -87,6 +110,14 @@ export default {
     },
     setVeiculo(veiculo) {
       this.veiculoSelecionado = veiculo;
+    },
+    excluir() {
+      this.empresaService
+        .removerVeiculo(this.idVeiculo, this.empresaSelecionada)
+        .then(res => {
+          this.showAlert(res);
+          this.veiculos.splice(this.veiculos.indexOf(this.idVeiculo));
+        });
     },
     adicionarVeiculo() {
       const formdata = {
@@ -100,13 +131,23 @@ export default {
     buscaEmpresaVeiculo() {
       this.veiculos = [];
       if (this.empresaSelecionada != null) {
-        console.log(this.empresaSelecionada)
+        console.log(this.empresaSelecionada);
         this.empresaService
           .getVeiculos(this.empresaSelecionada)
           .then(veiculos => {
             this.veiculos = veiculos;
           });
       }
+    },
+    showAlert: function(res) {
+      if (res.ok) {
+        this.alertaSucess = true;
+      } else {
+        this.alertaErro = true;
+      }
+    },
+    setCodVeiculo(idVeiculo) {
+      this.idVeiculo = idVeiculo;
     },
     buscaEmpresas() {
       this.empresaService.listar().then(empresas => {
@@ -126,7 +167,8 @@ export default {
     this.buscaEmpresas();
   },
   components: {
-    tabela: Tabela
+    tabela: Tabela,
+     modal: ModalExcluir
   }
 };
 </script>

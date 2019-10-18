@@ -36,6 +36,10 @@ class EmpresaService {
         return repository.addVeiculo(request.id, request.veiculo);
     }
 
+    removeVeiculo(request) {
+        return repository.removeVeiculo(request.idVeiculo, request.idEmpresa);
+    }
+
     getEmpresasByNomeAndVeiculos(nomeEmpresa, idVeiculo) {
         return repository.findByNomeAndVeiculo(nomeEmpresa, idVeiculo);
     }

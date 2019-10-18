@@ -49,6 +49,12 @@ class EmpresaRepository {
         })
     }
 
+    removeVeiculo(idVeiculo, idEmpresa) {
+        return this.findOneByPk(idEmpresa).then(empresaBanco => {
+            empresaBanco.removeVeiculo(idVeiculo);
+        })
+    }
+
     getVeiculos(idEmpresa) {
         return this.findOneByPk(idEmpresa)
             .then(empresaBanco => {
