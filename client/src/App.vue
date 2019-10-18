@@ -25,7 +25,6 @@ export default {
     criaNotificacaoDesktop(msg) {
       new Notification("Internet", {
         body: "Conexão estabelecida!",
-        icon: "static/favicon-32x32.png"
       });
     }
   },
