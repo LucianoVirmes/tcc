@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import MenuHorizontal from '../../components/shared/menu/MenuHorizontal.vue';
+import MenuVertical from '../../components/shared/menu/MenuVertical.vue';
 import {rotasEmpresaTela} from '../../route/rotasEmpresa';
 export default {
     data(){
@@ -12,7 +12,7 @@ export default {
         }
     },
     components: {
-        menuHorizontal:MenuHorizontal
+        menuHorizontal:MenuVertical
     }
 }
 </script>

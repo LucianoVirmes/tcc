@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import MenuHorizontal from "../../components/shared/menu/MenuHorizontal.vue";
+
+import MenuVertical from '../../components/shared/menu/MenuVertical.vue';
 import { rotasTela } from "../../route/rotasVeiculo.js";
 
 export default {
@@ -23,7 +24,7 @@ export default {
     }
   },
   components: {
-    menuHorizontal: MenuHorizontal
+    menuHorizontal: MenuVertical
   }
 };
 </script>
