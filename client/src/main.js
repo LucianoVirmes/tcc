@@ -6,7 +6,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import VueResource from 'vue-resource';
 import './registerServiceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret, faTrash, faPen, faPlus, faUser, faWeight, faBalanceScale, faBoxOpen, faBusinessTime, faBriefcase, faAddressCard, faTruck } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faTrash, faPen, faPlus, faUser, faBalanceScale, faBoxOpen, faBriefcase, faAddressCard, faTruck } from '@fortawesome/free-solid-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import router from './route/router.js';

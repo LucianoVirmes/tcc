@@ -12,7 +12,7 @@ const empresaVeiculos = {
 }
 
 export const rotasEmpresa = {
-    path: '/empresa/lista', component: Empresa, icon:'briefcase', parent:'/empresa', titulo: 'Empresas', meta,
+    path: '/empresa/lista', component: Empresa, icon: 'briefcase', parent: '/empresa', titulo: 'Empresas', meta,
     children: [lista, cadastro, alteracao, empresaVeiculos]
 };
 
