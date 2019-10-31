@@ -70,7 +70,7 @@ export default {
       this.$validator.validateAll().then(success => {
         if (success) {
           this.service.cadastrar(this.empresa).then(res => {
-            this.empresa = new Empresa();
+            this.resetForm();
             this.showAlert(res);
           });
         }
