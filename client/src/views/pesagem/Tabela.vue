@@ -17,9 +17,11 @@
       </template>
     </b-modal>
     <modalDownload @download="downloadPesquisa" />
-    <tabela :items="pesagens" :headers="headers">
-      <template>aqui deveria ir a datahora de cada item da lista pesagem</template>
-    </tabela>
+    <tabela
+      :items="pesagens"
+      :headers="headers"
+      id="tabelaPesagens"
+    />
   </div>
 </template>
 <script>

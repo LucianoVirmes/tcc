@@ -3,7 +3,7 @@ import Lista from '../views/motorista/Lista.vue';
 import Motorista from '../views/motorista/Index.vue';
 import MotoristaEmpresa from '../views/motorista/MotoristaEmpresa.vue';
 
-const meta = { desc: "Motorista" }
+const meta = { desc: "Motorista", requireAuth: true }
 const cadastro = {
     path: '/motorista/cadastro', titulo: 'Cadastro', component: Cadastro, meta
 };

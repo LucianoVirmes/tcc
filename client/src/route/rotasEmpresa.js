@@ -3,7 +3,7 @@ import Lista from '../views/empresa/Lista.vue';
 import Empresa from '../views/empresa/Index.vue';
 import EmpresaVeiculo from '../views/empresa/EmpresaVeiculo.vue';
 
-const meta = { desc: 'Empresa' }
+const meta = { desc: 'Empresa', requireAuth: true }
 const cadastro = { path: '/empresa/cadastro', titulo: 'Cadastro', component: Cadastro, meta };
 const lista = { path: '/empresa/lista', titulo: 'Lista', component: Lista, meta };
 const alteracao = { path: '/empresa/cadastro/:id', titulo: 'Alterar', component: Cadastro, menu: false, meta }

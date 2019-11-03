@@ -33,7 +33,7 @@ export default {
       if (process.env.IS_ELECTRON) {
         this.criaNotificacaoDesktop("Conexão estabelecida!");
       } else {
-        this.criaNotificacao("Sem conexão com a Internet!", "success");
+        this.criaNotificacao("Conexão estabelecida!", "success");
       }
     });
 

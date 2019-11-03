@@ -4,6 +4,10 @@ node_modules
 
 #configuração do banco de dados
 dataBase.json
+
+#configuração do firebase
+fireBaseConfig.js
+
 # local env files
 .env.local
 .env.*.local

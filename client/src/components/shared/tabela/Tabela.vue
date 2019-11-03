@@ -1,6 +1,16 @@
 <template>
   <div id="tabela clearfix">
-    <b-table striped hover responsive :items="items" :busy="carregando" :fields="headers" outlined>
+    <b-table
+      striped
+      hover
+      responsive
+      :items="items"
+      :busy="carregando"
+      :fields="headers"
+      outlined
+      :per-page="perPage"
+      :current-page="currentPage"
+    >
       <div slot="table-busy" class="text-center text-success my-2">
         <b-spinner class="align-middle"></b-spinner>
         <strong>Carregando...</strong>
@@ -23,11 +33,23 @@
     <div class="text-center">
       <span v-if="items.length <= 0 && !carregando" class="text-center">Ainda não há nada aqui.</span>
     </div>
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="tabela"
+    ></b-pagination>
   </div>
 </template>
 <script>
 export default {
   props: {
+    perPage: {
+      default: 5
+    },
+    currentPage: {
+      default: 1
+    },
     items: {
       required: true,
       type: Array
@@ -59,6 +81,11 @@ export default {
     excluir: function(codExcluir) {
       this.$emit("codExcluir", codExcluir);
       this.$bvModal.show("modal-excluir");
+    }
+  },
+  computed: {
+    rows() {
+      return this.items.length;
     }
   }
 };

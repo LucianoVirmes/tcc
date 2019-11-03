@@ -2,7 +2,7 @@ import Cadastro from '../views/veiculo/Cadastro.vue';
 import Lista from '../views/veiculo/Lista.vue';
 import Veiculo from '../views/veiculo/Index.vue';
 
-const meta = { desc: "Veículo" }
+const meta = { desc: "Veículo", requireAuth: true }
 const lista = { path: '/veiculo/lista', titulo: 'Lista', component: Lista, meta };
 const cadastro = { path: '/veiculo/cadastro', titulo: 'Cadastro', component: Cadastro, meta }
 const edita = { path: '/veiculo/cadastro/:id', titulo: 'Editar', component: Cadastro, meta }
